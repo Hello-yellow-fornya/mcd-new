@@ -1,20 +1,19 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import {
   Band,
   Faq,
+  HandlerBlock,
   HeroPhoto,
   IconCircle,
   JsonLd,
   Pattern,
-  PhotoPlaceholder,
   SectionCta,
   SiteFooter,
   SiteHeader,
   Steps,
 } from '@/components';
 import { site, absoluteUrl } from '@/lib/site';
-import { benefits, handler, hero, homeFaq, howItWorks, whoWeHelp } from '@/data/copy';
+import { benefits, hero, homeFaq, howItWorks, whoWeHelp } from '@/data/copy';
 import heroImage from '../../public/images/hero-placeholder.jpg';
 import heroImageMobile from '../../public/images/hero-placeholder-mobile.jpg';
 import styles from './page.module.css';
@@ -93,20 +92,7 @@ export default function HomePage() {
           <SectionCta />
         </Faq>
 
-        <section className={styles.handler} aria-labelledby="handler-h">
-          <div className={`wrap ${styles.handlerIn}`}>
-            <PhotoPlaceholder className={styles.handlerPhoto} label={handler.photoLabel} note="Photo: Dani, mid-call, real desk, no headset" />
-            <div>
-              <p className={styles.pre}>{handler.eyebrow}</p>
-              <h2 id="handler-h">{handler.quote}</h2>
-              <p>{handler.body}</p>
-              <Link className={styles.textLink} href={handler.link.href}>
-                {handler.link.label}
-              </Link>
-            </div>
-            <SectionCta className={styles.span} />
-          </div>
-        </section>
+        <HandlerBlock />
 
         <Band size="lg" />
 

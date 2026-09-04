@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Icon } from '@/components/Icon/Icon';
 import { nav } from '@/data/copy';
 import { compactReg, formatReg } from '@/lib/reg';
+import { track } from '@/lib/analytics';
 import styles from './RegBox.module.css';
 
 type Props = {
@@ -14,6 +15,9 @@ type Props = {
   onPhoto?: boolean;
   /** Called on submit with the compact reg. Defaults to opening the claim form with ?reg=. */
   onSubmit?: (reg: string) => void;
+  defaultValue?: string;
+  /** Reported with the reg_submit event. */
+  placement?: string;
   className?: string;
 };
 
@@ -22,14 +26,15 @@ type Props = {
  * Franklin 900, coral arrow. Formats the plate as you type. Lookup is off at
  * launch (brief §7); submit hands the reg to the claim form.
  */
-export function RegBox({ variant = 'field', onPhoto, onSubmit, className }: Props) {
+export function RegBox({ variant = 'field', onPhoto, onSubmit, defaultValue = '', placement, className }: Props) {
   const id = useId();
   const router = useRouter();
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(formatReg(defaultValue));
 
   function submit(e: FormEvent) {
     e.preventDefault();
     const reg = compactReg(value);
+    track('reg_submit', { reg_length: reg.length, placement: placement ?? (variant === 'card' ? 'card' : 'hero') });
     if (onSubmit) return onSubmit(reg);
     router.push(reg ? `${nav.claimHref}?reg=${encodeURIComponent(reg)}` : nav.claimHref);
   }

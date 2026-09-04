@@ -1,0 +1,24 @@
+{
+  "name": "mcd-claims-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Claims API for motorclaimsdepartment.co.uk: submissions, reg lookup proxy, CRM hand-off. Runs on Railway.",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev": "node --watch --experimental-strip-types src/index.ts",
+    "start": "node --experimental-strip-types src/index.ts",
+    "migrate": "node --experimental-strip-types src/migrate.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.14.0",
+    "hono": "^4.7.0",
+    "pg": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1",
+    "@types/pg": "^8.11.10",
+    "typescript": "^5.9.3"
+  }
+}

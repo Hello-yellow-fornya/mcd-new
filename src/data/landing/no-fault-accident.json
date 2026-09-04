@@ -1,0 +1,20 @@
+{
+  "slug": "no-fault-accident",
+  "insurer": null,
+  "title": "No-fault accident? Call us before you call your insurer",
+  "description": "Hit by someone else? Call Motor Claims Department before your insurer: no excess, no claims bonus untouched, a like-for-like car on your drive.",
+  "h1": "No-fault accident?",
+  "h1Sub": "Call us before you call your insurer.",
+  "instruction": "The smarter way to claim for\nno-fault accidents.",
+  "proof": ["no-claims", "no-excess", "like-for-like", "ninety-minutes"],
+  "waitRow": ["avg-wait", "fastest-way"],
+  "faultSection": true,
+  "facts": [],
+  "faq": [
+    { "q": "What’s the catch?", "a": "We recover our costs from the at-fault driver’s insurer, which is why it costs you nothing. If they refuse to accept fault, we argue it for you. In the rare case that fault can’t be established, you could be asked to cover the hire charges, which is why we’ll tell you on the first call whether your claim is one we’d take on." },
+    { "q": "What if they say it was my fault?", "a": "Tell us what happened and we’ll give you a straight answer on the first call. If fault is clear from the circumstances, their insurer’s opinion doesn’t change it. If it’s genuinely disputed, we’ll say so before you sign anything." },
+    { "q": "The other driver’s insurer has already rung me. What do I do?", "a": "That’s normal — they ring quickly because it’s cheaper for them if you use their car and their garage. You don’t have to accept anything. Tell them Motor Claims Department is handling it and give them our number." },
+    { "q": "Do I still have to tell my own insurer?", "a": "Yes — that the accident happened. It’s a notification, not a claim, and nothing goes through your policy." },
+    { "q": "Will my premium go up?", "a": "Nothing goes through your policy, so there’s no claim on it. You’ll still need to tell your insurer about the incident at renewal, and how they price that is up to them. We won’t pretend otherwise." }
+  ]
+}

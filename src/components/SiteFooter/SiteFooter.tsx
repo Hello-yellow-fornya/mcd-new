@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { site } from '@/lib/site';
 import { isProduction } from '@/lib/staging';
 import { footer } from '@/data/copy';
+import { CookieSettingsButton } from '@/components/Consent/ConsentBanner';
 import styles from './SiteFooter.module.css';
 
 /**
@@ -41,6 +42,11 @@ export function SiteFooter() {
                 <Link href={l.href}>{l.label}</Link>
               </li>
             ))}
+            {i === footer.links.length - 1 && (
+              <li>
+                <CookieSettingsButton className={styles.linkButton} />
+              </li>
+            )}
           </ul>
         ))}
         <p className={styles.legal} data-testid="legal-line">

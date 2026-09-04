@@ -25,5 +25,7 @@ export default defineConfig({
     url: `http://localhost:${port}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 240_000,
+    // A test container id so the consent path can be exercised; the loader request itself is blocked in tests.
+    env: { NEXT_PUBLIC_GTM_ID: process.env.NEXT_PUBLIC_GTM_ID || 'GTM-TEST0000' },
   },
 });

@@ -138,6 +138,10 @@
   display: none;
 }
 
+.phoneMinimal {
+  margin-left: auto;
+}
+
 .burger {
   display: none;
 }

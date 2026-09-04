@@ -3,6 +3,8 @@ import { body, bodySemibold, display } from '@/fonts';
 import { site, siteUrl } from '@/lib/site';
 import { robotsMeta } from '@/lib/staging';
 import { Sprite } from '@/components/Icon/Sprite';
+import { Analytics } from '@/components/Analytics/Analytics';
+import { ConsentBanner } from '@/components/Consent/ConsentBanner';
 import '@/styles/tokens.css';
 import './globals.css';
 
@@ -28,6 +30,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
   return (
     <html lang="en-GB" className={`${display.variable} ${body.variable} ${bodySemibold.variable}`}>
       <body>
@@ -36,6 +39,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <Sprite />
         {children}
+        <Analytics gtmId={gtmId} />
+        <ConsentBanner gtmId={gtmId} />
       </body>
     </html>
   );

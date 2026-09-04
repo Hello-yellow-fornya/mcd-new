@@ -12,6 +12,8 @@ type Props = {
   links?: ReadonlyArray<NavLink>;
   /** Homepage only: transparent over the photo hero, solid marine once it sticks. */
   transparent?: boolean;
+  /** Landing pages: wordmark and the coral pill only, no links or drawer (the mockups show the wordmark alone). */
+  minimal?: boolean;
 };
 
 function isActive(pathname: string, link: NavLink) {
@@ -25,7 +27,7 @@ function isActive(pathname: string, link: NavLink) {
  * coral, a coral phone pill (the number on desktop, "Call now" on mobile,
  * never an icon-only circle) and a burger that opens the paper drawer.
  */
-export function SiteHeader({ links = nav.links, transparent = false }: Props) {
+export function SiteHeader({ links = nav.links, transparent = false, minimal = false }: Props) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [stuck, setStuck] = useState(!transparent);
@@ -69,6 +71,7 @@ export function SiteHeader({ links = nav.links, transparent = false }: Props) {
           {site.wordmark}
         </Link>
 
+        {!minimal && (
         <nav className={styles.links} aria-label="Main">
           {links.map((l) =>
             l.children ? (
@@ -113,13 +116,15 @@ export function SiteHeader({ links = nav.links, transparent = false }: Props) {
             ),
           )}
         </nav>
+        )}
 
-        <a className={styles.phone} href={site.phone.href}>
+        <a className={[styles.phone, minimal && styles.phoneMinimal].filter(Boolean).join(' ')} href={site.phone.href}>
           <Icon name="phone" className={styles.ph} />
           <span className={styles.phoneDesktop}>{cta.call}</span>
           <span className={styles.phoneMobile}>Call now</span>
         </a>
 
+        {!minimal && (
         <button
           type="button"
           className={styles.burger}
@@ -132,8 +137,10 @@ export function SiteHeader({ links = nav.links, transparent = false }: Props) {
           <span />
           <span />
         </button>
+        )}
       </div>
 
+      {!minimal && (
       <div id={drawerId} className={styles.drawer} hidden={!open} data-testid="nav-drawer">
         <nav aria-label="Main menu" className={styles.drawerIn}>
           <ul className={styles.drawerList}>
@@ -163,6 +170,12 @@ export function SiteHeader({ links = nav.links, transparent = false }: Props) {
           <p className={styles.reassure}>{site.phone.reassurance}</p>
         </nav>
       </div>
+      )}
     </header>
   );
+}
+
+/** The landing-page header: the marine bar with the wordmark and the coral pill only. */
+export function LandingHeader() {
+  return <SiteHeader minimal />;
 }

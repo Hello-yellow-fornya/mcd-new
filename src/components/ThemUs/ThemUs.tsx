@@ -9,6 +9,8 @@ type Props = {
   /** them-us: cross on the left, tick on the right. you-we: ticks both sides (who does what). */
   variant?: 'them-us' | 'you-we';
   label?: string;
+  /** Landing-page sizing: 14px text, 12px gaps. */
+  compact?: boolean;
   className?: string;
 };
 
@@ -21,10 +23,10 @@ function Mark({ ok }: { ok: boolean }) {
 }
 
 /** Two-column comparison with cross and tick marks. */
-export function ThemUs({ head, rows, variant = 'them-us', label = 'Their claims department compared with your MCD claims handler', className }: Props) {
+export function ThemUs({ head, rows, variant = 'them-us', label = 'Their claims department compared with your MCD claims handler', compact, className }: Props) {
   const leftOk = variant === 'you-we';
   return (
-    <div className={[styles.tu, className].filter(Boolean).join(' ')} role="table" aria-label={label}>
+    <div className={[styles.tu, compact && styles.compact, className].filter(Boolean).join(' ')} role="table" aria-label={label}>
       <div className={styles.head} role="row">
         <div role="columnheader">{head[0]}</div>
         <div role="columnheader">{head[1]}</div>

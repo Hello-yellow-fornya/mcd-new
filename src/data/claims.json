@@ -1,0 +1,11 @@
+{
+  "$comment": "Proof-row and proof-grid claims for the landing pages (brief §6). Only entries with substantiated: true render on production. Flip a flag only with evidence on file, and record it in `evidence`.",
+  "claims": [
+    { "id": "no-claims", "kind": "grid", "icon": "shield", "title": "Protect your\nno claims", "sub": "Keep your no claims bonus safe.", "substantiated": true, "evidence": "Service fact: nothing goes through the customer's own policy." },
+    { "id": "no-excess", "kind": "grid", "icon": "pound", "title": "No excess\nto pay", "sub": "Our service is free for non-fault drivers.", "substantiated": true, "evidence": "Service fact: costs are recovered from the at-fault insurer." },
+    { "id": "like-for-like", "kind": "grid", "icon": "car", "title": "Like-for-like\nreplacement", "sub": "Car, van or bike, whatever your cover.", "substantiated": true, "evidence": "Service fact: like-for-like hire on every non-fault claim taken on." },
+    { "id": "ninety-minutes", "kind": "grid", "icon": "bolt", "title": "Back on the road\nwithin 90 mins", "sub": "Nationwide recovery and rapid mobilisation.", "substantiated": false, "evidence": "" },
+    { "id": "avg-wait", "kind": "row", "icon": "dot", "title": "Avg wait 1 min", "substantiated": false, "evidence": "" },
+    { "id": "fastest-way", "kind": "row", "icon": "bolt", "title": "Fastest way to claim", "substantiated": false, "evidence": "" }
+  ]
+}
