@@ -15,6 +15,8 @@ Source material in `/design/` (copy these files into the repo as-is; they are th
 - `tpl-*.html` — twelve SEO page templates (pillar, process, comparison, guide, location, article)
 - `mcd-lp-goskippy-mobile-grid.html`, `mcd-lp-no-fault-accident.html` — paid landing pages (mobile-first)
 - `mcd-review-carousel.html` — review band component
+- `mcd-nav-bar-marine.png` — the header, three states
+- `MCD-design-system-brief-claude-design.md` — supersedes the guidelines MD where they differ
 - `mcd-shards-*.svg`, `mcd-sweep-*.svg` — background patterns
 - `motorclaimsdepartment_sitemap.html` — the approved sitemap and phasing
 
@@ -77,7 +79,7 @@ Rules that must be enforced in code, not just documented: ink text on coral/sky/
 
 Each maps to markup in the templates. Names are suggestions; keep them consistent.
 
-- `SiteHeader` — wordmark (text placeholder until the logo exists), nav links, coral phone button. Mobile: wordmark only; `StickyCallBar` appears after the hero scrolls away.
+- `SiteHeader` — **marine bar, decided (see `design/mcd-nav-bar-marine.png`).** Background `ink`, 72px tall desktop, 64px mobile, sticky. Wordmark "motor claims department" in Libre Franklin 900, white, 19px desktop / 15px mobile (text placeholder until the logo exists). Links in Public Sans 16px at 88% white, active page white with a 2px `coral` underline; "Services" carries a dropdown to the service children. Right: a `coral` pill with the solid phone icon — desktop shows the number (46px, 16px text), mobile shows "Call now" as a full pill (40px, 14px text) between the wordmark and the burger, never an icon-only circle. Mobile burger opens a full-width drawer on `paper`: links in Public Sans 700 18px with hairline dividers, then a full-width coral "Call 0800 048 0048" button (56px) and the line "A person in the UK picks up." beneath. Homepage only: the same bar rendered transparent over the photo hero, switching to the solid marine bar once it goes sticky. `StickyCallBar` still appears after the hero scrolls away on landing pages.
 - `Breadcrumb` — with BreadcrumbList JSON-LD.
 - `HeroText` — kicker, H1, lead, CTA pair, meta line (last reviewed, author), photo placeholder slot.
 - `HeroPhoto` — full-bleed photo hero from the homepage: marine scrim from the left, bottom tint, copy block at the Cazoo proportions, reg box + coral call, three transparent pills bottom-right. Mobile: tall crop, bottom scrim, stacked.
