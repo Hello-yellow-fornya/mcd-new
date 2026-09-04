@@ -24,6 +24,7 @@ import {
   SiteFooter,
   SiteHeader,
   Steps,
+  StickyCallBar,
   ThemUs,
   Toc,
 } from '@/components';
@@ -147,9 +148,8 @@ export default function StyleguidePage() {
             </div>
           </Block>
 
-          <Block id="sectioncta" title="SectionCta" note="Guidelines: both coral. callVariant=ink gives the template pair. stack for landing pages.">
+          <Block id="sectioncta" title="SectionCta" note="Both coral: the end-of-section pair. Beside a Call button anywhere else, Start your claim is ink (see the HeroText below).">
             <SectionCta />
-            <SectionCta callVariant="ink" />
           </Block>
 
           <Block id="callout" title="Callout" note="Default, and the catch variant with the one shared wording.">
@@ -280,6 +280,8 @@ export default function StyleguidePage() {
         <Band pattern="shards-ink" cta={false} breakBeforeHighlight />
       </main>
       <SiteFooter />
+      {/* Landing pages render this after their hero (CLAUDE.md §4); shown here for review. */}
+      <StickyCallBar />
     </>
   );
 }

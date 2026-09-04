@@ -16,6 +16,7 @@ import {
 import { site, absoluteUrl } from '@/lib/site';
 import { benefits, handler, hero, homeFaq, howItWorks, whoWeHelp } from '@/data/copy';
 import heroImage from '../../public/images/hero-placeholder.jpg';
+import heroImageMobile from '../../public/images/hero-placeholder-mobile.jpg';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -55,9 +56,9 @@ const schema = {
 export default function HomePage() {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader transparent />
       <main id="main">
-        <HeroPhoto image={{ src: heroImage, alt: hero.photoAlt }} />
+        <HeroPhoto image={{ src: heroImage, alt: hero.photoAlt }} mobileImage={{ src: heroImageMobile }} underNav />
 
         <section className={styles.benefits} aria-labelledby="benefits-h">
           <div className="wrap">

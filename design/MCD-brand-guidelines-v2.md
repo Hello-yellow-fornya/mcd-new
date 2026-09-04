@@ -85,14 +85,15 @@ Lead palette: **Stone + coral**. Five core colours, one bright, one functional s
 | `green` | #7DC24A | Functional "handled" state in product only. Never in headlines or ads |
 | `muted` | #5B6570 | Secondary text |
 | `line` | #D9D4C8 | Hairlines and borders |
+| `ink-900` | #0F2438 | Text and icons on coral surfaces only. Reads as ink; measures 5.2:1 against coral |
 
 Rules
 - Usage split roughly 42% paper · 28% stone · 20% ink · 6% blue and sky · 4% coral.
 - Coral is a gesture, never a wallpaper. Exception: the coral shard pattern is a campaign asset for posters and ads, not a site surface.
-- Ink text on coral, sky and green — never white on any of them. White type only on ink and blue.
+- Ink text on sky and green, `ink-900` text and icons on coral — never white on any of them. White type only on ink and blue.
 - Pink (#F06EAC) and the alternative palettes (Original yellow, Splash, Ledger) are parked, not deleted; see §11.
 
-Contrast: ink on paper/stone/white and white on ink both exceed WCAG AAA. Ink on coral passes AA at all sizes. Blue on stone passes AA for text ≥ 16px bold.
+Contrast: ink on paper/stone/white and white on ink both exceed WCAG AAA. Ink on coral measures 4.3:1, which only passes AA for large text, so coral surfaces use `ink-900` (5.2:1, AA at 16px). Blue on stone passes AA for text ≥ 16px bold.
 
 ---
 

@@ -6,14 +6,27 @@
 import type { IconName } from '@/components/Icon/names';
 
 export const nav = {
+  /** Top-level links. "Services" carries a dropdown; in Phase 1 it lists the pillar pages that exist. */
   links: [
+    {
+      label: 'Services',
+      href: '/accident-management-company/',
+      children: [
+        { href: '/accident-management-company/', label: 'Accident management company' },
+        { href: '/non-fault-accident/', label: 'Non-fault accident' },
+        { href: '/third-party-insurance-claim/', label: 'Third party insurance claim' },
+        { href: '/non-fault-accident-courtesy-car/', label: 'Courtesy car' },
+        { href: '/credit-hire/', label: 'Credit hire' },
+      ],
+    },
     { href: '/how-accident-management-works/', label: 'How it works' },
     { href: '/accident-management-vs-insurance/', label: 'vs your insurer' },
-    { href: '/non-fault-accident/', label: 'Non-fault accident' },
-    { href: '/resource/', label: 'Advice' },
+    { href: '/what-to-do-after-a-car-accident/', label: 'Advice' },
   ],
   claimHref: '/claim-now/',
 } as const;
+
+export type NavLink = { label: string; href: string; children?: ReadonlyArray<{ href: string; label: string }> };
 
 export const hero = {
   line: 'Hit by someone else? You shouldn’t pay for it.',

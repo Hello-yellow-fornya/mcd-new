@@ -1,4 +1,4 @@
-import Image, { type StaticImageData } from 'next/image';
+import { getImageProps, type StaticImageData } from 'next/image';
 import { Icon } from '@/components/Icon/Icon';
 import type { IconName } from '@/components/Icon/names';
 import { RegBox } from '@/components/RegBox/RegBox';
@@ -10,6 +10,10 @@ export type HeroPill = { icon: IconName; label: string };
 
 type Props = {
   image: { src: string | StaticImageData; alt: string; width?: number; height?: number };
+  /** Dedicated portrait crop for the mobile frame, served through <picture>. */
+  mobileImage?: { src: string | StaticImageData; width?: number; height?: number };
+  /** Homepage: the hero runs up under the transparent nav bar. */
+  underNav?: boolean;
   title?: string;
   sub?: string;
   pills?: ReadonlyArray<HeroPill>;
@@ -22,7 +26,13 @@ type Props = {
  * tint, copy block at the Cazoo proportions, reg field and coral call, three
  * transparent pills bottom-right. Mobile: tall crop, bottom scrim, stacked.
  */
-export function HeroPhoto({ image, title = heroCopy.line, sub = heroCopy.subline, pills = heroCopy.pills, mobilePills = 'above' }: Props) {
+const MOBILE = '(max-width: 820px)';
+const DESKTOP = '(min-width: 821px)';
+
+export function HeroPhoto({ image, mobileImage, title = heroCopy.line, sub = heroCopy.subline, pills = heroCopy.pills, mobilePills = 'above', underNav }: Props) {
+  const common = { alt: image.alt, fill: true, sizes: '100vw', quality: 65, priority: true, fetchPriority: 'high' as const, className: styles.img };
+  const desktop = getImageProps({ ...common, src: image.src }).props;
+  const mobile = mobileImage ? getImageProps({ ...common, src: mobileImage.src }).props : null;
   const pillList = (
     <ul className={styles.pills} aria-label="Three reasons to claim through MCD">
       {pills.map((p) => (
@@ -35,10 +45,17 @@ export function HeroPhoto({ image, title = heroCopy.line, sub = heroCopy.subline
   );
   const mobileStrip = <div className={styles.pillsMobile}>{pillList}</div>;
   return (
-    <section className={styles.wrap} data-hero>
+    <section className={[styles.wrap, underNav && styles.underNav].filter(Boolean).join(' ')} data-hero>
+      {/* getImageProps does not preload; these links are hoisted into <head> and only the matching one loads. */}
+      {mobile && <link rel="preload" as="image" media={MOBILE} imageSrcSet={mobile.srcSet} imageSizes={mobile.sizes} fetchPriority="high" />}
+      <link rel="preload" as="image" media={mobile ? DESKTOP : undefined} imageSrcSet={desktop.srcSet} imageSizes={desktop.sizes} fetchPriority="high" />
       <div className={`${styles.frame} on-dark`}>
         {mobilePills === 'above' && mobileStrip}
-        <Image src={image.src} alt={image.alt} fill priority fetchPriority="high" quality={65} sizes="100vw" className={styles.img} />
+        <picture>
+          {mobile && <source media={MOBILE} srcSet={mobile.srcSet} sizes={mobile.sizes} />}
+          {/* eslint-disable-next-line jsx-a11y/alt-text -- alt comes from getImageProps */}
+          <img {...desktop} />
+        </picture>
         <div className={styles.copy}>
           <h1>{title}</h1>
           <p className={styles.sub}>{sub}</p>

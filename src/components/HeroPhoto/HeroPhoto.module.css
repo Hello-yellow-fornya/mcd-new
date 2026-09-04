@@ -4,6 +4,18 @@
   background: var(--ink);
 }
 
+.underNav {
+  margin-top: calc(-1 * var(--nav-h));
+}
+
+/* Under the transparent bar the top of the photo carries a light marine tint so
+   the nav links stay legible; the left scrim and bottom tint are unchanged. */
+.underNav .frame::before {
+  background:
+    linear-gradient(180deg, rgba(var(--ink-rgb), 0.55) 0%, rgba(var(--ink-rgb), 0) 160px),
+    var(--scrim-left);
+}
+
 .frame {
   position: relative;
   overflow: hidden;
@@ -191,6 +203,15 @@
     z-index: 1;
     background: var(--ink);
     padding: 12px 18px 18px;
+  }
+
+  /* On mobile the hero starts with the ink strip, so the transparent bar simply sits on it. */
+  .underNav .pillsMobile {
+    padding-top: calc(var(--nav-h) + 12px);
+  }
+
+  .underNav .frame::before {
+    background: var(--scrim-mobile);
   }
 
   .pills {

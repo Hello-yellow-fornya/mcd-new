@@ -8,7 +8,6 @@ type Props = {
   /** Homepage size is a step larger than the SEO templates. */
   size?: 'md' | 'lg';
   cta?: boolean;
-  callVariant?: 'coral' | 'ink';
   pattern?: PatternName;
   /** Break before the highlighted words (the mobile landing pages do this). */
   breakBeforeHighlight?: boolean;
@@ -16,7 +15,7 @@ type Props = {
 };
 
 /** Ink band: "Your insurer has a claims department. It works for your insurer. We work for you." */
-export function Band({ size = 'md', cta = true, callVariant, pattern, breakBeforeHighlight, className }: Props) {
+export function Band({ size = 'md', cta = true, pattern, breakBeforeHighlight, className }: Props) {
   return (
     <section className={[styles.band, size === 'lg' && styles.lg, pattern && patternClass(pattern), className].filter(Boolean).join(' ')}>
       <div className="wrap on-dark">
@@ -26,7 +25,7 @@ export function Band({ size = 'md', cta = true, callVariant, pattern, breakBefor
           {breakBeforeHighlight ? <br /> : ' '}
           <Highlight tone="coral">{band.highlight}</Highlight>
         </p>
-        {cta && <SectionCta callVariant={callVariant} />}
+        {cta && <SectionCta />}
       </div>
     </section>
   );

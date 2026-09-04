@@ -64,6 +64,7 @@ The site is not to be served from `motorclaimsdepartment.co.uk` until told. Buil
 --green:  #7DC24A   functional "handled"/tick state only
 --muted:  #5B6570   secondary text
 --line:   #D9D4C8   hairlines
+--ink-900: #0F2438  text and icons on coral only (5.2:1; ink itself is 4.3:1)
 display: Libre Franklin 900
 body:    Public Sans 400 / 600 / 700
 radii:   cards 20px · photo frames 24px · reg field 14px · buttons and pills 999px · icon circles 50%
@@ -71,7 +72,7 @@ grid:    max-width 1140px, 24px gutters; section padding 72px desktop / 48px mob
 motion:  150–200ms ease-out; nothing moves uninvited
 ```
 
-Rules that must be enforced in code, not just documented: ink text on coral/sky/green (never white); white text only on ink/blue; sentence case everywhere (no CSS uppercase); coral appears once per view as the bright, except the section CTA pair.
+Rules that must be enforced in code, not just documented: ink text on sky/green and ink-900 on coral (never white); white text only on ink/blue; sentence case everywhere (no CSS uppercase); coral appears once per view as the bright, except the section CTA pair.
 
 ---
 

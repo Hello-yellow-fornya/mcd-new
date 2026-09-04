@@ -8,15 +8,13 @@ type Props = {
   kicker?: string;
   title: ReactNode;
   lead?: ReactNode;
-  /** Colour of the Call button. The SEO templates draw it in ink; the guidelines' section pair is coral. */
-  callVariant?: 'ink' | 'coral';
   meta?: { lastReviewed?: string; author?: string };
   /** Photo slot: a next/image or a PhotoPlaceholder. */
   photo?: ReactNode;
 };
 
 /** Text hero from the SEO templates: kicker, H1, lead, CTA pair, meta line, photo slot. */
-export function HeroText({ kicker, title, lead, callVariant = 'ink', meta, photo }: Props) {
+export function HeroText({ kicker, title, lead, meta, photo }: Props) {
   return (
     <section className={styles.hero} data-hero>
       <div className={`wrap ${styles.heroIn}`}>
@@ -25,8 +23,11 @@ export function HeroText({ kicker, title, lead, callVariant = 'ink', meta, photo
           <h1>{title}</h1>
           {lead && <p className={styles.lead}>{lead}</p>}
           <div className={styles.ctaRow}>
-            <Button href={nav.claimHref}>{cta.start}</Button>
-            <Button href={site.phone.href} variant={callVariant} icon="phone">
+            {/* CTA rule: Call is always coral with the phone icon; Start your claim is ink here, coral only in the section pair. */}
+            <Button href={nav.claimHref} variant="ink">
+              {cta.start}
+            </Button>
+            <Button href={site.phone.href} icon="phone">
               {cta.call}
             </Button>
           </div>
