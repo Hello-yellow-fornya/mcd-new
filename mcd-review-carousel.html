@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MCD — review carousel band</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@900&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#16324F;--blue:#3D6D9C;--sky:#BFD6E6;--stone:#EDE9E1;--paper:#F7F5F0;--white:#fff;--coral:#F2694B;--muted:#5B6570;--line:#D9D4C8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#D9D4C8}
+body{font-family:'Public Sans',system-ui,sans-serif;color:var(--ink);background:var(--paper);max-width:430px;margin:0 auto;min-height:100vh;box-shadow:0 0 0 1px var(--line)}
+.wrap{padding:0 18px}
+
+/* context: the independence line the band sits under */
+.indep{background:var(--stone);border-top:1px solid var(--line);font-size:13px;line-height:1.45;padding:12px 18px}
+
+/* review band */
+.reviews{padding:22px 0 26px;background:var(--paper);overflow:hidden}
+.rhead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 18px 14px}
+.rhead h2{font-family:'Libre Franklin',sans-serif;font-weight:900;font-size:20px;letter-spacing:-0.02em;line-height:1.1}
+.score{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);white-space:nowrap}
+.score b{color:var(--ink);font-size:15px}
+.stars{display:inline-flex;gap:2px}
+.stars svg{width:14px;height:14px;fill:var(--coral)}
+
+.track{display:flex;gap:12px;width:max-content;padding:0 18px;animation:scroll 42s linear infinite}
+.track:hover,.track:active{animation-play-state:paused}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 6px))}}
+@media (prefers-reduced-motion:reduce){.track{animation:none;width:auto;overflow-x:auto;padding-bottom:6px}}
+
+.card{flex:none;width:280px;background:var(--white);border-radius:18px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px;border:1px solid var(--line)}
+.card .stars svg{width:16px;height:16px}
+.quote{font-size:15px;line-height:1.5;color:var(--ink)}
+.who{display:flex;align-items:center;gap:10px;margin-top:auto;font-size:13px;color:var(--muted)}
+.who .av{width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--coral);font-family:'Libre Franklin',sans-serif;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none}
+.who b{display:block;color:var(--ink);font-size:14px}
+.src{margin-left:auto;font-size:11px;font-weight:700;color:var(--blue);border:1px solid var(--sky);border-radius:999px;padding:3px 8px;white-space:nowrap}
+
+.note{font-size:12px;color:var(--muted);padding:12px 18px 0;line-height:1.4}
+.sample{position:absolute;left:0;right:0;top:0;text-align:center;font-size:11px;color:#fff;background:var(--coral);padding:4px;font-weight:700;letter-spacing:.02em}
+</style>
+</head>
+<body>
+<div class="sample">Sample reviews for layout only — replace with verified reviews and the real aggregate score before use</div>
+
+<div class="indep" style="margin-top:26px">Independent accident management company. Not GoSkippy, not an insurer — we help drivers with any insurer claim from the driver who hit them.</div>
+
+<section class="reviews" aria-label="Customer reviews">
+  <div class="rhead">
+    <h2>What drivers say</h2>
+    <div class="score"><span class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg></span><b>4.9</b> · 300+ reviews</div>
+  </div>
+
+  <div class="track" id="track">
+    <!-- set A -->
+    <article class="card"><span class="stars" aria-label="5 stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg></span><p class="quote">"Got hit on the school run. One call and they sorted the lot — a car on my drive the next morning and I never spoke to the other insurer once."</p><div class="who"><span class="av">S</span><span><b>Sarah M.</b>Bristol</span></div></article>
+    <article class="card"><span class="stars" aria-label="5 stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg></span><p class="quote">"No excess, my no claims untouched, and the same person every time I rang. Wish I'd known this existed years ago."</p><div class="who"><span class="av">D</span><span><b>Daniel K.</b>Leeds</span></div></article>
+    <article class="card"><span class="stars" aria-label="5 stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg></span><p class="quote">"The other driver's insurer rang me within the hour. I told them to speak to MCD, like I'd been told. Best decision I made all week."</p><div class="who"><span class="av">P</span><span><b>Priya R.</b>Croydon</span></div></article>
+    <article class="card"><span class="stars" aria-label="5 stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg></span><p class="quote">"Van was written off. They kept me in a like-for-like until the payout came through, so I didn't lose a day's work."</p><div class="who"><span class="av">T</span><span><b>Tom H.</b>Salford</span></div></article>
+  </div>
+  
+</section>
+
+<script>
+// duplicate the card set once so the loop is seamless
+const t=document.getElementById('track');t.innerHTML+=t.innerHTML;
+// pause while the user is touching/scrolling it on mobile
+t.addEventListener('touchstart',()=>t.style.animationPlayState='paused',{passive:true});
+t.addEventListener('touchend',()=>t.style.animationPlayState='running');
+</script>
+</body>
+</html>
