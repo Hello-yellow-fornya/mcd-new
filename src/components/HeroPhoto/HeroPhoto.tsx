@@ -38,7 +38,7 @@ export function HeroPhoto({ image, title = heroCopy.line, sub = heroCopy.subline
     <section className={styles.wrap} data-hero>
       <div className={`${styles.frame} on-dark`}>
         {mobilePills === 'above' && mobileStrip}
-        <Image src={image.src} alt={image.alt} fill priority sizes="100vw" className={styles.img} />
+        <Image src={image.src} alt={image.alt} fill priority fetchPriority="high" quality={65} sizes="100vw" className={styles.img} />
         <div className={styles.copy}>
           <h1>{title}</h1>
           <p className={styles.sub}>{sub}</p>
