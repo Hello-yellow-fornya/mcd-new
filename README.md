@@ -4,7 +4,7 @@ Marketing and lead-generation site for Motor Claims Department. Next.js 15 (App 
 
 ## Run locally
 
-Requires Node 22.18 or later and pnpm 10 (`corepack enable` gives you the pinned version).
+Requires Node 22.18 or later (the unit tests rely on Node’s built-in type stripping) and pnpm 10; `corepack enable` gives you the pinned version.
 
 ```bash
 pnpm install
