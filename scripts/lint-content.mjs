@@ -75,6 +75,16 @@ function frontmatterHeadingText(line) {
   return m[2].replace(/^["']|["']$/g, '');
 }
 
+/** The copy part of a frontmatter line: after "key:" or a "- " list marker, quotes stripped; slugs and dates are not copy. */
+function frontmatterValue(line) {
+  const kv = line.match(/^\s*(?:-\s+)?([A-Za-z0-9_-]+)\s*:\s*(.*)$/);
+  let v = kv ? kv[2] : line.replace(/^\s*-\s+/, '');
+  if (kv && ['slug', 'lastReviewed', 'template', 'phase', 'draft', 'href', 'id', 'related', 'schemaType'].includes(kv[1])) return '';
+  v = v.trim().replace(/^["']|["']$/g, '');
+  if (v.startsWith('/')) return '';
+  return v;
+}
+
 function capsWords(text, allowed) {
   const allow = new Set(allowed.map((w) => w.toUpperCase()));
   const hits = [];
@@ -110,7 +120,8 @@ export function lintText(text, file, rules = loadRules()) {
       : isFrontmatter
         ? frontmatterHeadingText(line)
         : null;
-    const prose = isFrontmatter ? (headingText ?? '') : line;
+    // Frontmatter: every string value is copy (title, lead, FAQ answers…), so lint the value part.
+    const prose = isFrontmatter ? frontmatterValue(line) : line;
     if (!prose) continue;
     const plain = straightQuotes(prose);
 

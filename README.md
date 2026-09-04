@@ -74,7 +74,30 @@ tests/e2e/              Playwright
 
 ## Add a page
 
-Coming in step 4 with the page templates: `content/<section>/<slug>.mdx` with frontmatter, and `pnpm new-page --template pillar --slug ...` to scaffold from the template's lorem-ipsum version. Adding a page is "add a file, open a PR"; every PR gets a Vercel preview link.
+Pages are MDX files under `content/<section>/<slug>.mdx`. The route comes from the `slug` in the frontmatter, not the folder. Adding a page is "add a file, open a PR"; every PR gets a Vercel preview.
+
+```bash
+pnpm new-page --template pillar --slug /accident-recovery/ --title "Accident recovery"
+```
+
+That copies the template's lorem-ipsum skeleton from `content/_templates/` as a draft. Write the page, remove `draft: true`, open a PR. Frontmatter fields (brief §10):
+
+| Field | Purpose |
+|---|---|
+| `slug`, `template` | The route and one of `pillar`, `process`, `comparison`, `guide`, `location`, `article`, `utility` |
+| `title`, `description` | `<title>` (≤60 characters) and meta description (≤155) |
+| `kicker`, `h1`, `lead` | The hero |
+| `lastReviewed`, `author` | The meta line and Article schema |
+| `breadcrumb` | Parent pages in order; Home is added |
+| `photo` | `alt` and a production `note` until the real photo exists |
+| `faq` | Rendered after the body and emitted as FAQPage schema from the same data |
+| `related` | Slugs of related pages; drafts are dropped at build time |
+| `schemaType`, `steps` | Override the template's schema; HowTo steps by heading id |
+| `draft` | `true` keeps the page out of the build and the sitemap |
+
+In the body: H2s become the "On this page" list (ids are GitHub-style slugs of the heading text; H2s starting "Step 1." feed HowTo schema), and `<Callout>`, `<Steps>`, `<ThemUs>`, `<Figure>` and `<Muted>` are available. Links to pages that do not build yet render as plain text, so nothing 404s.
+
+`pnpm stubs` creates a draft file for every sitemap page that has none; drafts for Phase 2 and 3 are already in place. `pnpm lint:content` runs before every build and stops it on an exclamation mark, an all-caps heading, "week(s)", or a banned phrase.
 
 ## Add an insurer landing page
 

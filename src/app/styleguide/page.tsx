@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
   Band,
@@ -199,7 +200,7 @@ export default function StyleguidePage() {
                   <strong>You do this.</strong> It’s the only thing you have to do.
                 </p>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. An accident management company handles a non-fault claim on your behalf and recovers the cost from the at-fault driver’s insurer. <a href="/credit-hire/">How credit hire works</a>.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. An accident management company handles a non-fault claim on your behalf and recovers the cost from the at-fault driver’s insurer. <Link href="/credit-hire/">How credit hire works</Link>.
                 </p>
                 <h3>What we ask you on the first call</h3>
                 <ul>
