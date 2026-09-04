@@ -1,0 +1,31 @@
+import localFont from 'next/font/local';
+
+/**
+ * Self-hosted type (brief §2, guidelines §4). Both faces are SIL OFL; the
+ * licences sit alongside the WOFF2 files. Never load from Google's CDN.
+ *
+ * display: Libre Franklin 900 — headlines, big print, the £0, the phone number,
+ *          step and card titles.
+ * body:    Public Sans 400 / 600 / 700 — everything else.
+ */
+export const display = localFont({
+  src: './libre-franklin-latin-900-normal.woff2',
+  weight: '900',
+  style: 'normal',
+  display: 'swap',
+  preload: true,
+  variable: '--font-display',
+  adjustFontFallback: 'Arial',
+});
+
+export const body = localFont({
+  src: [
+    { path: './public-sans-latin-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: './public-sans-latin-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: './public-sans-latin-700-normal.woff2', weight: '700', style: 'normal' },
+  ],
+  display: 'swap',
+  preload: true,
+  variable: '--font-body',
+  adjustFontFallback: 'Arial',
+});
