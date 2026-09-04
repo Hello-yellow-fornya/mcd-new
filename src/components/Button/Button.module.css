@@ -1,0 +1,67 @@
+/* Buttons (guidelines §6). Pill, 48px minimum, 60px on the mobile hero. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: var(--btn-min);
+  padding: 12px 22px;
+  border: 2px solid transparent;
+  border-radius: var(--r-pill);
+  font-family: var(--body);
+  font-weight: var(--w-bold);
+  font-size: var(--fs-btn);
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--motion), background var(--motion);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.coral {
+  background: var(--coral);
+  color: var(--on-coral);
+  border-color: var(--coral);
+}
+
+.ink {
+  background: var(--ink);
+  color: var(--on-ink);
+  border-color: var(--ink);
+}
+
+.secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.secondaryOnDark {
+  background: transparent;
+  color: var(--white);
+  border-color: var(--white);
+}
+
+.lg {
+  min-height: var(--btn-min-hero-mobile);
+  font-size: var(--fs-btn-lg);
+  gap: 12px;
+}
+
+.full {
+  width: 100%;
+}
+
+.ph {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.lg .ph {
+  width: 22px;
+  height: 22px;
+}

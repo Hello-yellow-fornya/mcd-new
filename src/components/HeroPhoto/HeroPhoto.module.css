@@ -1,0 +1,207 @@
+.wrap {
+  container-type: inline-size;
+  width: 100%;
+  background: var(--ink);
+}
+
+.frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1820 / 745;
+  background: var(--ink);
+  color: var(--white);
+}
+
+.img {
+  object-fit: cover;
+  object-position: 72% 30%;
+}
+
+/* Marine scrim from the left, then a full-width tint rising from the bottom. Never black. */
+.frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--scrim-left);
+}
+
+.frame::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 34%;
+  background: var(--scrim-bottom);
+  pointer-events: none;
+}
+
+.copy {
+  position: absolute;
+  z-index: 1;
+  left: max(24px, calc((100% - 1140px) / 2 + 24px));
+  top: 9cqw;
+  color: var(--white);
+}
+
+.copy h1 {
+  font-size: 3.4cqw;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  max-width: 40cqw;
+  margin: 0 0 0.3em;
+  color: var(--white);
+  text-wrap: balance;
+}
+
+.sub {
+  font-size: 1.05cqw;
+  line-height: 1.4;
+  opacity: 0.92;
+  margin: 0;
+  max-width: 40cqw;
+  color: var(--white);
+}
+
+.reg {
+  margin-top: 3cqw;
+  width: 27cqw;
+}
+
+.call {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7cqw;
+  margin-top: 1cqw;
+  min-height: 3.6cqw;
+  border-radius: var(--r-pill);
+  background: var(--coral);
+  color: var(--on-coral);
+  font-weight: var(--w-bold);
+  font-size: 1.15cqw;
+  text-decoration: none;
+}
+
+.ph {
+  width: 1.3cqw;
+  height: 1.3cqw;
+}
+
+/* Three transparent pills, bottom-right */
+.pillsMobile {
+  display: none;
+}
+
+.pillsDesktop {
+  position: absolute;
+  z-index: 1;
+  right: max(24px, calc((100% - 1140px) / 2 + 24px));
+  bottom: 24px;
+}
+
+.pills {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.pills li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 16px 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: var(--r-pill);
+  color: var(--white);
+  font-weight: var(--w-bold);
+  font-size: 14px;
+  white-space: nowrap;
+  max-width: none;
+  --icon-knockout: var(--ink);
+}
+
+.pills svg {
+  fill: var(--white);
+}
+
+@media (max-width: 820px) {
+  /* Tall 9:15.6 crop, bottom scrim, copy at the bottom. The signed-off mockup
+     renders the three pills as an ink strip at the top of the frame. */
+  .frame {
+    aspect-ratio: 9 / 15.6;
+  }
+
+  .frame::before {
+    background: var(--scrim-mobile);
+  }
+
+  .img {
+    object-position: 66% 20%;
+  }
+
+  .copy {
+    left: 18px;
+    right: 18px;
+    top: auto;
+    bottom: 26px;
+  }
+
+  .copy h1 {
+    font-size: 34px;
+    max-width: none;
+    margin-bottom: 12px;
+  }
+
+  .sub {
+    font-size: 15px;
+    max-width: none;
+    margin-bottom: 22px;
+  }
+
+  .reg {
+    margin-top: 0;
+    width: 100%;
+  }
+
+  .call {
+    margin-top: 14px;
+    min-height: var(--btn-min-hero-mobile);
+    font-size: 18px;
+    gap: 12px;
+  }
+
+  .ph {
+    width: 22px;
+    height: 22px;
+  }
+
+  .pillsDesktop {
+    display: none;
+  }
+
+  .pillsMobile {
+    display: block;
+    position: relative;
+    z-index: 1;
+    background: var(--ink);
+    padding: 12px 18px 18px;
+  }
+
+  .pills {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pills li {
+    height: 38px;
+    font-size: 13px;
+    padding: 0 12px 0 10px;
+    gap: 8px;
+  }
+}

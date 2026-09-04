@@ -1,0 +1,11 @@
+{
+  "$comment": "Sample reviews for layout only. Replace with verified reviews and the real aggregate score before use; while sample is true the carousel does not render on production.",
+  "sample": true,
+  "aggregate": { "rating": 4.9, "count": "300+" },
+  "reviews": [
+    { "name": "Sarah M.", "location": "Bristol", "rating": 5, "quote": "Got hit on the school run. One call and they sorted the lot — a car on my drive the next morning and I never spoke to the other insurer once." },
+    { "name": "Daniel K.", "location": "Leeds", "rating": 5, "quote": "No excess, my no claims untouched, and the same person every time I rang. Wish I’d known this existed years ago." },
+    { "name": "Priya R.", "location": "Croydon", "rating": 5, "quote": "The other driver’s insurer rang me within the hour. I told them to speak to MCD, like I’d been told. Best decision I made all week." },
+    { "name": "Tom H.", "location": "Salford", "rating": 5, "quote": "Van was written off. They kept me in a like-for-like until the payout came through, so I didn’t lose a day’s work." }
+  ]
+}

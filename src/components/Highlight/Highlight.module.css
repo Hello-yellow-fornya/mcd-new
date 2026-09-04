@@ -1,0 +1,13 @@
+.sky {
+  background: transparent;
+  color: var(--blue);
+  padding: 0;
+  box-shadow: var(--hl-underlay);
+}
+
+.coral {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  box-shadow: var(--hl-coral);
+}
