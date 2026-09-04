@@ -32,14 +32,14 @@ test.describe('styleguide components', () => {
     await expect(page).toHaveURL(/\/claim-now\/\?reg=AB12CDE$/);
   });
 
-  test('every coral surface carries ink text, and nothing but the reg input is uppercase', async ({ page }) => {
+  test('every coral surface carries ink-900 text, and nothing but the reg input is uppercase', async ({ page }) => {
     const bad = await page.evaluate(() => {
       const coral = 'rgb(242, 105, 75)';
-      const ink = 'rgb(22, 50, 79)';
+      const ink900 = 'rgb(15, 36, 56)';
       const out: string[] = [];
       for (const el of Array.from(document.querySelectorAll('body *'))) {
         const cs = getComputedStyle(el);
-        if (cs.backgroundColor === coral && cs.color !== ink && el.textContent?.trim()) out.push(`coral: ${el.tagName}.${el.className}`);
+        if (cs.backgroundColor === coral && cs.color !== ink900 && el.textContent?.trim()) out.push(`coral: ${el.tagName}.${el.className} ${cs.color}`);
         if (cs.textTransform === 'uppercase' && !(el instanceof HTMLInputElement)) out.push(`uppercase: ${el.tagName}.${el.className}`);
         if (cs.fontStyle === 'italic') out.push(`italic: ${el.tagName}.${el.className}`);
       }

@@ -38,10 +38,21 @@ test.describe('homepage', () => {
     expect(faq.mainEntity).toHaveLength(4);
   });
 
-  test('hero image is eager and the reg field has a real label', async ({ page }) => {
-    const img = page.locator('main img').first();
+  test('hero image is eager, art-directed for mobile, and the reg field has a real label', async ({ page, isMobile }) => {
+    const img = page.locator('main picture img').first();
     await expect(img).toHaveAttribute('alt', /keys to her hire car/);
     expect(await img.getAttribute('loading')).not.toBe('lazy');
+    await expect(img).toHaveAttribute('fetchpriority', 'high');
+    const current = await img.evaluate((el) => (el as HTMLImageElement).currentSrc);
+    expect(current).toMatch(isMobile ? /hero-placeholder-mobile/ : /hero-placeholder\.[a-f0-9]+\.jpg/);
+    await expect(page.locator('link[rel="preload"][as="image"]')).toHaveCount(2);
     await expect(page.getByLabel('Enter your reg')).toBeVisible();
+  });
+
+  test('header is transparent over the hero and marine once scrolled', async ({ page }) => {
+    const header = page.getByTestId('site-header');
+    await expect(header).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+    await page.evaluate(() => window.scrollTo(0, 400));
+    await expect(header).toHaveCSS('background-color', 'rgb(22, 50, 79)');
   });
 });

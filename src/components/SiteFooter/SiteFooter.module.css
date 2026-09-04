@@ -2,7 +2,7 @@
   padding: 48px 0 40px;
   border-top: var(--border);
   font-size: 15px;
-  background: var(--paper);
+  background: var(--white); /* white, as the homepage mockup: coral number on white is 3.04:1 (large text AA) */
 }
 
 .footIn {

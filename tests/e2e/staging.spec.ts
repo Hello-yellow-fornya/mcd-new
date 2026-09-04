@@ -30,6 +30,8 @@ test('fonts are self-hosted and loaded', async ({ page }) => {
   expect(loaded.some((f) => f.startsWith('400'))).toBe(true);
   expect(fontRequests.length).toBeGreaterThan(0);
   for (const url of fontRequests) expect(url).not.toMatch(/fonts\.(googleapis|gstatic)\.com/);
+  // Only Franklin 900 and Public Sans 400/700 are preloaded; 600 loads normally.
+  await expect(page.locator('link[rel="preload"][as="font"]')).toHaveCount(3);
 });
 
 test('skip link is the first focusable element and targets main', async ({ page }) => {

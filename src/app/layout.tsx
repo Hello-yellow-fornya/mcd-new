@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
-import { body, display } from '@/fonts';
+import { body, bodySemibold, display } from '@/fonts';
 import { site, siteUrl } from '@/lib/site';
 import { robotsMeta } from '@/lib/staging';
 import { Sprite } from '@/components/Icon/Sprite';
-import { StickyCallBar } from '@/components/StickyCallBar/StickyCallBar';
 import '@/styles/tokens.css';
 import './globals.css';
 
@@ -30,14 +29,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB" className={`${display.variable} ${body.variable}`}>
+    <html lang="en-GB" className={`${display.variable} ${body.variable} ${bodySemibold.variable}`}>
       <body>
         <a className="skip" href="#main">
           Skip to content
         </a>
         <Sprite />
         {children}
-        <StickyCallBar />
       </body>
     </html>
   );

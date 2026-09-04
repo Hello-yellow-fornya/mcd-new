@@ -16,6 +16,7 @@
   --green: #7dc24a;  /* functional "handled" state only; never in headlines or ads */
   --muted: #5b6570;  /* secondary text */
   --line: #d9d4c8;   /* hairlines and borders */
+  --ink-900: #0f2438; /* text and icons on coral: 5.2:1 against coral, AA at 16px; reads as ink */
 
   /* Supporting values used by the signed-off mockups */
   --marine-lift: #214a73;     /* lighter marine circle behind coral icons on dark (§6 icons) */
@@ -23,12 +24,12 @@
   --ink-rgb: 22, 50, 79;      /* for scrims and tints: rgba(var(--ink-rgb), .8) */
   --coral-rgb: 242, 105, 75;
 
-  /* Contrast pairings (§3 rules): ink text on coral, sky and green — never white.
+  /* Contrast pairings (§3 rules): ink text on sky and green, ink-900 on coral — never white.
      White type only on ink and blue. Components set colour from these, which is
      what scripts/lint-css.mjs checks. */
   --on-ink: var(--white);
   --on-blue: var(--white);
-  --on-coral: var(--ink);
+  --on-coral: var(--ink-900);
   --on-sky: var(--ink);
   --on-green: var(--ink);
   --on-stone: var(--ink);
@@ -38,6 +39,9 @@
   /* §4 Type — two faces, self-hosted. Sentence case everywhere; no caps, no italics. */
   --display: var(--font-display), 'Libre Franklin', system-ui, sans-serif;
   --body: var(--font-body), 'Public Sans', system-ui, sans-serif;
+  /* Public Sans 600 is not preloaded; it lives in its own next/font family, so
+     anything set at 600 uses this stack. */
+  --body-semibold: var(--font-body-600), var(--font-body), 'Public Sans', system-ui, sans-serif;
   --w-display: 900;
   --w-regular: 400;
   --w-semibold: 600;
@@ -73,7 +77,7 @@
   --section-pad: 72px;   /* 48px on mobile, see below */
   --grid-max: 1140px;
   --gutter: 24px;
-  --nav-h: 76px;
+  --nav-h: 72px;
 
   /* §5 Shape */
   --r-card: 20px;

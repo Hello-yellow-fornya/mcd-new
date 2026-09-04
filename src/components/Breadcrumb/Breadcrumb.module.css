@@ -23,5 +23,6 @@
 
 .crumbs [aria-current] {
   color: var(--ink);
+  font-family: var(--body-semibold);
   font-weight: var(--w-semibold);
 }
