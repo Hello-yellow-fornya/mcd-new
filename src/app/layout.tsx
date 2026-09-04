@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { body, display } from '@/fonts';
 import { site, siteUrl } from '@/lib/site';
 import { robotsMeta } from '@/lib/staging';
+import { Sprite } from '@/components/Icon/Sprite';
+import { StickyCallBar } from '@/components/StickyCallBar/StickyCallBar';
 import '@/styles/tokens.css';
 import './globals.css';
 
@@ -33,7 +35,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a className="skip" href="#main">
           Skip to content
         </a>
+        <Sprite />
         {children}
+        <StickyCallBar />
       </body>
     </html>
   );

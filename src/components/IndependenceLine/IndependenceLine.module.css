@@ -1,0 +1,9 @@
+.indep {
+  background: var(--stone);
+  border-top: var(--border);
+  border-bottom: var(--border);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink);
+  padding: 12px 0;
+}

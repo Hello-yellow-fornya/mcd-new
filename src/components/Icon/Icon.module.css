@@ -1,0 +1,33 @@
+.icon {
+  display: inline-block;
+  flex: none;
+  fill: currentColor;
+  vertical-align: middle;
+}
+
+/* Circle variants (guidelines §6): the icon colour knocks out to the circle colour. */
+.circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  border-radius: var(--r-circle);
+}
+
+.coral {
+  background: var(--coral);
+  color: var(--on-coral);
+  --icon-knockout: var(--coral);
+}
+
+.sky {
+  background: var(--sky);
+  color: var(--on-sky);
+  --icon-knockout: var(--sky);
+}
+
+.ink {
+  background: var(--ink);
+  color: var(--coral);
+  --icon-knockout: var(--ink);
+}

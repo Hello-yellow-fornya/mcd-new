@@ -63,6 +63,15 @@ tests/e2e/              Playwright
 - never italics
 - ink text on coral, sky and green, never white; white type only on ink and blue
 
+## Components
+
+`src/components/` holds the set from brief §4, one folder per component with its CSS module, exported from `src/components/index.ts`. Markup and values come from the mockups in `design/`; copy comes from `src/data/copy.ts` so the approved words live in one place. `/styleguide/` renders every component with its variants on staging (it returns 404 on production).
+
+- Icons are one SVG sprite (`Sprite` in the root layout) drawn from the mockups; `IconCircle` gives the coral, sky and ink circles.
+- `StickyCallBar` sits in the root layout and shows on mobile once the element marked `data-hero` has scrolled away.
+- `ReviewCarousel` reads `src/data/reviews.json`; while `sample` is true it does not render on production.
+- `SiteFooter` reads `FCA_STATUS_LINE`; a `[TODO]` shows on preview and the production build stops until it is set.
+
 ## Add a page
 
 Coming in step 4 with the page templates: `content/<section>/<slug>.mdx` with frontmatter, and `pnpm new-page --template pillar --slug ...` to scaffold from the template's lorem-ipsum version. Adding a page is "add a file, open a PR"; every PR gets a Vercel preview link.

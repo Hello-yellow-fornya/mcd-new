@@ -1,0 +1,45 @@
+/* Background colour matches the SVG's own base so nothing shows through at the edges. */
+.shardsInk {
+  background: var(--ink) url('/patterns/mcd-shards-ink-1920x1080.svg') center / cover no-repeat;
+  color: var(--on-ink);
+}
+
+.shardsBlue {
+  background: var(--blue) url('/patterns/mcd-shards-blue-1920x1080.svg') center / cover no-repeat;
+  color: var(--on-blue);
+}
+
+.shardsCoral {
+  background: var(--coral) url('/patterns/mcd-shards-coral-1920x1080.svg') center / cover no-repeat;
+  color: var(--on-coral);
+}
+
+.shardsSky {
+  background: var(--sky) url('/patterns/mcd-shards-sky-1920x1080.svg') center / cover no-repeat;
+  color: var(--on-sky);
+}
+
+.shardsStone {
+  background: var(--stone) url('/patterns/mcd-shards-stone-1920x1080.svg') center / cover no-repeat;
+  color: var(--on-stone);
+}
+
+.shardsWhite {
+  background: var(--white) url('/patterns/mcd-shards-white-1920x1080.svg') center / cover no-repeat;
+  color: var(--on-white);
+}
+
+.sweepStone {
+  background: #132b45 url('/patterns/mcd-sweep-stone-subtle-1920x1080.svg') center / cover no-repeat;
+  color: var(--on-ink);
+}
+
+.sweepSplash {
+  background: #0b3a63 url('/patterns/mcd-sweep-splash-subtle-1920x1080.svg') center / cover no-repeat;
+  color: var(--on-ink);
+}
+
+.sweepLedger {
+  background: #1a2470 url('/patterns/mcd-sweep-ledger-subtle-1920x1080.svg') center / cover no-repeat;
+  color: var(--on-ink);
+}
