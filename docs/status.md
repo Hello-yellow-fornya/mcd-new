@@ -1,14 +1,14 @@
 # Phase 1 status
 
-Written at the end of the Phase 1 build, 5 September 2026. Everything below is against `CLAUDE.md` as amended by the consolidated instructions of 4 September. Items marked **open** need an answer or an action from the client or Hello Yellow before the site goes live.
+Written at the end of the Phase 1 build, 5 September 2026, against `CLAUDE.md` as updated the same day (`mcd-new-2` only, host-based noindex, §4a logo). Items marked **open** need an answer or an action from the client or Hello Yellow before the site goes live.
 
 ## 1. Staging, checked against §2a
 
 | Requirement | State | Where |
 |---|---|---|
-| No custom domain on the Vercel project | **Open, and not as expected.** `motorclaimsdepartment.co.uk` already resolves to Vercel (bare domain 308s to `www`, `www` is a CNAME to `vercel-dns-016.com`) and serves a page titled "Motor Claims Department — non-fault accident specialists", which is not this build. Some Vercel project owns that domain today. Find out which, and whether it is meant to. This build's projects are `mcd-new-2` (connected) and `mcd-new` (a duplicate, safe to disconnect). | Vercel dashboard → the project holding the domain |
-| Deployment protection on every non-final environment | **Open, and not met.** Preview deployments are protected (Vercel authentication, confirmed by the SSO redirect). The production deployments of both projects are public: `https://mcd-new-2.vercel.app/` and `https://mcd-new.vercel.app/` return 200 to anyone. | Vercel → `mcd-new-2` → Settings → Deployment Protection → protect production as well as previews (Standard Protection) until go-live |
-| `noindex` on non-production | Met. Every preview response carries `X-Robots-Tag: noindex, nofollow` and the meta tag, from `VERCEL_ENV`. **But** the production deployment on `mcd-new-2.vercel.app` builds with `VERCEL_ENV=production`, so it carries `index, follow` while being publicly reachable (see the row above). Protection closes that gap; until it is on, that URL is indexable. | `next.config.ts`, `src/lib/staging.ts` |
+| No custom domain on `mcd-new-2` | Met for `mcd-new-2`. Separately, `motorclaimsdepartment.co.uk` already resolves to Vercel (bare domain 308s to `www`, `www` is a CNAME to `vercel-dns-016.com`) and serves a holding page titled "Motor Claims Department — non-fault accident specialists". The go-live checklist starts with finding that project and removing the domain there. `mcd-new` is retired; disconnect it from the repo so it stops building. | Vercel dashboard |
+| Deployment protection on every deployment of `mcd-new-2`, production included | **Open, and not met.** Previews are protected (Vercel authentication, confirmed by the SSO redirect). The production deployment `https://mcd-new-2.vercel.app/` returns 200 to anyone. | Vercel → `mcd-new-2` → Settings → Deployment Protection → Standard Protection, all deployments, until the real domain is attached |
+| `noindex` off the real domain | Met, host-based. Every response whose host is not `motorclaimsdepartment.co.uk` (or `www`) carries `X-Robots-Tag: noindex, nofollow` from the middleware, gets a disallow-all `robots.txt`, and gains the robots meta tag in the browser. That includes the `.vercel.app` production build. It lifts on its own on the real domain. Tested both ways in `tests/e2e/staging.spec.ts`. One limitation: pages are static, so the meta tag is added by script rather than server-rendered; the header is the authoritative signal and is server-side. | `src/middleware.ts`, `src/lib/host.ts`, `src/app/robots.ts`, `HostRobots` |
 | Canonicals on the final domain | Met. Every page's canonical is `https://motorclaimsdepartment.co.uk/…` from `NEXT_PUBLIC_SITE_URL`'s default, on every environment. | `src/lib/site.ts` |
 | Railway staging isolated | **Open.** The Railway service has not been created yet. `api/README.md` has the steps: root directory `api`, a Postgres plugin, a `staging` environment with its own database and inbox, preview `CLAIMS_API_URL` pointing at staging, production at production. Until then the reg box gets a stub acknowledgement from the Next route handler and stores nothing. | `api/` |
 | Optional `staging.motorclaimsdepartment.co.uk` | Not added; no DNS record exists. Add only if a branded link is wanted. | DNS |
@@ -36,7 +36,7 @@ In the order they will bite.
 2. **Substantiation flags.** `src/data/claims.json`: "Back on the road within 90 mins", "Avg wait 1 min" and "Fastest way to claim" are `substantiated: false`. They render with a dotted coral outline on previews and never on production. Flip a flag only with evidence on file, and record it in `evidence`.
 3. **The catch wording.** `src/data/copy.ts` → `theCatch.callout` and `theCatch.faq` carry the mockup wording, pending MCD's policy on hire charges where fault cannot be established. Every page reads from those two strings.
 4. **Claim-flow mount.** `#claim-flow` on `/claim-now/` is empty until Ollie's flow mounts on it. Until then a visitor who submits a reg sees the reference and the note "Next, a few questions about what happened", and nothing follows. Either the flow ships before go-live, or the copy after the reference changes to "Your handler will call you" and the stub becomes a real hand-off (email or CRM).
-5. **Logo and favicon.** The wordmark is text in Libre Franklin 900. The favicon is the "MCD" shorthand on ink as a placeholder. Once the logo exists: `src/components/SiteHeader/`, `src/components/SiteFooter/`, `src/app/icon.svg`, plus a `manifest` and the OG image (`/assets/og/…` referenced nowhere yet).
+5. **Logo: done from §4a.** The horizontal lockup and the square are SVG components with the type as outlines; header (mono white) and footer (mono ink) use the lockup; favicon, Apple icon, 512 and 1024 app icons and the manifest are cut from the square. Still open: the OG/social image (`/assets/og/…` is referenced nowhere yet), and a designer's eye on the generated lockup against `design/mcd-logo-motor-mark.png` (kerning is not applied; the mark's spoke length is my reading of the PNG).
 6. **Real reviews.** `src/data/reviews.json` is sample data with `sample: true`, so the review band does not render on production at all. Replace with verified reviews and the real aggregate, set `sample: false`.
 7. **Photography.** Every photo is a placeholder box with the intended scene as its label, except the homepage hero, which is the mockup's AI placeholder image (guidelines §1 rule that out for final assets). Real shoot needed for the hero, the handler, and the twelve template heroes.
 8. **Copy.** The twelve template pages and the seven utility pages are lorem ipsum with the mockups' fixed lines. Alex writes the rest by PR. Titles over 60 characters and descriptions over 155 are warned at build time (one page today: third-party-insurance-claim).
@@ -45,14 +45,13 @@ In the order they will bite.
 
 ## 4. What is needed to go live, in order
 
-1. Turn on deployment protection for production on `mcd-new-2` now, and disconnect `mcd-new` (or confirm it is wanted).
-2. Establish which Vercel project holds `motorclaimsdepartment.co.uk` today and what that page is.
-3. Protect `main` on GitHub: it is currently unprotected. Require a pull request and block force pushes.
-4. Put `design/mcd-nav-bar-marine.png` and `design/MCD-design-system-brief-claude-design.md` on `main`; the header check and the brief-versus-build diff are waiting on them.
+1. Turn on deployment protection for every deployment of `mcd-new-2` now, and disconnect the retired `mcd-new` project from the repo.
+2. Protect `main` on GitHub: it is currently unprotected. Require a pull request and block force pushes.
+3. Read `docs/design-diff.md` (the header check against the PNG and the brief-versus-build differences) and decide each item.
 5. Set `NEXT_PUBLIC_GTM_ID` in Vercel (preview and production) once the container exists; inside GTM, GA4 and Google Ads tags on consent-mode checks, conversions per `docs/tracking.md`.
 6. Create the Railway service from `api/` with production and staging environments; set `CLAIMS_API_URL` and `CLAIMS_API_KEY` in Vercel per environment.
 7. Resolve the placeholders in section 3 in that order: FCA line and company details, substantiation evidence, the catch wording, the claim flow, logo, reviews, photography, copy.
-8. Run the go-live checklist in `README.md` (unrun): add root and `www` to the project, switch DNS, remove protection on production only, confirm the noindex is gone on the real domain, confirm `sitemap.xml` and `robots.txt`, submit the sitemap.
+8. Run the go-live checklist in `README.md` (unrun): find the project holding `motorclaimsdepartment.co.uk` and remove it there, add root and `www` to `mcd-new-2`, switch DNS, remove protection on production only, confirm the noindex has lifted on the real domain, confirm `sitemap.xml` and `robots.txt`, submit the sitemap.
 
 ## 5. Quality gates at the end of Phase 1
 

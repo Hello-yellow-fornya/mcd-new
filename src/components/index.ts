@@ -1,6 +1,8 @@
 export { Button } from './Button/Button';
 export { Icon, IconCircle } from './Icon/Icon';
 export { Sprite } from './Icon/Sprite';
+export { Logo, LogoSquare, Mark, squareSvg } from './Logo/Logo';
+export type { LogoVariant, SquareTone } from './Logo/Logo';
 export type { IconName } from './Icon/names';
 export { JsonLd } from './JsonLd/JsonLd';
 export { SiteHeader } from './SiteHeader/SiteHeader';

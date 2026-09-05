@@ -3,6 +3,7 @@ import { site } from '@/lib/site';
 import { isProduction } from '@/lib/staging';
 import { footer } from '@/data/copy';
 import { CookieSettingsButton } from '@/components/Consent/ConsentBanner';
+import { Logo } from '@/components/Logo/Logo';
 import styles from './SiteFooter.module.css';
 
 /**
@@ -26,7 +27,9 @@ export function SiteFooter() {
       <div className={`wrap ${styles.footIn}`}>
         <div>
           <p>
-            <strong>{site.wordmark}</strong>
+            <Link href="/" className={styles.brand} aria-label="Motor Claims Department, home">
+              <Logo variant="mono-ink" height={28} />
+            </Link>
           </p>
           <p className={styles.muted}>{site.strapline}</p>
           <p>

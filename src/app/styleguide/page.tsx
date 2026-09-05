@@ -14,6 +14,8 @@ import {
   IconCircle,
   IndependenceLine,
   KeepsStrip,
+  Logo,
+  LogoSquare,
   Pattern,
   PhotoPlaceholder,
   ProofGrid,
@@ -88,6 +90,25 @@ export default function StyleguidePage() {
               Every component, <Highlight>one page.</Highlight>
             </h1>
           </div>
+
+          <Block id="logo" title="Logo" note="§4a: the horizontal lockup in its three mono states and the colour states; the square in marine, paper and coral. Type set as outlines.">
+            <div className={styles.row}>
+              <div className={styles.stone}><Logo variant="mono-ink" height={40} /></div>
+              <div className={styles.dark}><Logo variant="mono-white" height={40} /></div>
+              <div style={{ background: 'var(--coral)', color: 'var(--ink-900)', padding: 20, borderRadius: 'var(--r-card)' }}><Logo variant="mono-ink900" height={40} /></div>
+            </div>
+            <div className={styles.row} style={{ marginTop: 12 }}>
+              <div className={styles.stone}><Logo variant="colour-on-paper" height={40} /></div>
+              <div className={styles.dark}><Logo variant="colour-on-marine" height={40} /></div>
+              <div style={{ background: 'var(--coral)', color: 'var(--ink-900)', padding: 20, borderRadius: 'var(--r-card)' }}><Logo variant="colour-on-coral" height={40} /></div>
+            </div>
+            <div className={styles.row} style={{ marginTop: 12 }}>
+              <LogoSquare tone="marine" size={96} />
+              <LogoSquare tone="paper" size={96} />
+              <LogoSquare tone="coral" size={96} />
+              <Logo variant="mono-ink" height={28} />
+            </div>
+          </Block>
 
           <Block id="buttons" title="Button" note="coral, ink, secondary, secondary on dark; md and lg; with icons.">
             <div className={styles.row}>

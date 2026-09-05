@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isProduction, robotsHeaders, robotsMeta, NOINDEX } from '../../src/lib/staging.ts';
+import { isProduction } from '../../src/lib/staging.ts';
+import { isLiveHost } from '../../src/lib/host.ts';
 
 test('only VERCEL_ENV=production is production', () => {
   assert.equal(isProduction('production'), true);
@@ -9,15 +10,14 @@ test('only VERCEL_ENV=production is production', () => {
   assert.equal(isProduction(undefined), false);
 });
 
-test('non-production gets a site-wide X-Robots-Tag', () => {
-  const headers = robotsHeaders('preview');
-  assert.equal(headers.length, 1);
-  assert.equal(headers[0].source, '/:path*');
-  assert.deepEqual(headers[0].headers, [{ key: 'X-Robots-Tag', value: NOINDEX }]);
-  assert.deepEqual(robotsHeaders('production'), []);
-});
-
-test('robots meta follows the environment', () => {
-  assert.deepEqual(robotsMeta('preview'), { index: false, follow: false });
-  assert.deepEqual(robotsMeta('production'), { index: true, follow: true, 'max-image-preview': 'large' });
+test('only the real domain, with or without www, is live', () => {
+  const site = 'motorclaimsdepartment.co.uk';
+  assert.equal(isLiveHost('motorclaimsdepartment.co.uk', site), true);
+  assert.equal(isLiveHost('www.motorclaimsdepartment.co.uk', site), true);
+  assert.equal(isLiveHost('MotorClaimsDepartment.co.uk:443', site), true);
+  assert.equal(isLiveHost('mcd-new-2.vercel.app', site), false);
+  assert.equal(isLiveHost('mcd-new-2-git-main-fornya.vercel.app', site), false);
+  assert.equal(isLiveHost('staging.motorclaimsdepartment.co.uk', site), false);
+  assert.equal(isLiveHost('localhost:3100', site), false);
+  assert.equal(isLiveHost(null, site), false);
 });

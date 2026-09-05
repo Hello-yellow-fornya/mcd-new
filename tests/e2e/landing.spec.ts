@@ -8,7 +8,7 @@ test.describe('landing pages', () => {
       const res = await request.get(path);
       expect(res.headers()['x-robots-tag']).toContain('noindex');
       await page.goto(path);
-      await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
+      await expect(page.locator('meta[name="robots"]:not([data-host])')).toHaveAttribute('content', 'noindex, nofollow');
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://motorclaimsdepartment.co.uk${path}`);
       await expect(page.locator('h1')).toHaveCount(1);
       // Independence line directly after the hero

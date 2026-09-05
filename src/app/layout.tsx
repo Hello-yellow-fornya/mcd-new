@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { body, bodySemibold, display } from '@/fonts';
 import { site, siteUrl } from '@/lib/site';
-import { robotsMeta } from '@/lib/staging';
 import { Sprite } from '@/components/Icon/Sprite';
 import { Analytics } from '@/components/Analytics/Analytics';
 import { ConsentBanner } from '@/components/Consent/ConsentBanner';
+import { HostRobots } from '@/components/Analytics/HostRobots';
 import '@/styles/tokens.css';
 import './globals.css';
 
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.subline,
-  // noindex on every environment that is not production, in addition to the
-  // X-Robots-Tag header set in next.config.ts.
-  robots: robotsMeta(process.env.VERCEL_ENV),
+  // Indexable by default; HostRobots adds noindex in the browser and the
+  // middleware adds the header whenever the host is not the real domain.
+  robots: { index: true, follow: true, 'max-image-preview': 'large' },
   openGraph: {
     siteName: site.name,
     locale: site.locale,
@@ -39,6 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <Sprite />
         {children}
+        <HostRobots />
         <Analytics gtmId={gtmId} />
         <ConsentBanner gtmId={gtmId} />
       </body>

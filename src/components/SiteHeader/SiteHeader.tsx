@@ -4,6 +4,7 @@ import { useEffect, useId, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Icon } from '@/components/Icon/Icon';
+import { Logo } from '@/components/Logo/Logo';
 import { site } from '@/lib/site';
 import { nav, cta, type NavLink } from '@/data/copy';
 import styles from './SiteHeader.module.css';
@@ -23,7 +24,7 @@ function isActive(pathname: string, link: NavLink) {
 
 /**
  * The marine bar (CLAUDE.md §4). Sticky, ink, 72px desktop / 64px mobile.
- * Franklin wordmark, links at 88% white with the active page underlined in
+ * The mono white lockup (§4a, 28px desktop / 22px mobile), links at 88% white with the active page underlined in
  * coral, a coral phone pill (the number on desktop, "Call now" on mobile,
  * never an icon-only circle) and a burger that opens the paper drawer.
  */
@@ -67,8 +68,8 @@ export function SiteHeader({ links = nav.links, transparent = false, minimal = f
   return (
     <header className={[styles.bar, transparent && styles.transparent, solid && styles.solid, 'on-dark'].filter(Boolean).join(' ')} data-testid="site-header">
       <div className={`wrap ${styles.in}`}>
-        <Link className={styles.brand} href="/">
-          {site.wordmark}
+        <Link className={styles.brand} href="/" aria-label="Motor Claims Department, home">
+          <Logo variant="mono-white" className={styles.logo} />
         </Link>
 
         {!minimal && (

@@ -1,11 +1,17 @@
 import type { MetadataRoute } from 'next';
+import { headers } from 'next/headers';
+import { isLiveHost } from '@/lib/host';
 import { absoluteUrl } from '@/lib/site';
-import { isProduction } from '@/lib/staging';
 
-/** Disallow /claim/ everywhere (brief §5); on staging disallow everything on top of the noindex header. */
-export default function robots(): MetadataRoute.Robots {
+// Served per request so it can follow the host rule (brief §2a).
+export const dynamic = 'force-dynamic';
+
+/** Disallow everything off the real domain; on it, disallow /claim/ and the styleguide (brief §5). */
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const h = await headers();
+  const host = h.get('x-forwarded-host') ?? h.get('host');
   return {
-    rules: isProduction() ? { userAgent: '*', allow: '/', disallow: ['/claim/', '/styleguide/'] } : { userAgent: '*', disallow: '/' },
+    rules: isLiveHost(host) ? { userAgent: '*', allow: '/', disallow: ['/claim/', '/styleguide/'] } : { userAgent: '*', disallow: '/' },
     sitemap: absoluteUrl('/sitemap.xml'),
   };
 }
