@@ -29,6 +29,16 @@ export function Sprite() {
         <symbol id="i-car" viewBox="0 0 24 24">
           <path d="M4.2 11.5l1.9-5A2.5 2.5 0 0 1 8.4 5h7.2a2.5 2.5 0 0 1 2.3 1.5l1.9 5A2.5 2.5 0 0 1 22 14v4a1.5 1.5 0 0 1-1.5 1.5h-.5a2 2 0 0 1-4 0H8a2 2 0 0 1-4 0h-.5A1.5 1.5 0 0 1 2 18v-4a2.5 2.5 0 0 1 2.2-2.5zM7.1 7.8L6 11h12l-1.1-3.2A.8.8 0 0 0 16.1 7H7.9a.8.8 0 0 0-.8.8zM6 15.5a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6zm12 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6z" />
         </symbol>
+        <symbol id="i-document" viewBox="0 0 24 24">
+          <path d="M6 2h8l5 5v15H6z" />
+          <path
+            d="M9 11h6M9 14.5h6M9 18h4"
+            fill="none"
+            strokeWidth="2"
+            strokeLinecap="round"
+            style={{ stroke: 'var(--icon-knockout, var(--coral))' }}
+          />
+        </symbol>
         <symbol id="i-person" viewBox="0 0 24 24">
           <circle cx="12" cy="7.5" r="4.5" />
           <path d="M3.5 21.5c0-4.7 3.8-8 8.5-8s8.5 3.3 8.5 8z" />

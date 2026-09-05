@@ -52,6 +52,7 @@ export const benefits = {
     { icon: 'shield', title: 'Keep your no claims bonus', body: 'Nothing goes through your policy, so your no-claims is untouched.' },
     { icon: 'car', title: 'Like-for-like car hire, 100% guaranteed', body: 'Delivered to your drive. If yours is written off, you keep it until the money lands.' },
     { icon: 'person', title: 'A dedicated, UK-based call handler', body: 'Your handler owns it from first call to keys back. No queues, no repeating yourself.' },
+    { icon: 'document', title: 'Nothing on your record', body: 'You tell your insurer it happened. That’s all. No claim, no fuss at renewal.' },
   ] satisfies { icon: IconName; title: string; body: string }[],
 } as const;
 
@@ -108,6 +109,14 @@ export const band = {
   line1: 'Your insurer has a claims department.',
   line2: 'It works for your insurer.',
   highlight: 'We work for you.',
+  /** The two small outlined pills under the chip band (homepage). */
+  pills: { start: 'Start your claim', call: 'Call now' },
+} as const;
+
+/** "What's the catch?" section on the homepage: the FAQ under its own heading. */
+export const catchSection = {
+  heading: 'What’s the catch?',
+  sub: 'There’s one. Here it is, in the same size as everything else.',
 } as const;
 
 export const handler = {

@@ -17,6 +17,35 @@
   background: var(--ink);
 }
 
+/* The paper bar (homepage, design/mcd-site-fullbleed.html): the colour logo at 36px,
+   ink links, active underlined in coral. Over the hero it stays transparent with white type. */
+.paper .logo {
+  height: 36px;
+}
+
+.paper.solid {
+  background: var(--paper);
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+
+.paper.solid .brand {
+  color: var(--ink);
+}
+
+.paper.solid .link {
+  color: var(--ink);
+}
+
+.paper.solid .link:hover,
+.paper.solid .active {
+  color: var(--ink);
+}
+
+.paper.solid .active {
+  border-bottom-color: var(--coral);
+}
+
 .in {
   display: flex;
   align-items: center;
@@ -161,6 +190,10 @@
     height: 22px;
   }
 
+  .paper .logo {
+    height: 28px;
+  }
+
   .links {
     display: none;
   }
@@ -196,6 +229,10 @@
     background: none;
     border: 0;
     cursor: pointer;
+  }
+
+  .paper.solid .burger span {
+    background: var(--ink);
   }
 
   .burger span {

@@ -1,64 +1,39 @@
-/* Homepage v1 (design/mcd-site-fullbleed.html, guidelines §9). Section styles
+/* Homepage V1 (design/mcd-site-fullbleed.html, guidelines §9). Section styles
    that belong to the page rather than a component. */
 
-.benefits {
+/* The paper bar on the homepage is 88px tall on desktop (the mockup's nav-in). */
+.home {
+  --nav-h: 88px;
+}
+
+/* How it works on the ink shards: white heading and intro, white step cards. */
+.how {
   padding: var(--section-pad) 0;
-  background: var(--white);
+  background-color: var(--ink);
+  color: var(--white);
 }
 
-.benefits h2 {
-  white-space: nowrap;
-  font-size: clamp(26px, 3.3vw, 38px);
-  margin-bottom: 34px;
+.how h2 {
+  max-width: 24ch;
+  color: var(--white);
 }
 
-.bgrid {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 22px;
+.howSub {
+  max-width: 64ch;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--white);
+  opacity: 0.95;
+  margin-bottom: 0;
 }
 
-.b {
-  background: var(--stone);
-  color: var(--ink);
-  border-radius: var(--r-card);
-  padding: 28px 26px 26px;
-  max-width: none;
-}
-
-.b h3 {
-  font-size: 21px;
-  margin: 18px 0 8px;
-}
-
-.b p {
-  font-size: 16px;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.tu {
-  padding: 8px 0 var(--section-pad);
-  background: var(--white);
-}
-
-.tuTable {
-  margin-top: 0;
+.howSub b {
+  display: block;
+  margin-bottom: 6px;
 }
 
 @media (max-width: 820px) {
-  .benefits h2 {
-    white-space: normal;
+  .home {
+    --nav-h: 64px;
   }
-
-  .bgrid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .b {
-    padding: 22px;
-  }
-
 }

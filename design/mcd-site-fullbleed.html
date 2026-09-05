@@ -302,6 +302,60 @@ h1{color:var(--ink)}
 .sec-cta{display:flex;gap:12px;flex-wrap:wrap}
 .btn-coral{background:var(--coral);color:var(--ink);border-color:var(--coral);border-radius:999px}
 .btn-phone2{background:var(--coral);color:var(--ink);border-color:var(--coral);border-radius:999px}
+
+/* marine nav, always, with the logo */
+.nav{background:#16324F!important;border-bottom:1px solid #214A73}
+.nav .links a{color:rgba(255,255,255,.88)} .nav .links a:first-child{color:#fff;border-bottom:2px solid #F2694B;padding-bottom:4px}
+.mcd{display:inline-flex;flex-direction:column;line-height:1;color:#fff}
+.mcd1{font-family:var(--display);font-weight:900;font-size:36px;letter-spacing:-0.035em;white-space:nowrap}
+.mcd .om{display:inline-block;width:.74em;height:.74em;vertical-align:-0.02em}
+.mcd2{font-family:var(--body);font-weight:700;font-size:11px;letter-spacing:.14em;margin-top:3px;white-space:nowrap}
+.nav-in{min-height:88px}
+/* the moving claims band: wider than 2.0 */
+.claimsband{background:#16324F;color:#fff;overflow:hidden;padding:0}
+.claimsband .track{display:flex;gap:56px;width:max-content;padding:22px 24px;animation:cb 40s linear infinite;font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:-0.01em}
+.claimsband span{display:inline-flex;align-items:center;gap:14px;white-space:nowrap}
+.claimsband i{width:44px;height:44px;border-radius:50%;background:#F2694B;color:#16324F;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.claimsband i svg{width:24px;height:24px}
+@keyframes cb{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.claimsband .track:hover{animation-play-state:paused}
+/* band, 2.0 sizing in our type */
+.band{background:#16324F;color:#fff;padding:64px 0 60px}
+.band .l0,.band .l1{font-family:var(--display);font-weight:900;font-size:clamp(28px,3.6vw,44px);line-height:1.08;letter-spacing:-0.02em;display:block;color:#fff}
+.band .l1{margin-top:.2em} .band .l2{display:block;margin-top:.35em}
+.band mark{display:inline-block;background:#F2694B;color:#16324F;font-family:var(--display);font-weight:900;font-size:clamp(28px,3.6vw,44px);line-height:1.05;padding:.06em .18em .1em;border-radius:8px;letter-spacing:-0.02em;box-shadow:none}
+.band-ctas{display:flex;gap:10px;margin-top:26px}
+.band-call{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 18px;border-radius:999px;border:1.5px solid #F2694B;color:#fff;font-weight:700;font-size:14px;text-decoration:none} .band-call .ph{width:15px;height:15px;fill:#F2694B}
+/* reviews */
+.reviews{padding:56px 0 52px;overflow:hidden;background:var(--paper)}
+.rhead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.stars{display:inline-flex;gap:2px} .stars svg{width:14px;height:14px;fill:#F2694B}
+.rtrack{display:flex;gap:14px;width:max-content;padding:0 24px;animation:cb 44s linear infinite} .rtrack:hover{animation-play-state:paused}
+.rcard{flex:none;width:300px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px} .rcard p{font-size:15px;margin:10px 0 12px} .rcard small{font-size:13px;color:var(--muted)} .rcard b{color:var(--ink)}
+@media (max-width:820px){.mcd1{font-size:28px}.mcd2{font-size:9px}.claimsband .track{font-size:16px;gap:36px;padding:14px 18px}.claimsband i{width:32px;height:32px}.claimsband i svg{width:18px;height:18px}}
+
+.btn .ph,.btn-phone2 .ph{width:18px;height:18px;fill:currentColor}
+.sec-cta .btn{display:inline-flex;flex:none;align-items:center}
+.band{background:#16324F url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiPjx0aXRsZT5NQ0Qgc2hhcmQgcGF0dGVybiDigJQgaW5rPC90aXRsZT48cmVjdCB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiBmaWxsPSIjMTYzMjRGIi8+PGcgZmlsbD0iIzExMjczRCI+PHBhdGggZD0iTTEwMjEsODQ1IEwxMjAyLDM0OCBMMTE4MywzNjQgTDEwMDEsODYxWiIvPjxwYXRoIGQ9Ik01MjcsNzMzIEw2NDQsNDExIEw2NTAsMzczIEw1MzMsNjk1WiIvPjxwYXRoIGQ9Ik0yOTcsMTA2OSBMNDY5LDU5NyBMNDE4LDY4MCBMMjQ2LDExNTJaIi8+PHBhdGggZD0iTTE0MDIsNzUwIEwxNDQ5LDYyMSBMMTQ1MCw1ODAgTDE0MDMsNzA5WiIvPjxwYXRoIGQ9Ik01ODYsMzIwIEw2MzQsMTg3IEw2MTYsMjAyIEw1NjcsMzM2WiIvPjxwYXRoIGQ9Ik0xMTY0LDg0NiBMMTI2Miw1NzUgTDEyNjMsNTM3IEwxMTY0LDgwOFoiLz48cGF0aCBkPSJNMTg0MSwxMjk4IEwxOTgxLDkxNiBMMTk5Miw4NTIgTDE4NTMsMTIzNVoiLz48cGF0aCBkPSJNNzM5LDI4NSBMODgwLC0xMDQgTDg3MiwtMTMzIEw3MzAsMjU2WiIvPjxwYXRoIGQ9Ik0xODU0LDk2OSBMMTg5MCw4NjkgTDE4NzMsODYxIEwxODM2LDk2MVoiLz48cGF0aCBkPSJNMTg3OCw0OTggTDE5MjAsMzgyIEwxOTA5LDM2MSBMMTg2Nyw0NzdaIi8+PHBhdGggZD0iTTI2Miw2MDcgTDQxOCwxNzcgTDQzNCwxMTEgTDI3Nyw1NDJaIi8+PHBhdGggZD0iTTMxNSwyODAgTDQ2NiwtMTM0IEw0NTcsLTE1MCBMMzA2LDI2NFoiLz48cGF0aCBkPSJNNTc3LDg2OSBMNjMxLDcyMSBMNjI2LDcxMiBMNTcyLDg2MFoiLz48cGF0aCBkPSJNNTgwLDU0NiBMNzk1LC00NSBMNzIwLDM2IEw1MDUsNjI3WiIvPjxwYXRoIGQ9Ik01NjcsNjUxIEw3NzAsOTMgTDcyNCwyMDAgTDUyMCw3NThaIi8+PHBhdGggZD0iTTU4MCw0ODggTDY5OSwxNjIgTDcyMiw3MCBMNjAzLDM5NloiLz48cGF0aCBkPSJNMzI1LDczMSBMMzk2LDUzNiBMMzg3LDUyNyBMMzE2LDcyM1oiLz48cGF0aCBkPSJNMTgyMSw2OTYgTDE5MjIsNDE5IEwxOTA4LDM0OSBMMTgwNyw2MjZaIi8+PHBhdGggZD0iTTE3NjYsOTg3IEwxODU2LDc0MCBMMTgyNCw3NzkgTDE3MzQsMTAyNloiLz48cGF0aCBkPSJNNTM3LDEyNTggTDY3MSw4ODkgTDY5Myw3OTQgTDU1OSwxMTYzWiIvPjxwYXRoIGQ9Ik0xNjYsMTE0MCBMMjQ5LDkxMCBMMjI5LDkzOSBMMTQ1LDExNjlaIi8+PHBhdGggZD0iTTEzMDksNDA0IEwxMzYzLDI1NSBMMTM2NSwyMjkgTDEzMTEsMzc5WiIvPjxwYXRoIGQ9Ik0xMjIzLDEwOTkgTDEzMzIsODAwIEwxMzMzLDc0MiBMMTIyNSwxMDQxWiIvPjxwYXRoIGQ9Ik02MSw0MzMgTDE1OCwxNjkgTDE1NiwxNDggTDYwLDQxMloiLz48cGF0aCBkPSJNMTI4NiwyNzggTDEzODQsMTAgTDEzMTIsNiBMMTIxNCwyNzRaIi8+PHBhdGggZD0iTTE0NTcsNzExIEwxNTI2LDUyMSBMMTUwOSw1NTEgTDE0MzksNzQyWiIvPjxwYXRoIGQ9Ik0xNDgzLDEwOTcgTDE1MjgsOTc0IEwxNTExLDk4MyBMMTQ2NywxMTA1WiIvPjxwYXRoIGQ9Ik04NDYsMTE0OCBMOTA0LDk5MCBMODc5LDEwMTAgTDgyMSwxMTY5WiIvPjxwYXRoIGQ9Ik0xNDk0LDk3OSBMMTY2Myw1MTcgTDE2MDcsNTQxIEwxNDM5LDEwMDNaIi8+PHBhdGggZD0iTTE3NDQsMTA3OSBMMTg0Niw3OTkgTDE4MjUsODAyIEwxNzIzLDEwODNaIi8+PHBhdGggZD0iTTEzMjMsNTgzIEwxNDU1LDIyMiBMMTQ0MCwyNDMgTDEzMDgsNjA0WiIvPjxwYXRoIGQ9Ik0xODQ2LDExNTIgTDE5OTcsNzM4IEwxOTc2LDc0OSBMMTgyNSwxMTYyWiIvPjxwYXRoIGQ9Ik0xMDYwLDk3NCBMMTExMiw4MzIgTDExMDMsODM3IEwxMDUxLDk3OVoiLz48cGF0aCBkPSJNMTA4Nyw0NDQgTDEyNTcsLTIyIEwxMjEzLDU0IEwxMDQ0LDUyMFoiLz48cGF0aCBkPSJNNzAzLDEyNiBMNzcxLC02MSBMNzc2LC0xMDEgTDcwOCw4NloiLz48cGF0aCBkPSJNMTc2MSw4NjEgTDE4NzEsNTU2IEwxODIyLDU2NSBMMTcxMiw4NjlaIi8+PHBhdGggZD0iTTU3Miw2OTEgTDcxOSwyODcgTDY2NiwyNDAgTDUxOSw2NDRaIi8+PHBhdGggZD0iTTEyOTYsNDIzIEwxMzYzLDIzOSBMMTMzNiwyNjAgTDEyNjksNDQ0WiIvPjxwYXRoIGQ9Ik0xNDc5LDExMzUgTDE1NDgsOTQ1IEwxNTQ2LDkxNyBMMTQ3NywxMTA3WiIvPjxwYXRoIGQ9Ik01OTMsNjI3IEw3NDQsMjExIEw3MTIsMjY4IEw1NjEsNjgzWiIvPjxwYXRoIGQ9Ik0xODgwLDU1OCBMMTkxNyw0NTYgTDE5MTEsNDIwIEwxODc0LDUyMVoiLz48cGF0aCBkPSJNMTQ3MCw3MzEgTDE1MzgsNTQ1IEwxNTQ3LDUwMiBMMTQ3OSw2ODdaIi8+PHBhdGggZD0iTTEwMzAsMjQ3IEwxMTUzLC05MiBMMTE4MiwtMTk0IEwxMDU5LDE0NVoiLz48cGF0aCBkPSJNMTMzMSw2NjQgTDE0OTEsMjI1IEwxNDQ1LDMwMSBMMTI4NSw3NDBaIi8+PHBhdGggZD0iTTE0MjIsMzY0IEwxNTI3LDczIEwxNTIzLDY3IEwxNDE4LDM1N1oiLz48cGF0aCBkPSJNMTQ4NiwzMDIgTDE1NjQsODggTDE1NDgsODUgTDE0NzAsMjk5WiIvPjxwYXRoIGQ9Ik0xMzI3LDk1MSBMMTQwMiw3NDMgTDE0MDQsNjgzIEwxMzI5LDg5MFoiLz48cGF0aCBkPSJNMTgwNyw4NjAgTDE4NzUsNjc0IEwxODUwLDcwMSBMMTc4Miw4ODZaIi8+PHBhdGggZD0iTTg5NSw4NDcgTDEwNTksMzk3IEwxMDQ0LDM4MiBMODgwLDgzMloiLz48cGF0aCBkPSJNMTM3Nyw0MjggTDE1MzYsLTkgTDE0NjgsMTQgTDEzMDksNDUyWiIvPjxwYXRoIGQ9Ik01ODQsMTIzMSBMNzkzLDY1OCBMNzE4LDcxMyBMNTA5LDEyODZaIi8+PHBhdGggZD0iTTc4NywxMjA4IEw5NDYsNzczIEw5NDQsNzU3IEw3ODUsMTE5M1oiLz48cGF0aCBkPSJNMTIxOCw5ODIgTDEzMDMsNzQ4IEwxMzEwLDY3NyBMMTIyNSw5MTFaIi8+PHBhdGggZD0iTTE2MDMsMzA3IEwxNjc0LDExMSBMMTY4Miw2NyBMMTYxMCwyNjJaIi8+PHBhdGggZD0iTTExMzgsMTAwNiBMMTI5OCw1NjUgTDEyODEsNTU3IEwxMTIwLDk5OFoiLz48cGF0aCBkPSJNMTgyMSwxOTAgTDE4OTksLTIzIEwxODgxLC01IEwxODA0LDIwOVoiLz48cGF0aCBkPSJNMTMyNyw3ODggTDE0NzksMzcxIEwxNDc5LDM0MSBMMTMyNyw3NThaIi8+PHBhdGggZD0iTTE3MDUsMTA3NyBMMTc3NCw4ODkgTDE3MDgsODY4IEwxNjQwLDEwNTZaIi8+PHBhdGggZD0iTTEyNDksMzc5IEwxMzM4LDEzNSBMMTM1MSw1NSBMMTI2MywyOTlaIi8+PHBhdGggZD0iTTE4NTUsNjk4IEwxOTUxLDQzNSBMMTkwMiw0MTYgTDE4MDYsNjc5WiIvPjxwYXRoIGQ9Ik0xNDMzLDIzNSBMMTU3NCwtMTUzIEwxNTMxLC05MiBMMTM5MCwyOTZaIi8+PHBhdGggZD0iTTc0Nyw1OTEgTDgxMyw0MDcgTDc4Niw0MzIgTDcxOSw2MTVaIi8+PHBhdGggZD0iTTExMTksNDM1IEwxMTcyLDI4OSBMMTE2NiwyNTAgTDExMTMsMzk2WiIvPjxwYXRoIGQ9Ik0xNTg3LDExNyBMMTY0NywtNDcgTDE2MzgsLTY4IEwxNTc4LDk2WiIvPjxwYXRoIGQ9Ik05MDgsNzQzIEw5NjEsNTk4IEw5NTMsNTk2IEw5MDAsNzQxWiIvPjxwYXRoIGQ9Ik02NzYsMzc0IEw3ODcsNzEgTDc4MSw1MyBMNjcxLDM1NloiLz48cGF0aCBkPSJNMTIwNCwyNjcgTDEyNzIsODAgTDEyNTcsNzggTDExODgsMjY1WiIvPjxwYXRoIGQ9Ik0xNjQxLDg4OCBMMTgzMCwzNjkgTDE3ODksNDMzIEwxNjAwLDk1MloiLz48cGF0aCBkPSJNMTc2NCw0NjIgTDE4NjgsMTc2IEwxODExLDIyMCBMMTcwNiw1MDZaIi8+PHBhdGggZD0iTTE3MzUsMjQ2IEwxNzkyLDg3IEwxNzk4LDQ0IEwxNzQwLDIwMloiLz48cGF0aCBkPSJNMTYxNyw2NjggTDE3ODUsMjA3IEwxNzYwLDI0MiBMMTU5Miw3MDRaIi8+PHBhdGggZD0iTTc4LDQxOCBMMTg5LDExMiBMMTUxLDE2IEw0MCwzMjJaIi8+PHBhdGggZD0iTTExNDAsOTczIEwxMjI3LDczMyBMMTI0Myw2NjUgTDExNTUsOTA1WiIvPjxwYXRoIGQ9Ik0zNDcsMjA2IEw0NDQsLTYyIEw0NTIsLTEyNSBMMzU1LDE0M1oiLz48cGF0aCBkPSJNNTM5LDQ1MyBMNjY4LDEwMCBMNjM3LC0xMyBMNTA5LDM0MFoiLz48cGF0aCBkPSJNMjI2LDExNzQgTDMzMCw4OTAgTDMyMiw4ODEgTDIxOCwxMTY2WiIvPjxwYXRoIGQ9Ik0xMTUyLDY0MCBMMTI5OSwyMzUgTDEyNjMsMjg5IEwxMTE1LDY5NFoiLz48cGF0aCBkPSJNNTEyLDY5MyBMNjM0LDM1OCBMNjUwLDI4OCBMNTI4LDYyMloiLz48cGF0aCBkPSJNMTE0NSwyNTkgTDEzNDUsLTI4OSBMMTI2MCwtMjI1IEwxMDYwLDMyMloiLz48cGF0aCBkPSJNMTMzNSw2MTMgTDE0ODAsMjE1IEwxNDQyLDI2MSBMMTI5Nyw2NTlaIi8+PHBhdGggZD0iTTY3OSwxMTg5IEw4MTksODA0IEw4MTAsNzc5IEw2NzAsMTE2NFoiLz48cGF0aCBkPSJNMTcxNywxMTQ1IEwxODUwLDc3OSBMMTg0MSw3NTYgTDE3MDgsMTEyMVoiLz48cGF0aCBkPSJNMTQ4OSwxOTcgTDE1NzAsLTI2IEwxNTcwLC00NSBMMTQ4OSwxNzhaIi8+PHBhdGggZD0iTTEzOTQsNzgxIEwxNDU5LDYwMiBMMTQxMiw1NjYgTDEzNDYsNzQ2WiIvPjxwYXRoIGQ9Ik0xMzg3LDc3OCBMMTUxMSw0MzcgTDE0ODQsNDUzIEwxMzYwLDc5M1oiLz48cGF0aCBkPSJNMCwtNTkgTDQzLDAgTDAsNTkgTC00MywwWiIvPjxwYXRoIGQ9Ik0wLDE3OCBMNDMsMjM4IEwwLDI5NyBMLTQzLDIzOFoiLz48cGF0aCBkPSJNMCw0MTYgTDQzLDQ3NSBMMCw1MzUgTC00Myw0NzVaIi8+PHBhdGggZD0iTTAsNjUzIEw0Myw3MTMgTDAsNzcyIEwtNDMsNzEzWiIvPjxwYXRoIGQ9Ik0wLDg5MSBMNDMsOTUwIEwwLDEwMTAgTC00Myw5NTBaIi8+PHBhdGggZD0iTTAsMTEyOSBMNDMsMTE4OCBMMCwxMjQ3IEwtNDMsMTE4OFoiLz48cGF0aCBkPSJNODYsMCBMMTMwLDU5IEw4NiwxMTkgTDQzLDU5WiIvPjxwYXRoIGQ9Ik04NiwyMzggTDEzMCwyOTcgTDg2LDM1NiBMNDMsMjk3WiIvPjxwYXRoIGQ9Ik04Niw3MTMgTDEzMCw3NzIgTDg2LDgzMiBMNDMsNzcyWiIvPjxwYXRoIGQ9Ik04Niw5NTAgTDEzMCwxMDEwIEw4NiwxMDY5IEw0MywxMDEwWiIvPjxwYXRoIGQ9Ik0xNzMsNDE2IEwyMTYsNDc1IEwxNzMsNTM1IEwxMzAsNDc1WiIvPjxwYXRoIGQ9Ik0xNzMsNjUzIEwyMTYsNzEzIEwxNzMsNzcyIEwxMzAsNzEzWiIvPjxwYXRoIGQ9Ik0xNzMsODkxIEwyMTYsOTUwIEwxNzMsMTAxMCBMMTMwLDk1MFoiLz48cGF0aCBkPSJNMTczLDExMjkgTDIxNiwxMTg4IEwxNzMsMTI0NyBMMTMwLDExODhaIi8+PHBhdGggZD0iTTI1OSwwIEwzMDIsNTkgTDI1OSwxMTkgTDIxNiw1OVoiLz48cGF0aCBkPSJNMjU5LDIzOCBMMzAyLDI5NyBMMjU5LDM1NiBMMjE2LDI5N1oiLz48cGF0aCBkPSJNMjU5LDQ3NSBMMzAyLDUzNSBMMjU5LDU5NCBMMjE2LDUzNVoiLz48cGF0aCBkPSJNMjU5LDcxMyBMMzAyLDc3MiBMMjU5LDgzMiBMMjE2LDc3MloiLz48cGF0aCBkPSJNMzQ2LC01OSBMMzg5LDAgTDM0Niw1OSBMMzAyLDBaIi8+PHBhdGggZD0iTTM0NiwxNzggTDM4OSwyMzggTDM0NiwyOTcgTDMwMiwyMzhaIi8+PHBhdGggZD0iTTM0Niw2NTMgTDM4OSw3MTMgTDM0Niw3NzIgTDMwMiw3MTNaIi8+PHBhdGggZD0iTTQzMiw5NTAgTDQ3NSwxMDEwIEw0MzIsMTA2OSBMMzg5LDEwMTBaIi8+PC9nPjwvc3ZnPg==") center/cover no-repeat;border-top:1px solid #214A73}
+.claimsband{border-bottom:1px solid #214A73}
+
+/* nav back to paper */
+.nav{background:var(--paper)!important;border-bottom:1px solid var(--line)}
+.nav .links a{color:var(--ink)} .nav .links a:first-child{color:var(--ink);border-bottom:2px solid #F2694B}
+.mcd{color:#16324F}
+/* benefits as a horizontally moving band: white, stone cards, equal height */
+.claimsband{background:var(--white);color:var(--ink);padding:56px 0 60px;border-bottom:0}
+.claimsband h2{margin-bottom:26px}
+.claimsband .track{display:flex;gap:18px;width:max-content;padding:0 24px;animation:cb 48s linear infinite;font-family:var(--body);font-weight:400;font-size:16px;letter-spacing:0}
+.bcard{flex:none;width:340px;height:220px;background:var(--stone);border-radius:20px;padding:26px 24px;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.bcard .ic{width:48px;height:48px;border-radius:50%;background:#F2694B;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.bcard .ic svg{width:26px;height:26px;fill:#16324F}
+.bcard h3{font-family:var(--display);font-weight:900;font-size:20px;line-height:1.15;letter-spacing:-0.02em;margin:0}
+.bcard p{font-size:15px;line-height:1.5;margin:0}
+/* the chip in white */
+.band mark{background:#F2694B;color:#fff}
+.band-call{border-color:#fff;color:#fff} .band-call .ph{fill:#fff}
+@media (max-width:820px){.bcard{width:280px;height:210px}}
 </style>
 </head>
 <body>
@@ -309,7 +363,7 @@ h1{color:var(--ink)}
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="#">motor claims department</a>
+    <a class="brand" href="/"><span class="mcd"><span class="mcd1">MOT<svg class="om" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#F2694B"/><line x1="50" y1="50" x2="84.00" y2="50.00" stroke="#16324F" stroke-width="9" stroke-linecap="round"/><line x1="50" y1="50" x2="74.04" y2="74.04" stroke="#16324F" stroke-width="9" stroke-linecap="round"/><line x1="50" y1="50" x2="50.00" y2="84.00" stroke="#16324F" stroke-width="9" stroke-linecap="round"/><line x1="50" y1="50" x2="25.96" y2="74.04" stroke="#16324F" stroke-width="9" stroke-linecap="round"/><line x1="50" y1="50" x2="16.00" y2="50.00" stroke="#16324F" stroke-width="9" stroke-linecap="round"/><line x1="50" y1="50" x2="25.96" y2="25.96" stroke="#16324F" stroke-width="9" stroke-linecap="round"/><line x1="50" y1="50" x2="50.00" y2="16.00" stroke="#16324F" stroke-width="9" stroke-linecap="round"/><line x1="50" y1="50" x2="74.04" y2="25.96" stroke="#16324F" stroke-width="9" stroke-linecap="round"/><circle cx="50" cy="50" r="11" fill="#16324F"/></svg>R</span><span class="mcd2">CLAIMS DEPARTMENT</span></span></a>
     <nav class="links" aria-label="Main">
       <a href="#how">How it works</a>
       <a href="#catch">What's the catch?</a>
@@ -342,35 +396,17 @@ h1{color:var(--ink)}
 
 
 
-<section class="benefits">
+<section class="claimsband" aria-label="Why claim through Motor Claims Department"><div class="wrap"><h2>Why claim through Motor Claims Department</h2></div><div class="track"><article class="bcard"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="20" text-anchor="middle" style="font-family:var(--display);font-size:24px;font-weight:900">£</text></svg></span><h3>No excess fees to pay, ever</h3><p>Nothing to pay up front. Nothing to chase back.</p></article><article class="bcard"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3.2v6.4c0 5-3.6 8.6-8 11.2C7.6 20.2 4 16.6 4 11.6V5.2z"/><path d="M8.5 12l2.5 2.5 4.8-4.8" fill="none" stroke="#F2694B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>Keep your no claims bonus</h3><p>Nothing goes through your policy, so your no-claims is untouched.</p></article><article class="bcard"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.2 11.5l1.9-5A2.5 2.5 0 0 1 8.4 5h7.2a2.5 2.5 0 0 1 2.3 1.5l1.9 5A2.5 2.5 0 0 1 22 14v4a1.5 1.5 0 0 1-1.5 1.5h-.5a2 2 0 0 1-4 0H8a2 2 0 0 1-4 0h-.5A1.5 1.5 0 0 1 2 18v-4a2.5 2.5 0 0 1 2.2-2.5zM7.1 7.8L6 11h12l-1.1-3.2A.8.8 0 0 0 16.1 7H7.9a.8.8 0 0 0-.8.8zM6 15.5a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6zm12 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6z"/></svg></span><h3>Like-for-like car hire, 100% guaranteed</h3><p>Delivered to your drive. If yours is written off, you keep it until the money lands.</p></article><article class="bcard"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.5" r="4.5"/><path d="M3.5 21.5c0-4.7 3.8-8 8.5-8s8.5 3.3 8.5 8z"/></svg></span><h3>A dedicated, UK-based call handler</h3><p>Your handler owns it from first call to keys back. No queues, no repeating yourself.</p></article><article class="bcard"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l5 5v15H6z"/><path d="M9 11h6M9 14.5h6M9 18h4" fill="none" stroke="#F2694B" stroke-width="2" stroke-linecap="round"/></svg></span><h3>Nothing on your record</h3><p>You tell your insurer it happened. That’s all. No claim, no fuss at renewal.</p></article><article class="bcard"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="20" text-anchor="middle" style="font-family:var(--display);font-size:24px;font-weight:900">£</text></svg></span><h3>No excess fees to pay, ever</h3><p>Nothing to pay up front. Nothing to chase back.</p></article><article class="bcard"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3.2v6.4c0 5-3.6 8.6-8 11.2C7.6 20.2 4 16.6 4 11.6V5.2z"/><path d="M8.5 12l2.5 2.5 4.8-4.8" fill="none" stroke="#F2694B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>Keep your no claims bonus</h3><p>Nothing goes through your policy, so your no-claims is untouched.</p></article><article class="bcard"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.2 11.5l1.9-5A2.5 2.5 0 0 1 8.4 5h7.2a2.5 2.5 0 0 1 2.3 1.5l1.9 5A2.5 2.5 0 0 1 22 14v4a1.5 1.5 0 0 1-1.5 1.5h-.5a2 2 0 0 1-4 0H8a2 2 0 0 1-4 0h-.5A1.5 1.5 0 0 1 2 18v-4a2.5 2.5 0 0 1 2.2-2.5zM7.1 7.8L6 11h12l-1.1-3.2A.8.8 0 0 0 16.1 7H7.9a.8.8 0 0 0-.8.8zM6 15.5a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6zm12 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6z"/></svg></span><h3>Like-for-like car hire, 100% guaranteed</h3><p>Delivered to your drive. If yours is written off, you keep it until the money lands.</p></article><article class="bcard"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.5" r="4.5"/><path d="M3.5 21.5c0-4.7 3.8-8 8.5-8s8.5 3.3 8.5 8z"/></svg></span><h3>A dedicated, UK-based call handler</h3><p>Your handler owns it from first call to keys back. No queues, no repeating yourself.</p></article><article class="bcard"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l5 5v15H6z"/><path d="M9 11h6M9 14.5h6M9 18h4" fill="none" stroke="#F2694B" stroke-width="2" stroke-linecap="round"/></svg></span><h3>Nothing on your record</h3><p>You tell your insurer it happened. That’s all. No claim, no fuss at renewal.</p></article></div></section>
+<section class="band">
   <div class="wrap">
-    <h2>Why claim through Motor Claims Department</h2>
-    <ul class="bgrid">
-      <li class="b">
-        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><text x="12" y="20" text-anchor="middle" style="font-family:var(--display);font-size:24px;font-weight:900">£</text></svg></span>
-        <h3>No excess fees to pay, ever</h3>
-        <p>Nothing to pay up front. Nothing to chase back.</p>
-      </li>
-      <li class="b">
-        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3.2v6.4c0 5-3.6 8.6-8 11.2C7.6 20.2 4 16.6 4 11.6V5.2z"/><path d="M8.5 12l2.5 2.5 4.8-4.8" fill="none" stroke="#F2694B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <h3>Keep your no claims bonus</h3>
-        <p>Nothing goes through your policy, so your no-claims is untouched.</p>
-      </li>
-      <li class="b">
-        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.2 11.5l1.9-5A2.5 2.5 0 0 1 8.4 5h7.2a2.5 2.5 0 0 1 2.3 1.5l1.9 5A2.5 2.5 0 0 1 22 14v4a1.5 1.5 0 0 1-1.5 1.5h-.5a2 2 0 0 1-4 0H8a2 2 0 0 1-4 0h-.5A1.5 1.5 0 0 1 2 18v-4a2.5 2.5 0 0 1 2.2-2.5zM7.1 7.8L6 11h12l-1.1-3.2A.8.8 0 0 0 16.1 7H7.9a.8.8 0 0 0-.8.8zM6 15.5a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6zm12 0a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6z"/></svg></span>
-        <h3>Like-for-like car hire, 100% guaranteed</h3>
-        <p>Delivered to your drive. If yours is written off, you keep it until the money lands.</p>
-      </li>
-      
-      <li class="b">
-        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.5" r="4.5"/><path d="M3.5 21.5c0-4.7 3.8-8 8.5-8s8.5 3.3 8.5 8z"/></svg></span>
-        <h3>A dedicated, UK-based call handler</h3>
-        <p>Your handler owns it from first call to keys back. No queues, no repeating yourself.</p>
-      </li>
-    </ul>
-      <p class="sec-cta"><a class="btn btn-coral" href="#start">Start your claim</a><a class="btn btn-phone2" href="tel:08000480048"><svg viewBox="0 0 24 24" aria-hidden="true" class="ph"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Call 0800 048 0048</a></p>
+    <span class="l0">Your insurer has a claims department.</span>
+    <span class="l1">It works for your insurer.</span>
+    <span class="l2"><mark>We work for you.</mark></span>
+    <div class="band-ctas"><a class="band-call" href="#start">Start your claim</a><a class="band-call" href="tel:08000480048"><svg viewBox="0 0 24 24" aria-hidden="true" class="ph"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1.3 1.3 0 0 1 1.3-.3c1.2.4 2.5.6 3.8.6a1.3 1.3 0 0 1 1.3 1.3v3.4a1.3 1.3 0 0 1-1.3 1.3A18.3 18.3 0 0 1 2.2 4.5a1.3 1.3 0 0 1 1.3-1.3h3.4a1.3 1.3 0 0 1 1.3 1.3c0 1.3.2 2.6.6 3.8a1.3 1.3 0 0 1-.3 1.3z"/></svg>Call now</a></div>
   </div>
 </section>
+<section class="reviews"><div class="wrap rhead"><h2>What drivers say</h2><p><span class="stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg></span> <b>4.9</b> · 300+ reviews</p></div><div class="rtrack" id="rt"><article class="rcard"><span class="stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg></span><p>"Got hit on the school run. One call and they sorted the lot — a car on my drive the next morning."</p><small><b>Sarah M.</b> · Bristol</small></article><article class="rcard"><span class="stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg></span><p>"No excess, my no claims untouched, and the same person every time I rang."</p><small><b>Daniel K.</b> · Leeds</small></article><article class="rcard"><span class="stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg></span><p>"The other driver’s insurer rang me within the hour. I told them to speak to MCD."</p><small><b>Priya R.</b> · Croydon</small></article><article class="rcard"><span class="stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.2 4.8 1.4 7L12 17.8 5.8 21.2l1.4-7L2 9.4l7-.8z"/></svg></span><p>"Van was written off. They kept me in a like-for-like until the payout came through."</p><small><b>Tom H.</b> · Salford</small></article></div></section>
+<script>const rt=document.getElementById('rt');rt.innerHTML+=rt.innerHTML;</script>
 
 <section id="how" class="how">
   <div class="wrap">
@@ -429,13 +465,7 @@ h1{color:var(--ink)}
 
 
 
-<section class="band">
-  <div class="wrap">
-    <p class="band-l1">Your insurer has a claims department.</p>
-    <p class="band-l2">It works for your insurer. <mark>We work for you.</mark></p>
-      <p class="sec-cta"><a class="btn btn-coral" href="#start">Start your claim</a><a class="btn btn-phone2" href="tel:08000480048"><svg viewBox="0 0 24 24" aria-hidden="true" class="ph"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Call 0800 048 0048</a></p>
-  </div>
-</section>
+
 
 <section id="types" class="types">
   <div class="wrap">

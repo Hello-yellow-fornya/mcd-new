@@ -29,11 +29,14 @@
   object-position: 72% 30%;
 }
 
-/* Marine scrim from the left, then a full-width tint rising from the bottom. Never black. */
+/* Marine scrim from the left, then a full-width tint rising from the bottom. Never black.
+   Both sit above the photo (the fill image is positioned and comes later in the DOM,
+   so without a z-index it would paint over the scrim) and below the copy. */
 .frame::before {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: var(--scrim-left);
 }
 
@@ -43,6 +46,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1;
   height: 34%;
   background: var(--scrim-bottom);
   pointer-events: none;
@@ -50,7 +54,7 @@
 
 .copy {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   left: max(24px, calc((100% - 1140px) / 2 + 24px));
   top: 9cqw;
   color: var(--white);
@@ -107,7 +111,7 @@
 
 .pillsDesktop {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   right: max(24px, calc((100% - 1140px) / 2 + 24px));
   bottom: 24px;
 }
@@ -200,7 +204,7 @@
   .pillsMobile {
     display: block;
     position: relative;
-    z-index: 1;
+    z-index: 2;
     background: var(--ink);
     padding: 12px 18px 18px;
   }

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import { Band, Faq, HandlerBlock, HeroPhoto, IconCircle, JsonLd, ReviewCarousel, SectionCta, SiteFooter, SiteHeader, ThemUs } from '@/components';
+import { Band, BenefitsBand, Faq, HandlerBlock, HeroPhoto, Highlight, JsonLd, ReviewCarousel, SectionCta, SiteFooter, SiteHeader, Steps } from '@/components';
+import { patternClass } from '@/components/Pattern/Pattern';
 import { site, absoluteUrl } from '@/lib/site';
-import { benefits, hero, homeFaq, themUs } from '@/data/copy';
+import { benefits, catchSection, hero, homeFaq, howItWorks } from '@/data/copy';
 import heroImage from '../../public/images/hero-placeholder.jpg';
 import heroImageMobile from '../../public/images/hero-placeholder-mobile.jpg';
 import styles from './page.module.css';
@@ -40,47 +41,51 @@ const schema = {
   ],
 };
 
+/** The intro with "their" underlined in coral, as the mockup sets it. */
+function Intro({ text }: { text: string }) {
+  const key = 'their insurer instead';
+  const at = text.indexOf(key);
+  if (at < 0) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, at)}
+      <Highlight tone="coral">their</Highlight>
+      {text.slice(at + 'their'.length)}
+    </>
+  );
+}
+
 /**
- * Homepage. Order: photo hero → benefits grid + CTA pair → review band → the
- * band on ink shards (no CTAs) running into the their/your table + CTA pair →
- * "How it works" FAQ with the catch open + CTA pair → handler block + CTA pair
- * → footer.
+ * Homepage V1 (design/mcd-site-fullbleed.html). Order: photo hero → the moving
+ * "Why claim" band → the chip band on ink shards → review carousel → How it
+ * works on ink shards → the catch (FAQ) → handler block → footer.
  */
 export default function HomePage() {
   return (
-    <>
-      <SiteHeader transparent />
+    <div className={styles.home}>
+      <SiteHeader transparent solidTone="paper" />
       <main id="main">
         <HeroPhoto image={{ src: heroImage, alt: hero.photoAlt }} mobileImage={{ src: heroImageMobile }} underNav />
 
-        <section className={styles.benefits} aria-labelledby="benefits-h" data-placement="benefits">
-          <div className="wrap">
-            <h2 id="benefits-h">{benefits.heading}</h2>
-            <ul className={styles.bgrid}>
-              {benefits.items.map((b) => (
-                <li key={b.title} className={styles.b}>
-                  <IconCircle name={b.icon} size={56} />
-                  <h3>{b.title}</h3>
-                  <p>{b.body}</p>
-                </li>
-              ))}
-            </ul>
-            <SectionCta />
-          </div>
-        </section>
+        <BenefitsBand heading={benefits.heading} items={benefits.items} />
+
+        <Band variant="chip" pattern="shards-ink" />
 
         <ReviewCarousel />
 
-        <Band size="lg" pattern="shards-ink" cta={false} />
-
-        <section id="ways" className={styles.tu} aria-label="Their claims department compared with your claims handler" data-placement="them-us">
-          <div className="wrap">
-            <ThemUs head={themUs.head} rows={themUs.rows} className={styles.tuTable} />
+        <section id="how" className={`${styles.how} ${patternClass('shards-ink')}`} aria-labelledby="how-h" data-placement="how">
+          <div className="wrap on-dark">
+            <h2 id="how-h">{howItWorks.heading}</h2>
+            <p className={styles.howSub}>
+              <b>{howItWorks.introLead}</b>
+              <Intro text={howItWorks.intro} />
+            </p>
+            <Steps items={howItWorks.steps} onDark />
             <SectionCta />
           </div>
         </section>
 
-        <Faq id="how" heading={homeFaq.heading} sub={homeFaq.sub} items={homeFaq.items}>
+        <Faq id="catch" heading={catchSection.heading} sub={catchSection.sub} items={homeFaq.items}>
           <SectionCta />
         </Faq>
 
@@ -88,6 +93,6 @@ export default function HomePage() {
       </main>
       <SiteFooter />
       <JsonLd data={schema} />
-    </>
+    </div>
   );
 }
