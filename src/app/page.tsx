@@ -1,19 +1,7 @@
 import type { Metadata } from 'next';
-import {
-  Band,
-  Faq,
-  HandlerBlock,
-  HeroPhoto,
-  IconCircle,
-  JsonLd,
-  Pattern,
-  SectionCta,
-  SiteFooter,
-  SiteHeader,
-  Steps,
-} from '@/components';
+import { Band, Faq, HandlerBlock, HeroPhoto, IconCircle, JsonLd, ReviewCarousel, SectionCta, SiteFooter, SiteHeader, ThemUs } from '@/components';
 import { site, absoluteUrl } from '@/lib/site';
-import { benefits, hero, homeFaq, howItWorks, whoWeHelp } from '@/data/copy';
+import { benefits, hero, homeFaq, themUs } from '@/data/copy';
 import heroImage from '../../public/images/hero-placeholder.jpg';
 import heroImageMobile from '../../public/images/hero-placeholder-mobile.jpg';
 import styles from './page.module.css';
@@ -52,6 +40,12 @@ const schema = {
   ],
 };
 
+/**
+ * Homepage. Order: photo hero → benefits grid + CTA pair → review band → the
+ * band on ink shards (no CTAs) running into the their/your table + CTA pair →
+ * "How it works" FAQ with the catch open + CTA pair → handler block + CTA pair
+ * → footer.
+ */
 export default function HomePage() {
   return (
     <>
@@ -59,7 +53,7 @@ export default function HomePage() {
       <main id="main">
         <HeroPhoto image={{ src: heroImage, alt: hero.photoAlt }} mobileImage={{ src: heroImageMobile }} underNav />
 
-        <section className={styles.benefits} aria-labelledby="benefits-h">
+        <section className={styles.benefits} aria-labelledby="benefits-h" data-placement="benefits">
           <div className="wrap">
             <h2 id="benefits-h">{benefits.heading}</h2>
             <ul className={styles.bgrid}>
@@ -75,40 +69,22 @@ export default function HomePage() {
           </div>
         </section>
 
-        <Pattern as="section" name="shards-ink" id="how" className={`${styles.how} on-dark`} aria-labelledby="how-h">
+        <ReviewCarousel />
+
+        <Band size="lg" pattern="shards-ink" cta={false} />
+
+        <section id="ways" className={styles.tu} aria-label="Their claims department compared with your claims handler" data-placement="them-us">
           <div className="wrap">
-            <h2 id="how-h">{howItWorks.heading}</h2>
-            <p className={styles.howSub}>
-              <b>{howItWorks.introLead}</b>
-              Most people don’t know that. They ring their own insurer, pay the excess, and watch their no-claims take the hit for
-              somebody else’s mistake. We claim from <em>their</em> insurer instead. Here’s what that means for you.
-            </p>
-            <Steps items={howItWorks.steps} onDark />
+            <ThemUs head={themUs.head} rows={themUs.rows} className={styles.tuTable} />
             <SectionCta />
           </div>
-        </Pattern>
+        </section>
 
-        <Faq id="catch" heading={homeFaq.heading} sub={homeFaq.sub} items={homeFaq.items}>
+        <Faq id="how" heading={homeFaq.heading} sub={homeFaq.sub} items={homeFaq.items}>
           <SectionCta />
         </Faq>
 
         <HandlerBlock />
-
-        <Band size="lg" />
-
-        <section id="types" className={styles.types} aria-labelledby="types-h">
-          <div className="wrap">
-            <h2 id="types-h">Who we help</h2>
-            <ul className={styles.chips}>
-              {whoWeHelp.map((w) => (
-                <li key={w} className={styles.chip}>
-                  {w}
-                </li>
-              ))}
-            </ul>
-            <SectionCta className={styles.typesCta} />
-          </div>
-        </section>
       </main>
       <SiteFooter />
       <JsonLd data={schema} />

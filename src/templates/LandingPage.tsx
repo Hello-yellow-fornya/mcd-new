@@ -17,16 +17,9 @@ import {
 import { Button } from '@/components/Button/Button';
 import { absoluteUrl, site } from '@/lib/site';
 import { resolveClaims, type LandingConfig } from '@/lib/landing';
-import { cta } from '@/data/copy';
+import { cta, homeFaq, themUs } from '@/data/copy';
 import styles from './LandingPage.module.css';
 
-const themUsRows = [
-  { them: 'Works for your insurer', us: 'Works for you' },
-  { them: 'A queue, then whoever picks up', us: 'One named person, UK-based, from first call to keys back' },
-  { them: 'Your excess, paid by you', us: 'No excess — the other driver’s insurer pays' },
-  { them: 'A claim on your policy', us: 'Nothing on your policy. Your no-claims untouched' },
-  { them: 'A courtesy car, if you’re covered', us: 'A like-for-like car, on your drive' },
-];
 
 function Lines({ text }: { text: string }) {
   return (
@@ -162,12 +155,12 @@ export function LandingPage({ config }: { config: LandingConfig }) {
 
           <section className={styles.tu} id="ways" data-placement="them-us">
             <div className="wrap">
-              <ThemUs head={['Their claims department', 'Your claims handler']} rows={themUsRows} compact />
+              <ThemUs head={themUs.head} rows={themUs.rows} compact />
               <SectionCta stack />
             </div>
           </section>
 
-          <Faq id="catch" heading="How it works" sub="Answering your frequently asked questions." items={config.faq}>
+          <Faq id="how" heading={homeFaq.heading} sub={homeFaq.sub} items={config.faq}>
             <SectionCta stack />
           </Faq>
 

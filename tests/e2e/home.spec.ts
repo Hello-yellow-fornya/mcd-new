@@ -9,21 +9,27 @@ test.describe('homepage', () => {
     await expect(page.locator('h1')).toHaveCount(1);
     await expect(page.locator('h1')).toHaveText('Hit by someone else? You shouldn’t pay for it.');
     const h2s = await page.locator('main h2').allTextContents();
+    // Order: hero → benefits → reviews (sample data on staging) → band → their/your table → FAQ → handler
     expect(h2s).toEqual([
       'Why claim through Motor Claims Department',
+      'What drivers say',
       'How it works',
-      'What’s the catch?',
       '“I’m Dani. I’ll own your claim until your keys are back.”',
-      'Who we help',
     ]);
-    for (const id of ['how', 'catch', 'types']) await expect(page.locator(`#${id}`)).toHaveCount(1);
+    for (const id of ['ways', 'how']) await expect(page.locator(`#${id}`)).toHaveCount(1);
+    // The band runs straight into the table: no CTA between them
+    const bandCtas = page.locator('section:has(mark) a[href="/claim-now/"]').filter({ hasText: 'Start your claim' });
+    await expect(bandCtas).toHaveCount(0);
+    await expect(page.locator('#ways [role="row"]')).toHaveCount(6);
+    await expect(page.locator('#how details').first()).toHaveAttribute('open', '');
+    await expect(page.locator('#how details summary').first()).toHaveText('What’s the catch?');
   });
 
   test('every content section ends with the CTA pair and the phone is a tel link in text', async ({ page }) => {
     const pairs = page.locator('main a[href="/claim-now/"]:has-text("Start your claim")');
-    await expect(pairs).toHaveCount(6);
+    await expect(pairs).toHaveCount(4);
     const tel = page.locator('a[href="tel:08000480048"]');
-    expect(await tel.count()).toBeGreaterThanOrEqual(8);
+    expect(await tel.count()).toBeGreaterThanOrEqual(6);
     for (const t of await tel.all()) expect((await t.textContent())?.replace(/\s+/g, ' ')).toContain('0800 048 0048');
   });
 

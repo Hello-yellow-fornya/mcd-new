@@ -75,9 +75,21 @@ export const theCatch = {
   faq: 'We recover our costs from the at-fault driver’s insurer, which is why it costs you nothing. If they refuse to accept fault, we argue it for you. In the rare case that fault can’t be established, you could be asked to cover the hire charges, which is why we’ll tell you on the first call whether your claim is one we’d take on.',
 } as const;
 
+/** Their claims department vs your claims handler: the five rows used on the homepage and the landing pages. */
+export const themUs = {
+  head: ['Their claims department', 'Your claims handler'] as const,
+  rows: [
+    { them: 'Works for your insurer', us: 'Works for you' },
+    { them: 'A queue, then whoever picks up', us: 'One named person, UK-based, from first call to keys back' },
+    { them: 'Your excess, paid by you', us: 'No excess — the other driver’s insurer pays' },
+    { them: 'A claim on your policy', us: 'Nothing on your policy. Your no-claims untouched' },
+    { them: 'A courtesy car, if you’re covered', us: 'A like-for-like car, on your drive' },
+  ],
+} as const;
+
 export const homeFaq = {
-  heading: 'What’s the catch?',
-  sub: 'There’s one. Here it is, in the same size as everything else.',
+  heading: 'How it works',
+  sub: 'Answering your frequently asked questions.',
   items: [
     { q: 'What’s the catch?', a: theCatch.faq },
     {
