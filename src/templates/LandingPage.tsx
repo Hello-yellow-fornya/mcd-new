@@ -56,9 +56,9 @@ export function LandingPage({ config }: { config: LandingConfig }) {
                 {config.h1}
                 <span className={styles.hl}>{config.h1Sub}</span>
               </h1>
-              <p className={styles.instruction}>
+              <h2 className={styles.instruction}>
                 <Lines text={config.instruction} />
-              </p>
+              </h2>
               {grid.length > 0 && (
                 <ul className={styles.grid} aria-label="Why claim through MCD" data-testid="proof-grid">
                   {grid.map((c) => (
@@ -89,7 +89,7 @@ export function LandingPage({ config }: { config: LandingConfig }) {
                 </ul>
               )}
               <Button href="/claim-now/" variant="secondary" iconAfter="arrow" className={styles.online} data-testid="hero-online">
-                Or start your claim online
+                Or start your non-fault claim online
               </Button>
             </div>
           </section>

@@ -52,14 +52,18 @@
   text-underline-offset: 0.16em;
 }
 
+/* The H2: the instruction line, body face, not display */
 .instruction {
   text-align: center;
+  font-family: var(--body);
   font-size: 17px;
   font-weight: var(--w-bold);
   line-height: 1.35;
+  letter-spacing: 0;
   color: var(--ink);
   margin: 0 auto 14px;
   max-width: none;
+  text-wrap: balance;
 }
 
 /* 2×2 proof grid */
