@@ -13,7 +13,11 @@ const nextConfig: NextConfig = {
   // not production, keyed off VERCEL_ENV at build time. The <meta name="robots">
   // tag is set alongside it in src/app/layout.tsx.
   async headers() {
-    return robotsHeaders(process.env.VERCEL_ENV);
+    return [
+      ...robotsHeaders(process.env.VERCEL_ENV),
+      // Paid landing pages are never indexed (brief §6), whatever the environment.
+      { source: '/claim/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+    ];
   },
 };
 

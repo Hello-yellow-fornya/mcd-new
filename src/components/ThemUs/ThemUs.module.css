@@ -65,3 +65,20 @@
     gap: 10px;
   }
 }
+
+/* Landing pages */
+.compact {
+  margin: 0;
+}
+
+.compact .head,
+.compact .row {
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.compact .head {
+  padding: 12px 0 8px;
+  font-size: 12px;
+}

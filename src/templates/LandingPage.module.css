@@ -1,0 +1,317 @@
+/* Mobile-first column, as design/mcd-lp-*.html: 430px wide, centred on the line colour. */
+.page {
+  background: var(--line);
+  min-height: 100vh;
+}
+
+.column {
+  max-width: 430px;
+  margin: 0 auto;
+  background: var(--paper);
+  min-height: 100vh;
+  box-shadow: 0 0 0 1px var(--line);
+  overflow-x: hidden;
+}
+
+.column :global(.wrap) {
+  max-width: none;
+}
+
+/* Text hero on the stone shard pattern */
+.hero {
+  background: var(--stone) url('/patterns/mcd-shards-stone-1920x1080.svg') center / cover no-repeat;
+  padding: 30px 0 24px;
+}
+
+.heroIn {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.hero h1 {
+  font-size: 58px;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  margin-bottom: 22px;
+  text-wrap: balance;
+}
+
+.hl {
+  display: block;
+  font-family: var(--body-semibold);
+  font-weight: var(--w-semibold);
+  font-size: 21px;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  margin-top: 22px;
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-color: var(--sky);
+  text-decoration-thickness: 0.14em;
+  text-underline-offset: 0.16em;
+}
+
+.instruction {
+  text-align: center;
+  font-size: 17px;
+  font-weight: var(--w-bold);
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0 auto 14px;
+  max-width: none;
+}
+
+/* 2×2 proof grid */
+.grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0 0 18px;
+  text-align: center;
+}
+
+.grid li {
+  background: var(--white);
+  border-radius: 18px;
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  line-height: 1.2;
+  max-width: none;
+}
+
+.gic {
+  margin-bottom: 2px;
+}
+
+.grid b {
+  font-family: var(--display);
+  font-weight: var(--w-display);
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.gsub {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+/* The primary CTA: "call now" pill, Franklin 900, icon on the left */
+.call {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60px;
+  padding: 0 60px;
+  border-radius: var(--r-pill);
+  background: var(--coral);
+  color: var(--on-coral);
+  font-family: var(--display);
+  font-weight: var(--w-display);
+  font-size: 24px;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: 0 14px 26px rgba(var(--coral-rgb), 0.35);
+}
+
+.callIcon {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+}
+
+/* Wait row */
+.wait {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  min-height: 20px;
+  margin: 14px 0 30px; /* spacing tuned so the online pill's bottom edge lands on the 844px fold */
+}
+
+.wait li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+  color: var(--muted);
+  white-space: nowrap;
+  max-width: none;
+}
+
+.pic {
+  flex: none;
+  width: 17px;
+  height: 17px;
+  border-radius: var(--r-circle);
+  background: var(--green-tint);
+  color: var(--green-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wait li:nth-child(2) .pic {
+  color: var(--ink);
+}
+
+/* Online CTA, the last thing above the fold */
+.online {
+  width: 100%;
+  min-height: 49px;
+  border-width: 1.5px;
+  font-size: 15px;
+  margin-top: 12px;
+}
+
+/* Preview-only marker for unsubstantiated claims (they never render on production) */
+.unsubstantiated {
+  outline: 1.5px dashed var(--coral);
+  outline-offset: -1.5px;
+}
+
+/* Sourced facts */
+.facts {
+  padding: 40px 0 36px;
+  background: var(--white);
+}
+
+.facts h2 {
+  font-size: 26px;
+  margin-bottom: 14px;
+}
+
+.factList {
+  list-style: none;
+  border-top: var(--border);
+}
+
+.factList li {
+  padding: 14px 0;
+  border-bottom: var(--border);
+  font-size: 15px;
+  max-width: none;
+}
+
+.src {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.fnote {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 16px;
+  max-width: none;
+}
+
+/* Not sure it was their fault? */
+.fault {
+  padding: 38px 0 34px;
+  background: var(--stone);
+}
+
+.fault h2 {
+  font-size: 26px;
+  margin-bottom: 14px;
+}
+
+.fchk {
+  list-style: none;
+  margin-bottom: 12px;
+}
+
+.fchk li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 16px;
+  max-width: none;
+}
+
+.ok {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--r-circle);
+  background: var(--green);
+  color: var(--on-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fnote2 {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-soft);
+  margin-bottom: 22px;
+  max-width: none;
+}
+
+.small {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 14px 0 0;
+}
+
+.fault h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.now {
+  list-style: none;
+}
+
+.now li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 16px;
+  line-height: 1.4;
+  max-width: none;
+}
+
+.now b {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-circle);
+  background: var(--coral);
+  color: var(--on-coral);
+  font-family: var(--display);
+  font-weight: var(--w-display);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -2px;
+}
+
+.faultCta {
+  margin-top: 20px;
+}
+
+/* Them / us */
+.tu {
+  padding: 8px 0 36px;
+  background: var(--white);
+}

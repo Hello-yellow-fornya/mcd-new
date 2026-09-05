@@ -11,10 +11,12 @@ type Props = {
   meta?: { lastReviewed?: string; author?: string };
   /** Photo slot: a next/image or a PhotoPlaceholder. */
   photo?: ReactNode;
+  /** pair: Start your claim (ink) + Call (coral). call: the Call button alone, for /claim-now/ itself. */
+  cta?: 'pair' | 'call' | 'none';
 };
 
 /** Text hero from the SEO templates: kicker, H1, lead, CTA pair, meta line, photo slot. */
-export function HeroText({ kicker, title, lead, meta, photo }: Props) {
+export function HeroText({ kicker, title, lead, meta, photo, cta: ctaMode = 'pair' }: Props) {
   return (
     <section className={styles.hero} data-hero>
       <div className={`wrap ${styles.heroIn}`}>
@@ -22,15 +24,19 @@ export function HeroText({ kicker, title, lead, meta, photo }: Props) {
           {kicker && <p className={styles.kicker}>{kicker}</p>}
           <h1>{title}</h1>
           {lead && <p className={styles.lead}>{lead}</p>}
-          <div className={styles.ctaRow}>
-            {/* CTA rule: Call is always coral with the phone icon; Start your claim is ink here, coral only in the section pair. */}
-            <Button href={nav.claimHref} variant="ink">
-              {cta.start}
-            </Button>
-            <Button href={site.phone.href} icon="phone">
-              {cta.call}
-            </Button>
-          </div>
+          {ctaMode !== 'none' && (
+            <div className={styles.ctaRow}>
+              {/* CTA rule: Call is always coral with the phone icon; Start your claim is ink here, coral only in the section pair. */}
+              {ctaMode === 'pair' && (
+                <Button href={nav.claimHref} variant="ink">
+                  {cta.start}
+                </Button>
+              )}
+              <Button href={site.phone.href} icon="phone">
+                {cta.call}
+              </Button>
+            </div>
+          )}
           {meta && (meta.lastReviewed || meta.author) && (
             <p className={styles.meta}>
               {meta.lastReviewed && (

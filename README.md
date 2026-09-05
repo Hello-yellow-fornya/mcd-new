@@ -101,7 +101,21 @@ In the body: H2s become the "On this page" list (ids are GitHub-style slugs of t
 
 ## Add an insurer landing page
 
-Coming in step 5: one template plus a config file per insurer under `/claim/`.
+Landing pages live at `/claim/<slug>/`, one JSON config each in `src/data/landing/`, rendered by `src/templates/LandingPage.tsx` from `design/mcd-lp-*.html`. Copy `goskippy.json`, change `slug`, `insurer`, `title`, `description`, `h1` and the FAQ, and the page builds; the insurer name only ever appears in the H1 and the independence line. Proof cards and the wait row reference ids in `src/data/claims.json`; a claim renders on production only when `substantiated: true` and `evidence` is filled (on previews unsubstantiated claims render with a dotted outline so the layout can be reviewed). Sourced facts go in `facts[]` with `source`, `sourceUrl` and `checkedOn`, rendered verbatim with the date.
+
+Every `/claim/*` page is `noindex, nofollow`, excluded from the sitemap, canonical to itself. The fold test in `tests/e2e/landing.spec.ts` checks the 390×844 layout.
+
+## Navigation
+
+`src/data/copy.ts` holds the header links. For launch, "Services" lists the five Phase 1 pillars in sitemap order and "Advice" points at the accident guide. When the service children come out of draft in Phase 2: move the five pillars to the top-level links, put the service children under "Services", and point "Advice" at `/resource/` (one line each).
+
+## Claim-now and the claims API
+
+`/claim-now/` is the hero and the reg box. The reg box posts to `/api/claim-start/` (a Next route handler: honeypot, rate limit, reg validation), which forwards to the Railway API when `CLAIMS_API_URL` and `CLAIMS_API_KEY` are set and otherwise acknowledges with a stub reference. The question flow is Ollie's and mounts on `#claim-flow` (`data-claim-flow-mount`, with `data-ref` and `data-reg` once the reg is accepted); when it completes it sends the visitor to `/claim-now/thank-you/?ref=…`, which fires the conversion. The Railway service and schema are in `api/` with their own README.
+
+## Tracking and consent
+
+See `docs/tracking.md`: GTM loads only after consent, the banner is the brand's own, the choice is one cookie, and every `dataLayer` event is specified there.
 
 ## Deploy
 

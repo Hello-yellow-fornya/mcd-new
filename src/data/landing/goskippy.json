@@ -1,0 +1,19 @@
+{
+  "slug": "goskippy",
+  "insurer": "GoSkippy",
+  "title": "Insured with GoSkippy? Call us before you call your insurer",
+  "description": "Hit by someone else? Don’t claim on your GoSkippy policy. Call Motor Claims Department: no excess, no claims bonus untouched, a like-for-like car.",
+  "h1": "Insured with GoSkippy?",
+  "h1Sub": "Call us before you call your insurer.",
+  "instruction": "The smarter way to claim for\nno-fault accidents.",
+  "proof": ["no-claims", "no-excess", "like-for-like", "ninety-minutes"],
+  "waitRow": ["avg-wait", "fastest-way"],
+  "faultSection": false,
+  "facts": [],
+  "faq": [
+    { "q": "What’s the catch?", "a": "We recover our costs from the at-fault driver’s insurer, which is why it costs you nothing. If they refuse to accept fault, we argue it for you. In the rare case that fault can’t be established, you could be asked to cover the hire charges, which is why we’ll tell you on the first call whether your claim is one we’d take on." },
+    { "q": "Will my premium go up?", "a": "Nothing goes through your policy, so there’s no claim on it. You’ll still need to tell your insurer about the incident at renewal, and how they price that is up to them. We won’t pretend otherwise." },
+    { "q": "Do I still need to speak to my insurer?", "a": "Only to let them know it happened. We handle everything else, including the call you’ll get from the other driver’s insurer." },
+    { "q": "Are you an insurer?", "a": "No. We don’t sell insurance. We just make it pay. MCD is regulated by the Financial Conduct Authority." }
+  ]
+}

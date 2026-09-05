@@ -17,6 +17,9 @@
   --muted: #5b6570;  /* secondary text */
   --line: #d9d4c8;   /* hairlines and borders */
   --ink-900: #0f2438; /* text and icons on coral: 5.2:1 against coral, AA at 16px; reads as ink */
+  --green-tint: #a9d98a; /* landing-page proof row circles (mcd-lp-*) */
+  --green-deep: #3f8f2e; /* landing-page proof row marks */
+  --text-soft: #3b4a55; /* landing-page supporting copy */
 
   /* Supporting values used by the signed-off mockups */
   --marine-lift: #214a73;     /* lighter marine circle behind coral icons on dark (§6 icons) */
