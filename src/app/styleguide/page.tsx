@@ -112,7 +112,7 @@ export default function StyleguidePage() {
 
           <Block id="buttons" title="Button" note="coral, ink, secondary, secondary on dark; md and lg; with icons.">
             <div className={styles.row}>
-              <Button href="/claim-now/">Start your claim</Button>
+              <Button href="/claim-now/">Start your non-fault claim</Button>
               <Button href="tel:08000480048" icon="phone">
                 Call 0800 048 0048
               </Button>
@@ -121,7 +121,7 @@ export default function StyleguidePage() {
               </Button>
               <Button variant="secondary">What’s the catch?</Button>
               <Button href="/claim-now/" variant="secondary" iconAfter="arrow">
-                Or start your claim online
+                Or start your no-fault claim online
               </Button>
               <Button href="tel:08000480048" size="lg" icon="phone">
                 call now

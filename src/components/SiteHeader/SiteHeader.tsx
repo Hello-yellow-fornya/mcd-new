@@ -77,7 +77,7 @@ export function SiteHeader({ links = nav.links, transparent = false, minimal = f
 
   return (
     <header
-      className={[styles.bar, transparent && styles.transparent, solid && styles.solid, paper && styles.paper, !onPaper && 'on-dark'].filter(Boolean).join(' ')}
+      className={[styles.bar, transparent && styles.transparent, solid && styles.solid, paper && styles.paper, minimal && styles.minimalBar, !onPaper && 'on-dark'].filter(Boolean).join(' ')}
       data-testid="site-header"
       data-tone={onPaper ? 'paper' : 'ink'}
     >

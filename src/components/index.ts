@@ -31,7 +31,6 @@ export type { RelatedPage } from './RelatedPages/RelatedPages';
 export { Band } from './Band/Band';
 export { BenefitsBand } from './BenefitsBand/BenefitsBand';
 export type { Benefit } from './BenefitsBand/BenefitsBand';
-export { HandlerBlock } from './HandlerBlock/HandlerBlock';
 export { LandingHeader } from './SiteHeader/SiteHeader';
 export { ReviewCarousel } from './ReviewCarousel/ReviewCarousel';
 export { ProofGrid } from './ProofGrid/ProofGrid';

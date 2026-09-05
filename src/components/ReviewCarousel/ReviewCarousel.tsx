@@ -22,11 +22,11 @@ function Stars({ n, size }: { n: number; size: number }) {
  * under reduced motion it becomes a scrollable row. Reads src/data/reviews.json
  * until the review platform is wired. Sample data never renders on production.
  */
-export function ReviewCarousel({ reviews = data as ReviewsData, heading = 'What drivers say' }: { reviews?: ReviewsData; heading?: string }) {
+export function ReviewCarousel({ reviews = data as ReviewsData, heading = 'What drivers say', className }: { reviews?: ReviewsData; heading?: string; className?: string }) {
   if (reviews.sample && isProduction()) return null;
   const sets: Array<'a' | 'b'> = ['a', 'b'];
   return (
-    <section className={styles.reviews} aria-label="Customer reviews">
+    <section className={[styles.reviews, className].filter(Boolean).join(' ')} aria-label="Customer reviews" data-placement="reviews">
       <div className={styles.head}>
         <h2>{heading}</h2>
         <div className={styles.score}>

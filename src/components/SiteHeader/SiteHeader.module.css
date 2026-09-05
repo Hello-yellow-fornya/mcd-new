@@ -23,10 +23,11 @@
   height: 36px;
 }
 
+/* The hairline is an inset shadow so the bar stays exactly --nav-h tall (the hero below is fold-locked to it). */
 .paper.solid {
   background: var(--paper);
   color: var(--ink);
-  border-bottom: 1px solid var(--line);
+  box-shadow: inset 0 -1px 0 var(--line);
 }
 
 .paper.solid .brand {
@@ -190,8 +191,30 @@
     height: 22px;
   }
 
-  .paper .logo {
+  .paper .logo,
+  .minimalBar .logo {
     height: 28px;
+  }
+
+  /* On mobile the homepage bar is the sticky paper bar from the start (design/mcd-homepage-mobile-v2.html):
+     the hero sits under it rather than behind it, so there is no transparent state. */
+  .transparent.paper {
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: inset 0 -1px 0 var(--line);
+  }
+
+  .transparent.paper .logo > g {
+    fill: var(--ink);
+  }
+
+  /* The pill and the burger sit hard right: 14px from the edge, as the mockup's nav row */
+  .paper .in {
+    padding: 0 14px 0 16px;
+  }
+
+  .transparent.paper .burger span {
+    background: var(--ink);
   }
 
   .links {

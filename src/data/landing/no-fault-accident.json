@@ -5,7 +5,7 @@
   "description": "Hit by someone else? Call Motor Claims Department before your insurer: no excess, no claims bonus untouched, a like-for-like car on your drive.",
   "h1": "No-fault accident?",
   "h1Sub": "Call us before you call your insurer.",
-  "instruction": "The smarter way to claim for\nno-fault accidents.",
+  "instruction": "Choose the smarter way to claim\nfor no-fault accidents.",
   "proof": ["no-claims", "no-excess", "like-for-like", "ninety-minutes"],
   "waitRow": ["avg-wait", "fastest-way"],
   "faultSection": true,

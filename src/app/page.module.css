@@ -1,9 +1,19 @@
-/* Homepage V1 (design/mcd-site-fullbleed.html, guidelines §9). Section styles
-   that belong to the page rather than a component. */
+/* Homepage V1 (design/mcd-site-fullbleed.html and mcd-homepage-mobile-v2.html).
+   Section styles that belong to the page rather than a component. */
 
-/* The paper bar on the homepage is 88px tall on desktop (the mockup's nav-in). */
+/* The paper bar on the homepage is 88px tall on desktop (the mockup's nav-in), 64px on mobile. */
 .home {
   --nav-h: 88px;
+}
+
+/* One DOM, two orders: desktop is DOM order, mobile is flex order (below). */
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.main > * {
+  width: 100%;
 }
 
 /* How it works on the ink shards: white heading and intro, white step cards. */
@@ -32,8 +42,57 @@
   margin-bottom: 6px;
 }
 
+/* Mobile-only sections */
+.proofSec {
+  padding: 18px 18px 22px;
+  background: var(--paper);
+}
+
+.tu {
+  padding: 8px 0 36px;
+  background: var(--white);
+}
+
+@media (min-width: 821px) {
+  .mobOnly {
+    display: none;
+  }
+}
+
 @media (max-width: 820px) {
   .home {
     --nav-h: 64px;
+  }
+
+  .deskOnly {
+    display: none;
+  }
+
+  .oHero {
+    order: 1;
+  }
+
+  .oProof {
+    order: 2;
+  }
+
+  .oReviews {
+    order: 3;
+  }
+
+  .oBand {
+    order: 4;
+  }
+
+  .oTu {
+    order: 5;
+  }
+
+  .oIndep {
+    order: 6;
+  }
+
+  .oFaq {
+    order: 7;
   }
 }

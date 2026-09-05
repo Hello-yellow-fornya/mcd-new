@@ -56,9 +56,16 @@ test.describe('landing pages', () => {
       expect(bottom, 'online CTA bottom edge').toBeGreaterThanOrEqual(844 - 1);
       expect(bottom, 'online CTA bottom edge').toBeLessThanOrEqual(844);
       const onlineCta = page.getByTestId('hero-online');
-      await expect(onlineCta).toHaveText(/Or start your non-fault claim online/);
+      await expect(onlineCta).toHaveText(/Or start your no-fault claim online/);
       await expect(onlineCta).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
-      await expect(onlineCta).toHaveCSS('border-top-color', 'rgb(22, 50, 79)');
+      await expect(onlineCta).toHaveCSS('border-top-color', 'rgb(255, 255, 255)');
+      // V1: the hero sits on the ink shards under the marine bar; white H1, the instruction line in sky, the sub in white
+      await expect(page.locator('[data-hero]')).toHaveCSS('background-color', 'rgb(22, 50, 79)');
+      await expect(page.locator('[data-hero] h1')).toHaveCSS('color', 'rgb(255, 255, 255)');
+      await expect(page.locator('[data-hero] h1 span')).toHaveCSS('color', 'rgb(191, 214, 230)');
+      expect((await page.locator('[data-hero] h2').innerText()).replace(/\s+/g, ' ')).toBe('Choose the smarter way to claim for no-fault accidents.');
+      await expect(page.locator('[data-hero] h2')).toHaveCSS('color', 'rgb(255, 255, 255)');
+      expect((await page.locator('header svg[data-logo]').boundingBox())!.height).toBeCloseTo(28, 0);
       // The 2×2 grid: the four cards, marine circles, coral icons
       const cards = page.locator('[data-testid="proof-grid"] li');
       await expect(cards).toHaveText([/Protect your\s*no claims/, /No excess\s*to pay/, /Like-for-like\s*replacement/, /Back on the road\s*within 90 mins/]);
@@ -71,6 +78,16 @@ test.describe('landing pages', () => {
       await expect(call.locator('svg use')).toHaveAttribute('href', '#i-phone');
     });
   }
+
+  test('the chip band with its two pills follows the reviews, and there is no handler section', async ({ page }) => {
+    await page.goto('/claim/goskippy/');
+    const band = page.getByTestId('band');
+    await expect(band.locator('mark')).toHaveText('We work for you.');
+    await expect(band.locator('mark')).toHaveCSS('background-color', 'rgb(242, 105, 75)');
+    await expect(band.locator('a')).toHaveText(['Start your claim', /Call now/]);
+    await expect(page.getByText('I’m Dani')).toHaveCount(0);
+    await expect(page.locator('main a[href="/claim-now/"]', { hasText: 'Start your non-fault claim' }).filter({ visible: true })).toHaveCount(2);
+  });
 
   test('no-fault page carries the fault checklist; goskippy does not', async ({ page }) => {
     await page.goto('/claim/no-fault-accident/');

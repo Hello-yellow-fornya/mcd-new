@@ -7,14 +7,15 @@ export type FaqItem = { q: string; a: string };
 type Props = {
   items: ReadonlyArray<FaqItem>;
   /** With a heading the FAQ renders as the two-column section (heading left, questions right). */
-  heading?: string;
-  sub?: string;
+  heading?: ReactNode;
+  sub?: ReactNode;
   /** Slot after the questions, normally a SectionCta. */
   children?: ReactNode;
   /** Emit FAQPage JSON-LD from the same items, so schema always matches the visible FAQ. */
   schema?: boolean;
   firstOpen?: boolean;
   id?: string;
+  className?: string;
 };
 
 function List({ items, firstOpen, large }: { items: ReadonlyArray<FaqItem>; firstOpen: boolean; large?: boolean }) {
@@ -45,7 +46,7 @@ export function faqSchema(items: ReadonlyArray<FaqItem>) {
 }
 
 /** Details accordion with plus/minus in coral, first item open by default. */
-export function Faq({ items, heading, sub, children, schema = true, firstOpen = true, id }: Props) {
+export function Faq({ items, heading, sub, children, schema = true, firstOpen = true, id, className }: Props) {
   const ld = schema ? <JsonLd data={faqSchema(items)} /> : null;
   if (!heading) {
     return (
@@ -56,7 +57,7 @@ export function Faq({ items, heading, sub, children, schema = true, firstOpen = 
     );
   }
   return (
-    <section id={id} className={styles.section}>
+    <section id={id} className={[styles.section, className].filter(Boolean).join(' ')}>
       <div className={`wrap ${styles.sectionIn}`}>
         <div>
           <h2>{heading}</h2>

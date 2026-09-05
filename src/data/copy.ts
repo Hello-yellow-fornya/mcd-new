@@ -39,6 +39,15 @@ export const hero = {
   ] satisfies { icon: IconName; label: string }[],
 } as const;
 
+/** The mobile homepage hero (design/mcd-homepage-mobile-v2.html): the bar sits under "Non-fault", the underline under "smarter way". */
+export const heroMobile = {
+  line: { before: '', mark: 'Non-fault', after: ' accident?' },
+  sub: { before: 'Choose the ', mark: 'smarter way', after: ' to claim.' },
+  /** The 2×2 grid and the wait row are claims.json ids; unsubstantiated ones never render on production. */
+  proof: ['no-claims', 'no-excess', 'like-for-like', 'ninety-minutes'],
+  waitRow: ['avg-wait', 'fastest-way'],
+} as const;
+
 export const keeps = [
   { icon: 'pound', label: 'No excess to pay' },
   { icon: 'shield', label: 'Keep your no claims bonus' },
@@ -119,14 +128,6 @@ export const catchSection = {
   sub: 'There’s one. Here it is, in the same size as everything else.',
 } as const;
 
-export const handler = {
-  eyebrow: 'Your handler',
-  quote: '“I’m Dani. I’ll own your claim until your keys are back.”',
-  body: 'Every claim has one person on it, start to finish. They call you back when they say they will. They’re in the UK. You’ll have their name, and they’ll know yours.',
-  link: { href: '/about-us/', label: 'Meet the department' },
-  photoLabel: 'Photo placeholder: a claims handler at their desk, mid-call, smiling',
-} as const;
-
 export const whoWeHelp = ['Car drivers', 'Van drivers', 'Motorbike riders', 'Taxi & fleet', 'Passengers'] as const;
 
 export const independence = {
@@ -136,8 +137,10 @@ export const independence = {
 } as const;
 
 export const cta = {
-  start: 'Start your claim',
+  start: 'Start your non-fault claim',
   call: 'Call 0800 048 0048',
+  /** The outlined pill on the landing-page fold. */
+  online: 'Or start your no-fault claim online',
 } as const;
 
 export const footer = {
