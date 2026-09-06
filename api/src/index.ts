@@ -1,7 +1,8 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
-import { createHash } from 'node:crypto';
+import { createHash, timingSafeEqual } from 'node:crypto';
 import { pool } from './db.ts';
+import { keyLabelFor, loadApiKeys } from './keys.ts';
 
 /**
  * Claims API (brief §2, §7). This is the service and its schema; the intake
@@ -10,12 +11,16 @@ import { pool } from './db.ts';
  *   GET  /health               liveness, plus whether the database is reachable
  *   POST /v1/claims/start      records that a claim was started from the reg box
  *
- * Auth: Bearer CLAIMS_API_KEY from the site. Staging and production are
- * separate Railway services with separate databases and email targets (§2a).
+ * Auth: a bearer key per site. CLAIMS_API_KEYS holds them as comma-separated
+ * label:secret pairs (e.g. "mcd1:…,mcd2:…") so each front end has its own
+ * key and the label is recorded on every submission next to `source`.
+ * CLAIMS_API_KEY still works on its own, labelled "default". Staging and
+ * production are separate Railway services with separate databases and
+ * email targets (§2a).
  */
-const app = new Hono();
+const app = new Hono<{ Variables: { apiKey: string } }>();
 
-const apiKey = process.env.CLAIMS_API_KEY ?? '';
+const apiKeys = loadApiKeys(process.env);
 const REG = /^[A-Z0-9]{2,7}$/;
 
 app.get('/health', async (c) => {
@@ -32,8 +37,10 @@ app.get('/health', async (c) => {
 });
 
 app.use('/v1/*', async (c, next) => {
-  if (!apiKey) return c.json({ ok: false, error: 'CLAIMS_API_KEY is not set on the service' }, 503);
-  if (c.req.header('authorization') !== `Bearer ${apiKey}`) return c.json({ ok: false, error: 'unauthorised' }, 401);
+  if (apiKeys.length === 0) return c.json({ ok: false, error: 'CLAIMS_API_KEYS (or CLAIMS_API_KEY) is not set on the service' }, 503);
+  const label = keyLabelFor(c.req.header('authorization'), apiKeys, timingSafeEqual);
+  if (!label) return c.json({ ok: false, error: 'unauthorised' }, 401);
+  c.set('apiKey', label);
   await next();
 });
 
@@ -50,8 +57,8 @@ app.post('/v1/claims/start', async (c) => {
     const ip = c.req.header('x-forwarded-for')?.split(',')[0].trim() ?? '';
     const ipHash = ip ? createHash('sha256').update(ip).digest('hex').slice(0, 32) : null;
     const { rows } = await pool.query(
-      'insert into submissions (ref, reg, source, path, utm, ip_hash, user_agent) values ($1,$2,$3,$4,$5,$6,$7) returning id',
-      [r, reg, body?.source ?? 'web', body?.path ?? null, body?.utm ? JSON.stringify(body.utm) : null, ipHash, c.req.header('user-agent') ?? null],
+      'insert into submissions (ref, reg, source, api_key, path, utm, ip_hash, user_agent) values ($1,$2,$3,$4,$5,$6,$7,$8) returning id',
+      [r, reg, body?.source ?? 'web', c.get('apiKey'), body?.path ?? null, body?.utm ? JSON.stringify(body.utm) : null, ipHash, c.req.header('user-agent') ?? null],
     );
     await pool.query('insert into submission_events (submission_id, event) values ($1, $2)', [rows[0].id, 'started']);
   }
