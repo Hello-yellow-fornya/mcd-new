@@ -95,17 +95,27 @@ test.describe(`layout rulebook (${theme})`, () => {
     }
   }
 
-  test('§1 desktop: headline, H2/lead, CTAs and the proof grid are all inside 1280×720', async ({ page, isMobile }) => {
-    test.skip(isMobile, 'desktop rule');
-    await page.setViewportSize({ width: 1280, height: 720 });
-    await ready(page, '/');
-    const hero = page.locator('[data-hero]');
-    for (const sel of ['h1', 'p', 'a[href], button', 'ul']) {
-      const box = (await hero.locator(sel).filter({ visible: true }).first().boundingBox())!;
-      expect(box, sel).toBeTruthy();
-      expect(box.y + box.height, `${sel} inside 720`).toBeLessThanOrEqual(720);
-    }
-  });
+  for (const [w, h] of [
+    [1280, 720],
+    [1440, 820],
+    [1920, 900],
+  ]) {
+    test(`§1 desktop ${w}×${h}: headline, lead, CTAs and the whole proof row are inside the first screen`, async ({ page, isMobile }) => {
+      test.skip(isMobile, 'desktop rule');
+      await page.setViewportSize({ width: w, height: h });
+      await ready(page, '/');
+      const hero = page.locator('[data-hero]');
+      for (const sel of ['h1', 'p', 'a[href], button']) {
+        const box = (await hero.locator(sel).filter({ visible: true }).first().boundingBox())!;
+        expect(box, sel).toBeTruthy();
+        expect(box.y + box.height, `${sel} inside ${h}`).toBeLessThanOrEqual(h);
+      }
+      // The reasons to believe: every card of the proof row, not just its top
+      const proof = hero.locator('ul').filter({ visible: true }).first();
+      const box = (await proof.boundingBox())!;
+      expect(box.y + box.height, `proof row inside ${h}`).toBeLessThanOrEqual(h);
+    });
+  }
 
   // ---- 2. The headline pair ----
   for (const path of pages) {

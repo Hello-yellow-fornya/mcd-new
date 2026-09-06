@@ -39,8 +39,8 @@
   grid-template-columns: 1.05fr 0.95fr;
   gap: 40px;
   align-items: center;
-  padding-top: 64px;
-  padding-bottom: 48px;
+  padding-top: 44px;
+  padding-bottom: 28px;
 }
 
 .heroEyebrow {
@@ -52,7 +52,7 @@
 }
 
 .hero h1 {
-  font-size: clamp(40px, 5.2vw, 64px);
+  font-size: clamp(40px, 4.6vw, 60px);
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--ink);
@@ -72,10 +72,10 @@
 
 .lead {
   color: var(--ink);
-  font-size: clamp(17px, 1.6vw, 20px);
-  line-height: 1.65;
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.5;
   max-width: 44ch;
-  margin: 18px 0 24px;
+  margin: 14px 0 20px;
   font-weight: 500;
 }
 
@@ -111,13 +111,14 @@
 
 .illustration {
   width: 100%;
+  max-height: 300px;
   height: auto;
   color: var(--ink);
 }
 
 /* The three worries: equal-height white cards */
 .worriesRow {
-  padding-bottom: 40px;
+  padding-bottom: 32px;
 }
 
 .worries {
