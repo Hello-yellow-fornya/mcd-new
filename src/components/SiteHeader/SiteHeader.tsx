@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Icon } from '@/components/Icon/Icon';
 import { Logo } from '@/components/Logo/Logo';
+import { isMcd3 } from '@/lib/theme';
+import { Wordmark } from '@/themes/mcd3/Wordmark';
 import { site } from '@/lib/site';
 import { nav, cta, type NavLink } from '@/data/copy';
 import styles from './SiteHeader.module.css';
@@ -77,13 +79,13 @@ export function SiteHeader({ links = nav.links, transparent = false, minimal = f
 
   return (
     <header
-      className={[styles.bar, transparent && styles.transparent, solid && styles.solid, paper && styles.paper, minimal && styles.minimalBar, !onPaper && 'on-dark'].filter(Boolean).join(' ')}
+      className={[styles.bar, transparent && styles.transparent, solid && styles.solid, paper && styles.paper, minimal && styles.minimalBar, isMcd3 && styles.mcd3, !onPaper && !isMcd3 && 'on-dark'].filter(Boolean).join(' ')}
       data-testid="site-header"
-      data-tone={onPaper ? 'paper' : 'ink'}
+      data-tone={onPaper || isMcd3 ? 'paper' : 'ink'}
     >
       <div className={`wrap ${styles.in}`}>
         <Link className={styles.brand} href="/" aria-label="Motor Claims Department, home">
-          <Logo variant={logo} className={styles.logo} />
+          {isMcd3 ? <Wordmark className={styles.wordmark} /> : <Logo variant={logo} className={styles.logo} />}
         </Link>
 
         {!minimal && (
@@ -133,11 +135,29 @@ export function SiteHeader({ links = nav.links, transparent = false, minimal = f
         </nav>
         )}
 
-        <a className={[styles.phone, minimal && styles.phoneMinimal].filter(Boolean).join(' ')} href={site.phone.href}>
-          <Icon name="phone" className={styles.ph} />
-          <span className={styles.phoneDesktop}>{cta.call}</span>
-          <span className={styles.phoneMobile}>Call now</span>
-        </a>
+        {isMcd3 ? (
+          <>
+            {/* 3.0: the number as a text link, then the ink "Start your claim" pill; on mobile the ink "Call now" pill */}
+            <a className={styles.phoneText} href={site.phone.href}>
+              {site.phone.display}
+            </a>
+            {!minimal && (
+              <Link className={styles.startPill} href={nav.claimHref}>
+                {cta.start}
+              </Link>
+            )}
+            <a className={[styles.phone, styles.phoneInk, minimal && styles.phoneMinimal].filter(Boolean).join(' ')} href={site.phone.href}>
+              <Icon name="phone" className={styles.ph} />
+              <span className={styles.phoneMobile}>Call now</span>
+            </a>
+          </>
+        ) : (
+          <a className={[styles.phone, minimal && styles.phoneMinimal].filter(Boolean).join(' ')} href={site.phone.href}>
+            <Icon name="phone" className={styles.ph} />
+            <span className={styles.phoneDesktop}>{cta.call}</span>
+            <span className={styles.phoneMobile}>Call now</span>
+          </a>
+        )}
 
         {!minimal && (
         <button

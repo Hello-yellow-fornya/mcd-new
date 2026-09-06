@@ -4,6 +4,8 @@ import { isProduction } from '@/lib/staging';
 import { footer } from '@/data/copy';
 import { CookieSettingsButton } from '@/components/Consent/ConsentBanner';
 import { Logo } from '@/components/Logo/Logo';
+import { isMcd3 } from '@/lib/theme';
+import { Wordmark } from '@/themes/mcd3/Wordmark';
 import styles from './SiteFooter.module.css';
 
 /**
@@ -23,12 +25,12 @@ export function fcaLine(): string {
 export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
-    <footer className={styles.foot}>
+    <footer className={[styles.foot, isMcd3 && styles.mcd3].filter(Boolean).join(' ')}>
       <div className={`wrap ${styles.footIn}`}>
         <div>
           <p>
             <Link href="/" className={styles.brand} aria-label="Motor Claims Department, home">
-              <Logo variant="mono-ink" height={28} />
+              {isMcd3 ? <Wordmark surface="ink" /> : <Logo variant="mono-ink" height={28} />}
             </Link>
           </p>
           <p className={styles.muted}>{site.strapline}</p>

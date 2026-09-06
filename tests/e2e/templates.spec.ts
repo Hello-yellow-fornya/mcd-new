@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { colours as c } from './theme';
 
 const phase1 = [
   ['/accident-management-company/', 'pillar', true],
@@ -39,7 +40,7 @@ test.describe('phase 1 routes', () => {
       expect(graph.map((n: { '@type': string }) => n['@type'])).toContain('BreadcrumbList');
       // The CTA rule: hero Start is ink, Call is coral; section pair both coral
       const heroStart = page.locator('main a[href="/claim-now/"]').first();
-      await expect(heroStart).toHaveCSS('background-color', 'rgb(22, 50, 79)');
+      await expect(heroStart).toHaveCSS('background-color', c.ink);
       // No link to a page that does not build yet
       const hrefs = await page.locator('main a[href^="/"]').evaluateAll((as) => as.map((a) => a.getAttribute('href')!));
       for (const h of hrefs) {

@@ -7,6 +7,7 @@ import { ConsentBanner } from '@/components/Consent/ConsentBanner';
 import { HostRobots } from '@/components/Analytics/HostRobots';
 import { isMcd3, theme } from '@/lib/theme';
 import { ThemeHead } from '@/themes/mcd3/ThemeHead';
+import { SpriteLine } from '@/themes/mcd3/SpriteLine';
 import '@/styles/tokens.css';
 import '@/themes/mcd3/theme.css';
 import './globals.css';
@@ -42,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a className="skip" href="#main">
           Skip to content
         </a>
-        <Sprite />
+        {isMcd3 ? <SpriteLine /> : <Sprite />}
         {children}
         <HostRobots />
         <Analytics gtmId={gtmId} />

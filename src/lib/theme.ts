@@ -17,5 +17,21 @@ export function resolveTheme(value: string | undefined | null): Theme {
   return value === 'mcd3' ? 'mcd3' : 'mcd2';
 }
 
-export const theme: Theme = resolveTheme(process.env.NEXT_PUBLIC_THEME);
+/**
+ * Preview builds on a branch named mcd3/… render the 3.0 skin without an
+ * environment variable, so the 2.0 Vercel project can show a 3.0 preview
+ * before the mcd-new-3 project exists. Production builds never take this
+ * path: main is always the variable's theme.
+ */
+export function themeForBuild(env: { NEXT_PUBLIC_THEME?: string; VERCEL_ENV?: string; VERCEL_GIT_COMMIT_REF?: string }): Theme {
+  if (env.NEXT_PUBLIC_THEME) return resolveTheme(env.NEXT_PUBLIC_THEME);
+  if (env.VERCEL_ENV === 'preview' && env.VERCEL_GIT_COMMIT_REF?.startsWith('mcd3/')) return 'mcd3';
+  return 'mcd2';
+}
+
+export const theme: Theme = themeForBuild({
+  NEXT_PUBLIC_THEME: process.env.NEXT_PUBLIC_THEME,
+  VERCEL_ENV: process.env.VERCEL_ENV,
+  VERCEL_GIT_COMMIT_REF: process.env.VERCEL_GIT_COMMIT_REF,
+});
 export const isMcd3 = theme === 'mcd3';

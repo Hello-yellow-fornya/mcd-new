@@ -76,3 +76,27 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ---- MCD 3.0: the ink footer ---- */
+.mcd3 {
+  background: var(--ink);
+  color: var(--white);
+  border-top: 0;
+}
+
+.mcd3 .muted {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.mcd3 a,
+.mcd3 .linkButton {
+  color: var(--white);
+}
+
+.mcd3 .phone {
+  color: var(--yellow);
+}
+
+.mcd3 .legal {
+  color: rgba(255, 255, 255, 0.7);
+}

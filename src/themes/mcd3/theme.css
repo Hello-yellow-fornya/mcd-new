@@ -78,7 +78,45 @@ html[data-theme='mcd3'] [data-icon-circle] {
   --icon-knockout: var(--yellow);
 }
 
-/* The headline highlight: ink words on the half-height yellow underlay */
-html[data-theme='mcd3'] mark {
+
+/* The headline highlight: the half-height yellow underlay on the last words of a heading */
+html[data-theme='mcd3'] mark[data-hl] {
+  background: linear-gradient(transparent 55%, var(--yellow) 55%);
+  box-shadow: none;
   color: inherit;
+  padding: 0 0.08em;
+}
+
+/* Chipped headline lines: ink on yellow, never white on yellow (the hero payoff is the inverted ink chip) */
+html[data-theme='mcd3'] mark[data-chip]:not([data-chip='invert']) {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+/* Comparison marks: ticked yellow circles and outlined crosses */
+html[data-theme='mcd3'] [data-mark='ok'] {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+html[data-theme='mcd3'] [data-mark='no'] {
+  border: 1.8px solid var(--ink);
+  color: var(--ink);
+  background: transparent;
+}
+
+/* Sentence case everywhere: the reg placeholder stays as typed */
+html[data-theme='mcd3'] body {
+  font-weight: 500;
+}
+
+html[data-theme='mcd3'] b,
+html[data-theme='mcd3'] strong {
+  font-weight: 700;
+}
+
+/* The H1 payoff: the chip inverted to ink on yellow */
+html[data-theme='mcd3'] mark[data-chip='invert'] {
+  background: var(--ink);
+  color: var(--yellow);
 }

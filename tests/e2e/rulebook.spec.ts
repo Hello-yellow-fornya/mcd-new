@@ -44,7 +44,7 @@ test.describe(`layout rulebook (${theme})`, () => {
       const copy = hero.locator('[data-fold-copy]');
       const fixedGaps = await copy.evaluate((el) => {
         const boxes = Array.from(el.querySelectorAll<HTMLElement>('h1, p, form, a, ul, [data-flex-gap]'))
-          .filter((n) => n.checkVisibility() && !n.closest('[data-flex-gap]') && !Array.from(n.children).some((c) => c.matches('h1, p, form, a, ul')))
+          .filter((n) => n.checkVisibility() && (n.matches('[data-flex-gap]') || !n.closest('[data-flex-gap]')) && !Array.from(n.children).some((c) => c.matches('h1, p, form, a, ul')))
           .map((n) => n.getBoundingClientRect())
           .sort((a, b) => a.top - b.top);
         const out: number[] = [];
@@ -58,10 +58,13 @@ test.describe(`layout rulebook (${theme})`, () => {
         // A photo fills the flexible space: the copy must be packed with fixed gaps only
         expect(largestFixed).toBeLessThanOrEqual(40);
       } else {
-        // Empty flexible space: never the largest gap on screen
-        const flexHeight = await gaps.evaluate((el) => el.getBoundingClientRect().height);
-        expect(flexHeight).toBeGreaterThanOrEqual(0);
-        expect(flexHeight, 'flexible gap is not the largest gap').toBeLessThan(Math.max(largestFixed, box.height * 0.25));
+        // Empty flexible space: never the largest thing on screen, i.e. smaller than the
+        // content block above it and the content block below it, and every other gap is fixed and tight
+        const copyBox = (await copy.boundingBox())!;
+        const above = flex.y - copyBox.y;
+        const below = copyBox.y + copyBox.height - (flex.y + flex.height);
+        expect(largestFixed, 'every other gap is fixed and tight').toBeLessThanOrEqual(40);
+        expect(flex.height, 'flexible gap is not the largest block on screen').toBeLessThan(Math.max(above, below));
       }
       expect(flex).toBeTruthy();
     });
