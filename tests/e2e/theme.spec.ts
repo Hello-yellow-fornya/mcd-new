@@ -23,6 +23,11 @@ test(`the build is the ${theme} theme`, async ({ page, request }) => {
       return out.slice(0, 10);
     });
     expect(offBrand).toEqual([]);
+    // The 3.0 favicon set: "mcd" on the Safety Yellow tile
+    const icon = await (await request.get('/icon.svg')).text();
+    expect(icon).toContain('#ffd400');
+    expect(icon).not.toContain('#16324f');
+    for (const path of ['/apple-icon.png', '/favicon.ico', '/icons/icon-512.png']) expect((await request.get(path)).status(), path).toBe(200);
   } else {
     expect(await html.getAttribute('data-theme')).toBeNull();
     await expect(page.locator('link[rel="preload"][as="font"][href*="quicksand"]')).toHaveCount(0);
@@ -31,6 +36,9 @@ test(`the build is the ${theme} theme`, async ({ page, request }) => {
     // No Quicksand face is ever requested on a 2.0 build
     const fonts = await page.evaluate(() => performance.getEntriesByType('resource').map((e) => e.name).filter((n) => /\.woff2/.test(n)));
     expect(fonts.some((n) => n.includes('quicksand'))).toBe(false);
+    // The 2.0 favicon set: the §4a mark on marine
+    const icon = await (await request.get('/icon.svg')).text();
+    expect(icon).toContain('#16324f');
   }
 });
 

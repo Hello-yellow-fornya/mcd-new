@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "prebuild": "pnpm lint:content && pnpm lint:css",
+    "prebuild": "node scripts/theme-icons.mjs && pnpm lint:content && pnpm lint:css",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -21,6 +21,7 @@
     "test:e2e:mcd3": "NEXT_PUBLIC_THEME=mcd3 playwright test",
     "test:rulebook": "playwright test tests/e2e/rulebook.spec.ts && NEXT_PUBLIC_THEME=mcd3 playwright test tests/e2e/rulebook.spec.ts",
     "snapshot:html": "node scripts/snapshot-html.mjs",
+    "icons:mcd3": "node scripts/mcd3-icons.mjs",
     "check": "pnpm typecheck && pnpm lint && pnpm lint:content && pnpm lint:css && pnpm test",
     "new-page": "node scripts/new-page.mjs",
     "stubs": "node scripts/stubs-from-sitemap.mjs"

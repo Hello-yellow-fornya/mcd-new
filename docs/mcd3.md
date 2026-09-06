@@ -27,7 +27,7 @@ Departures from the files, each on a rule:
 ## Known differences from a clean 3.0 build
 
 - A 3.0 build still preloads the three 2.0 font files (`next/font` registers them from the layout); they are not used for any text. A 2.0 build loads nothing of 3.0.
-- The favicon and app icons are the 2.0 mark on both builds.
+- Favicons and app icons are static files, so `scripts/theme-icons.mjs` (from `prebuild`) copies the theme's set into place: `src/themes/mcd2/icons` is the §4a mark, `src/themes/mcd3/icons` is "mcd" in Quicksand Bold on the Safety Yellow tile (`pnpm icons:mcd3` regenerates it from the shipped font). The committed files under `src/app` and `public/icons` are the 2.0 set.
 
 ## Hosting
 
