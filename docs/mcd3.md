@@ -36,3 +36,7 @@ See the README: the `mcd-new-3` project needs creating in the Vercel dashboard o
 ## Tests
 
 `pnpm test:e2e` (2.0, port 3100) and `pnpm test:e2e:mcd3` (3.0, port 3101). The rulebook, theme, staging, landing, claim-now, consent, templates and components specs run on both; `home.spec.ts` is the 2.0 homepage and `home-mcd3.spec.ts` the 3.0 one.
+
+## Preview branch
+
+`mcd3/preview` tracks the skin branch and exists only so `mcd-new-2` builds a 3.0 preview from a branch named `mcd3/…`. Do not merge it; merge #9 and #10.
