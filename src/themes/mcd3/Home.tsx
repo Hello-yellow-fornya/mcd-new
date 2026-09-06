@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { Faq, Icon, IconCircle, JsonLd, SectionCta, SiteFooter, SiteHeader, StickyCallBar } from '@/components';
 import { Button } from '@/components/Button/Button';
 import { Highlight } from '@/components/Highlight/Highlight';
-import { PhotoPlaceholder } from '@/components/PhotoPlaceholder/PhotoPlaceholder';
 import type { IconName } from '@/components/Icon/names';
 import { resolveClaims } from '@/lib/landing';
 import { site, absoluteUrl } from '@/lib/site';
@@ -19,7 +18,7 @@ const schema = {
   ],
 };
 
-/** Heading text with the yellow underlay on its last words, once per section. */
+/** Heading text with the half-height yellow underlay on its last words, once per section. */
 function Hl({ text, highlight }: { text: string; highlight: string }) {
   const at = text.lastIndexOf(highlight);
   if (at < 0) return <>{text}</>;
@@ -31,21 +30,13 @@ function Hl({ text, highlight }: { text: string; highlight: string }) {
   );
 }
 
-function Heading({ id, text, highlight }: { id: string; text: string; highlight: string }) {
-  return (
-    <h2 id={id}>
-      <Hl text={text} highlight={highlight} />
-    </h2>
-  );
-}
-
 /**
- * The MCD 3.0 homepage (design/mcd-homepage-concept-guidelines-v1.html and
- * mcd-homepage-mobile-guidelines-v1.html). Yellow hero with the three worries
- * → How it works → We know a shortcut → the handler block → who we help → the
- * objection-first FAQ → the ink final CTA → footer. On mobile the hero is
- * fold-locked with the ink call button, the wait row and the online pill on
- * the fold, and the sticky call bar appears once the hero scrolls away.
+ * The MCD 3.0 homepage, reproduced from design/mcd-homepage-concept-guidelines-v1.html
+ * (desktop) and mcd-homepage-mobile-guidelines-v1.html (mobile). Yellow hero
+ * with the three worries → How it works → We know a shortcut → the handler →
+ * who we help → the objection-first FAQ → the ink final CTA → footer. Mobile:
+ * the hero is fold-locked with one flexible gap between the worries and the
+ * call block; the sticky call bar shows once the hero scrolls away.
  */
 export function HomeMcd3() {
   const wait = resolveClaims([...home3.hero.proof]);
@@ -56,19 +47,30 @@ export function HomeMcd3() {
         <section className={styles.hero} data-hero data-placement="hero" aria-labelledby="hero-h">
           <div className={`wrap ${styles.heroIn}`} data-fold-locked>
             <div className={styles.heroCopy} data-fold-copy>
+              <p className={styles.heroEyebrow}>{home3.hero.eyebrow}</p>
               <h1 id="hero-h">
                 {home3.hero.line}
-                <span className={styles.payoffLine}>
-                  <mark className={styles.payoff} data-chip="invert">
-                    {home3.hero.payoff}
-                  </mark>
-                </span>
+                <br />
+                <mark className={styles.payoff} data-chip="invert">
+                  {home3.hero.payoff}
+                </mark>
               </h1>
               <p className={styles.lead}>{home3.hero.lead}</p>
-              <ul className={styles.worries} aria-label="Three worries, answered" data-card-row>
+              {/* Desktop CTAs (the mobile call block sits at the fold, below) */}
+              <div className={styles.heroCtas}>
+                <Button href={nav.claimHref} variant="ink" className={styles.heroStart} data-testid="hero-start">
+                  {home3.cta.start}
+                </Button>
+                <a className={styles.heroCallOut} href={site.phone.href}>
+                  <Icon name="phone" className={styles.ph} />
+                  {home3.cta.call}
+                </a>
+              </div>
+              {/* Mobile: the three worries under the headline pair, then the one flexible gap, then the call block on the fold */}
+              <ul className={`${styles.worries} ${styles.worriesMobile}`} aria-label="Three worries, answered" data-card-row>
                 {home3.hero.worries.map((w) => (
-                  <li key={w.worry}>
-                    <IconCircle name={w.icon as IconName} size={44} />
+                  <li key={w.worry} className={styles.worry}>
+                    <IconCircle name={w.icon as IconName} size={36} />
                     <div>
                       <b>{w.worry}</b>
                       <span>{w.answer}</span>
@@ -77,10 +79,7 @@ export function HomeMcd3() {
                 ))}
               </ul>
               <div className={styles.flex} data-flex-gap aria-hidden="true" />
-              <div className={styles.heroCtas}>
-                <Button href={nav.claimHref} variant="ink" className={styles.startDesktop} data-testid="hero-start">
-                  {home3.cta.start}
-                </Button>
+              <div className={styles.callBlock}>
                 <a className={styles.heroCall} href={site.phone.href} data-testid="hero-call">
                   <Icon name="phone" className={styles.ph} />
                   {home3.cta.call}
@@ -90,7 +89,7 @@ export function HomeMcd3() {
                     {wait.map((c) => (
                       <li key={c.id} className={c.substantiated ? undefined : styles.unsubstantiated} title={c.substantiated ? undefined : 'Unsubstantiated claim: renders on preview only until evidence is on file'}>
                         <span className={styles.pic}>
-                          <Icon name={c.icon} size={11} />
+                          <Icon name={c.icon === 'dot' ? 'clock' : c.icon} size={9} />
                         </span>
                         {c.title}
                       </li>
@@ -104,16 +103,35 @@ export function HomeMcd3() {
             </div>
             <Illustration className={styles.illustration} title={home3.hero.illustrationAlt} />
           </div>
+          {/* Desktop: the three worries as a row of equal-height cards under the headline pair */}
+          <div className={`wrap ${styles.worriesRow}`}>
+            <ul className={styles.worries} aria-label="Three worries, answered" data-card-row>
+              {home3.hero.worries.map((w) => (
+                <li key={w.worry} className={styles.worry}>
+                  <IconCircle name={w.icon as IconName} size={44} />
+                  <div>
+                    <b>{w.worry}</b>
+                    <span>{w.answer}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
-        <section id="how" className={styles.how} aria-labelledby="how-h" data-placement="how" data-content-section>
+        <section id="how" className={styles.sec} aria-labelledby="how-h" data-placement="how" data-content-section>
           <div className="wrap">
-            <Heading id="how-h" text={home3.how.heading} highlight={home3.how.highlight} />
-            <p className={styles.sub}>{home3.how.intro}</p>
+            <p className={styles.eyebrow}>{home3.how.eyebrow}</p>
+            <h2 id="how-h">
+              <Hl text={home3.how.heading} highlight={home3.how.highlight} />
+            </h2>
+            <p className={styles.sub}>{home3.how.sub}</p>
             <ol className={styles.steps} data-card-row>
-              {home3.how.steps.map((s) => (
-                <li key={s.title}>
-                  <IconCircle name={s.icon} size={48} />
+              {home3.how.steps.map((s, i) => (
+                <li key={s.title} className={styles.step}>
+                  <span className={styles.n} aria-hidden="true">
+                    {i + 1}
+                  </span>
                   <h3>{s.title}</h3>
                   <p>{s.body}</p>
                 </li>
@@ -123,29 +141,31 @@ export function HomeMcd3() {
           </div>
         </section>
 
-        <section id="shortcut" className={styles.shortcut} aria-labelledby="shortcut-h" data-placement="shortcut" data-content-section>
+        <section id="shortcut" className={`${styles.sec} ${styles.cream}`} aria-labelledby="shortcut-h" data-placement="shortcut" data-content-section>
           <div className="wrap">
-            <Heading id="shortcut-h" text={home3.shortcut.heading} highlight={home3.shortcut.highlight} />
+            <p className={styles.eyebrow}>{home3.shortcut.eyebrow}</p>
+            <h2 id="shortcut-h">
+              <Hl text={home3.shortcut.heading} highlight={home3.shortcut.highlight} />
+            </h2>
             <p className={styles.sub}>{home3.shortcut.sub}</p>
-            <div className={styles.ways} role="table" aria-label="The old way compared with the new way">
-              <div className={styles.waysHead} role="row">
-                <div role="columnheader">{home3.shortcut.oldWay}</div>
-                <div role="columnheader">{home3.shortcut.newWay}</div>
-              </div>
-              {home3.shortcut.rows.map((r, i) => (
-                <div key={i} className={styles.waysRow} role="row">
-                  <div role="cell" className={styles.old}>
-                    <span className={styles.mkNo} aria-hidden="true" data-mark="no">
-                      <Icon name="cross" size={14} />
-                    </span>
-                    <span>{r.them}</span>
-                  </div>
-                  <div role="cell" className={styles.new}>
-                    <span className={styles.mkOk} aria-hidden="true" data-mark="ok">
-                      <Icon name="tick" size={14} />
-                    </span>
-                    <span>{r.us}</span>
-                  </div>
+            <div className={styles.ways} data-card-row>
+              {[
+                { way: home3.shortcut.newWay, ok: true },
+                { way: home3.shortcut.oldWay, ok: false },
+              ].map(({ way, ok }) => (
+                <div key={way.title} className={[styles.way, ok ? styles.wayNew : styles.wayOld].join(' ')}>
+                  <p className={styles.eyebrow}>{way.eyebrow}</p>
+                  <h3>{way.title}</h3>
+                  <ul>
+                    {way.items.map((item) => (
+                      <li key={item}>
+                        <span className={ok ? styles.mkOk : styles.mkNo} aria-hidden="true" data-mark={ok ? 'ok' : 'no'}>
+                          <Icon name={ok ? 'tick' : 'cross'} size={16} />
+                        </span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
@@ -153,51 +173,75 @@ export function HomeMcd3() {
           </div>
         </section>
 
-        <section className={styles.handler} aria-labelledby="handler-h" data-placement="handler" data-content-section>
-          <div className={`wrap ${styles.handlerIn}`}>
-            <PhotoPlaceholder label={home3.handler.photoLabel} className={styles.handlerPhoto} />
+        <section className={styles.sec} aria-labelledby="handler-h" data-placement="handler" data-content-section>
+          <div className={`wrap ${styles.handler}`}>
+            <div className={styles.photo} role="img" aria-label={home3.handler.photoLabel}>
+              <span className={styles.cap}>{home3.handler.caption}</span>
+              {home3.handler.photoLabel}
+            </div>
             <div>
               <p className={styles.eyebrow}>{home3.handler.eyebrow}</p>
-              <h2 id="handler-h">{home3.handler.quote}</h2>
+              <blockquote className={styles.quote}>
+                <h2 id="handler-h">{home3.handler.quote}</h2>
+              </blockquote>
               <p>{home3.handler.body}</p>
-              <Link className={styles.textLink} href={home3.handler.link.href}>
-                {home3.handler.link.label}
-              </Link>
+              <p className={styles.linkLine}>
+                <Link className={styles.textLink} href={home3.handler.link.href}>
+                  {home3.handler.link.label}
+                </Link>
+              </p>
             </div>
             <SectionCta className={styles.handlerCta} />
           </div>
         </section>
 
-        <section id="who" className={styles.who} aria-labelledby="who-h" data-placement="who-we-help" data-content-section>
+        <section id="who" className={`${styles.sec} ${styles.cream}`} aria-labelledby="who-h" data-placement="who-we-help" data-content-section>
           <div className="wrap">
-            <Heading id="who-h" text={home3.who.heading} highlight={home3.who.highlight} />
-            <ul className={styles.chips} aria-label="Who we help">
-              {home3.who.chips.map((c) => (
-                <li key={c}>{c}</li>
+            <p className={styles.eyebrow}>{home3.who.eyebrow}</p>
+            <h2 id="who-h">
+              <Hl text={home3.who.heading} highlight={home3.who.highlight} />
+            </h2>
+            <ul className={styles.tags} aria-label="Who we help">
+              {home3.who.tags.map((t, i) => (
+                <li key={t} className={i === 0 ? styles.tagOn : undefined}>
+                  {t}
+                </li>
               ))}
             </ul>
-            <p className={styles.sub}>{home3.who.note}</p>
             <SectionCta />
           </div>
         </section>
 
-        <Faq id="catch" heading={<Hl text={home3.faq.heading} highlight={home3.faq.highlight} />} sub={home3.faq.sub} items={home3.faq.items} className={styles.faq}>
+        <Faq
+          id="catch"
+          heading={
+            <>
+              <span className={styles.eyebrowInHeading}>{home3.faq.eyebrow}</span>
+              <Hl text={home3.faq.heading} highlight={home3.faq.highlight} />
+            </>
+          }
+          sub={home3.faq.sub}
+          items={home3.faq.items}
+          className={styles.faq}
+        >
           <SectionCta />
         </Faq>
 
-        <section className={styles.final} aria-label="Your claims department" data-placement="final-cta">
-          <div className="wrap on-dark">
-            <p className={styles.finalLine}>{home3.final.line1}</p>
-            <p className={styles.finalLine}>{home3.final.line2}</p>
-            <p className={styles.finalPayoff}>
-              <mark className={styles.finalChip} data-chip>
-                {home3.final.payoff}
-              </mark>
-            </p>
+        <section className={styles.final} aria-labelledby="final-h" data-placement="final-cta">
+          <div className={`wrap ${styles.finalIn}`}>
+            <div>
+              <h2 id="final-h">
+                {home3.final.heading}{' '}
+                <mark className={styles.finalChip} data-chip>
+                  {home3.final.payoff}
+                </mark>
+              </h2>
+              <p className={styles.finalSub}>{home3.final.sub}</p>
+            </div>
             <div className={styles.finalCtas}>
               <Button href={nav.claimHref}>{home3.cta.start}</Button>
               <Button href={site.phone.href} variant="secondary-on-dark" icon="phone">
-                {home3.cta.call}
+                {site.phone.display}
               </Button>
             </div>
           </div>

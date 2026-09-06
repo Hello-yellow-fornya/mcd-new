@@ -13,14 +13,16 @@ A third variation for the client to choose from: the same site, pages, copy rule
 
 Safety Yellow `#FFD400`, ink `#19180F`, cream `#F7F5EF`, white, body grey `#54524A`, ochre `#B08900`, pale `#FFF6C9`, hairline `#E6E2D6`. Ink on yellow. Yellow only in the hero, chips and icon circles; cream and white alternate; ink for the final CTA and the footer. Quicksand 500/600/700 only, self-hosted (`public/fonts`, OFL in `src/fonts/LICENSE-quicksand.txt`). Sentence case.
 
-## Built to the brief, not yet to the files
+## Reproduced from the signed-off files
 
-The four 3.0 design files named in the brief (`mcd-homepage-concept-guidelines-v1.html`, `mcd-homepage-mobile-guidelines-v1.html`, `MCD-brand-guidelines-v1-original.pdf`, `MCD-layout-rules.md`) were not in `/design/` on any branch when this was built. The skin follows the brief's written values. When the files land, reconcile:
+`design/mcd-homepage-concept-guidelines-v1.html` (desktop) and `mcd-homepage-mobile-guidelines-v1.html` (mobile) are reproduced: copy verbatim in `src/themes/mcd3/copy.ts`, the illustration SVG verbatim, the section order, sizes and spacing from the files. Where the files and `MCD-brand-guidelines-v1-original.pdf` disagree, the HTML wins for layout and the PDF for colour, type and voice. `MCD-layout-rules.md` is `tests/e2e/rulebook.spec.ts`.
 
-- **Copy.** The three worries, the shortcut heading and sub, the who-we-help note and the FAQ heading are drafted in `src/themes/mcd3/copy.ts` and marked `[assumption]`. Headline, lead, steps, comparison rows, FAQ items, band lines and CTA labels are the shared 2.0 copy.
-- **Illustration.** `Illustration.tsx` is a bold-outline car and keys drawn to the description; swap in the SVG from the desktop file.
-- **Layout values.** Section paddings, card radii and the hero proportions are the 2.0 values under 3.0 tokens.
-- **Rulebook.** `tests/e2e/rulebook.spec.ts` encodes the rules as listed in the brief; check the wording of each against `MCD-layout-rules.md`, especially "not the largest gap on screen", read here as "smaller than the content block above or below it, with every other gap fixed".
+Departures from the files, each on a rule:
+- The final CTA's sub-line is white at full opacity (rules §7), not the file's 80%.
+- The mobile wordmark is 14px per line so the mark sits at 28–30px in the 64px bar (rules §4); the file's 17px would be 36px.
+- Nav links are the site's sections (Services, How it works, vs your insurer, Advice), not the file's three homepage anchors, so the header works on every page.
+- Primary buttons read "Start your non-fault claim" (the shared copy rule), the file's "Start your claim".
+- The proof marks under the mobile call button keep the file's yellow icon in an ink dot; the PDF says icons are never yellow, but an ink icon in an ink dot would vanish. Flagged for the client.
 
 ## Known differences from a clean 3.0 build
 

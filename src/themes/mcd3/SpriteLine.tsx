@@ -11,27 +11,32 @@ export function SpriteLine() {
       <defs>
         <symbol id="i-phone" viewBox="0 0 24 24">
           <g {...stroke}>
-            <path d="M5 4h3l2 4.6-2.4 1.6a11 11 0 0 0 6.2 6.2l1.6-2.4L20 16v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" />
+            <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" />
           </g>
         </symbol>
         <symbol id="i-shield" viewBox="0 0 24 24">
           <g {...stroke}>
-            <path d="M12 3l7 2.8v6c0 4.6-3 8.2-7 9.2-4-1-7-4.6-7-9.2v-6z" />
+            <path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z" />
             <path d="M9 12l2 2 4-4" />
           </g>
         </symbol>
         <symbol id="i-pound" viewBox="0 0 24 24">
           <g {...stroke}>
-            <path d="M16 7.5A3.5 3.5 0 0 0 9 8v8.5H7.5" />
-            <path d="M7.5 12.5h6M8 17h9" />
+            <path d="M15 6.5c-1-1-2.5-1.3-3.7-.6C9.7 6.8 10 9 10 11v5c0 2-1 3-2.5 3.5M7 13.5h6M7 19.5h10" />
           </g>
         </symbol>
         <symbol id="i-car" viewBox="0 0 24 24">
           <g {...stroke}>
-            <path d="M3 12l2-5h14l2 5v5H3z" />
-            <path d="M5 17v2M19 17v2M3 12h18" />
-            <circle cx="7" cy="14.5" r="0.6" />
-            <circle cx="17" cy="14.5" r="0.6" />
+            <path d="M5 15l1.5-5A2 2 0 0 1 8.4 8.5h7.2a2 2 0 0 1 1.9 1.5L19 15" />
+            <rect x="3.5" y="15" width="17" height="4.5" rx="1.5" />
+            <circle cx="7.5" cy="19.5" r="1.4" />
+            <circle cx="16.5" cy="19.5" r="1.4" />
+          </g>
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24">
+          <g {...stroke}>
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3.5 2" />
           </g>
         </symbol>
         <symbol id="i-person" viewBox="0 0 24 24">

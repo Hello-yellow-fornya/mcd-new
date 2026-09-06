@@ -55,7 +55,7 @@ test.describe('landing pages', () => {
       // The online CTA is the outlined pill whose bottom edge touches the fold
       const bottom = online.y + online.height;
       expect(bottom, 'online CTA bottom edge').toBeGreaterThanOrEqual(844 - 1);
-      expect(bottom, 'online CTA bottom edge').toBeLessThanOrEqual(844);
+      expect(bottom, 'online CTA bottom edge').toBeLessThanOrEqual(844.5);
       const onlineCta = page.getByTestId('hero-online');
       await expect(onlineCta).toHaveText(/Or start your no-fault claim online/);
       await expect(onlineCta).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');

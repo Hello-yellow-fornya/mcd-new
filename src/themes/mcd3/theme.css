@@ -53,7 +53,9 @@ html[data-theme='mcd3'] {
   --w-semibold: 600;
   --w-regular: 500;
   --ls-h1: -0.02em;
-  --ls-h2: -0.01em;
+  --ls-h2: -0.02em;
+  --lh-h1: 1.05;
+  --btn-min: 52px;
 
   /* The half-height yellow underlay on the last words of a heading */
   --hl-underlay: inset 0 -0.45em 0 var(--yellow);
@@ -119,4 +121,21 @@ html[data-theme='mcd3'] strong {
 html[data-theme='mcd3'] mark[data-chip='invert'] {
   background: var(--ink);
   color: var(--yellow);
+}
+
+/* Body copy is the body grey; headings are ink (brand guidelines v1) */
+html[data-theme='mcd3'] body {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* Zero specificity, so any surface that sets its own heading colour (white on ink) wins */
+:where(html[data-theme='mcd3']) :where(h1, h2, h3) {
+  color: var(--ink);
+}
+
+/* The sticky call bar is white with the ink button */
+html[data-theme='mcd3'] [data-testid='sticky-call-bar'] {
+  background: var(--white);
+  box-shadow: 0 -1px 0 var(--line);
 }

@@ -1,29 +1,26 @@
 /**
- * The hero illustration: a car and its keys in bold ink outline on yellow.
- * Desktop only. [assumption] Drawn to the brief's description; the signed-off
- * SVG in mcd-homepage-concept-guidelines-v1.html replaces it once the file is
- * in /design/.
+ * The hero illustration, verbatim from design/mcd-homepage-concept-guidelines-v1.html:
+ * a replacement car on a driveway with a set of keys, bold ink outline on yellow.
+ * Desktop only.
  */
-export function Illustration({ className, title = 'A car with its keys, drawn in bold outline' }: { className?: string; title?: string }) {
+export function Illustration({ className, title = 'Illustration of a replacement car on a driveway with a set of keys' }: { className?: string; title?: string }) {
   return (
-    <svg className={className} viewBox="0 0 520 320" role="img" aria-label={title} data-illustration="car-and-keys">
+    <svg className={className} viewBox="0 0 520 300" role="img" aria-label={title} data-illustration="car-and-keys">
       <title>{title}</title>
-      <g fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round">
-        {/* body */}
-        <path d="M60 210h400v-52a18 18 0 0 0-18-18h-44l-46-52a24 24 0 0 0-18-8H168a24 24 0 0 0-19 9l-44 51H78a18 18 0 0 0-18 18z" />
-        <path d="M120 140h96v-60M216 80h100l40 60" />
-        {/* wheels */}
-        <circle cx="150" cy="212" r="34" fill="var(--yellow)" />
-        <circle cx="150" cy="212" r="12" />
-        <circle cx="380" cy="212" r="34" fill="var(--yellow)" />
-        <circle cx="380" cy="212" r="12" />
-        {/* lights and door line */}
-        <path d="M60 176h26M434 176h26M262 140v70" />
-        {/* key: round bow, shaft down to the right, two teeth on the underside */}
-        <circle cx="440" cy="60" r="24" />
-        <circle cx="440" cy="60" r="7" fill="currentColor" stroke="none" />
-        <path d="M457 77l52 52M488 108l-10 10M501 121l-10 10" />
-        <path d="M509 129l8-8" />
+      <path d="M20 250h480" stroke="#19180F" strokeWidth="5" strokeLinecap="round" />
+      <path d="M80 250l16-58a22 22 0 0 1 21-16h210a22 22 0 0 1 20 13l30 61" fill="#FFFFFF" stroke="#19180F" strokeWidth="5" strokeLinejoin="round" />
+      <rect x="56" y="185" width="380" height="70" rx="22" fill="#FFF6C9" stroke="#19180F" strokeWidth="5" />
+      <path d="M120 190l12-40a10 10 0 0 1 9-6h60v46zM214 144h90a10 10 0 0 1 9 6l17 40H214z" fill="#FFFFFF" stroke="#19180F" strokeWidth="5" strokeLinejoin="round" />
+      <circle cx="130" cy="256" r="26" fill="#FFFFFF" stroke="#19180F" strokeWidth="5" />
+      <circle cx="130" cy="256" r="9" fill="#19180F" />
+      <circle cx="360" cy="256" r="26" fill="#FFFFFF" stroke="#19180F" strokeWidth="5" />
+      <circle cx="360" cy="256" r="9" fill="#19180F" />
+      <rect x="392" y="205" width="30" height="14" rx="6" fill="#19180F" />
+      <path d="M30 200h28M18 222h40M30 244h20" stroke="#19180F" strokeWidth="5" strokeLinecap="round" />
+      <g transform="translate(440 70)">
+        <circle cx="0" cy="0" r="22" fill="#FFFFFF" stroke="#19180F" strokeWidth="5" />
+        <circle cx="0" cy="0" r="7" fill="#19180F" />
+        <path d="M18 14l40 40M46 42l10-10M38 50l10-10" stroke="#19180F" strokeWidth="5" strokeLinecap="round" />
       </g>
     </svg>
   );

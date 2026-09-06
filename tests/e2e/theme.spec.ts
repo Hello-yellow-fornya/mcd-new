@@ -11,7 +11,18 @@ test(`the build is the ${theme} theme`, async ({ page, request }) => {
     await expect(page.locator('link[rel="preload"][as="font"][href*="quicksand"]')).toHaveCount(1);
     expect((await request.get('/fonts/quicksand-latin-wght.woff2')).status()).toBe(200);
     await expect(page.locator('body')).toHaveCSS('font-family', /Quicksand/);
-    await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(247, 245, 239)');
+    // Layout rules §7: never coral, never marine on the yellow brand; icons never yellow
+    const offBrand = await page.evaluate(() => {
+      const bad = new Set(['rgb(242, 105, 75)', 'rgb(22, 50, 79)', 'rgb(191, 214, 230)', 'rgb(61, 109, 156)']);
+      const out: string[] = [];
+      for (const el of Array.from(document.querySelectorAll<HTMLElement>('body *'))) {
+        const cs = getComputedStyle(el);
+        if (bad.has(cs.backgroundColor) || bad.has(cs.color) || bad.has(cs.borderTopColor)) out.push(`${el.tagName}.${el.className}`);
+        if (el.matches('[data-icon-circle] svg') && cs.color === 'rgb(255, 212, 0)') out.push(`yellow icon: ${el.parentElement?.className}`);
+      }
+      return out.slice(0, 10);
+    });
+    expect(offBrand).toEqual([]);
   } else {
     expect(await html.getAttribute('data-theme')).toBeNull();
     await expect(page.locator('link[rel="preload"][as="font"][href*="quicksand"]')).toHaveCount(0);

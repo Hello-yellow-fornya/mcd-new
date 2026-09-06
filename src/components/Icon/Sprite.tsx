@@ -52,6 +52,9 @@ export function Sprite() {
           <path d="M17.3 11.4c-.2 1.6-1 2.4-2.1 2.6" fill="none" strokeWidth="1" strokeLinecap="round" style={{ stroke: 'var(--icon-knockout, var(--coral))' }} />
           <circle cx="15" cy="14.3" r=".85" style={{ fill: 'var(--icon-knockout, var(--coral))' }} />
         </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24">
+          <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm.9 5v4.6l3.2 1.9-.9 1.5L11.1 12.7V7z" />
+        </symbol>
         <symbol id="i-person" viewBox="0 0 24 24">
           <circle cx="12" cy="7.5" r="4.5" />
           <path d="M3.5 21.5c0-4.7 3.8-8 8.5-8s8.5 3.3 8.5 8z" />
