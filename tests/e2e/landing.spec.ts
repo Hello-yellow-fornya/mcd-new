@@ -8,7 +8,7 @@ test.describe('landing pages', () => {
       const res = await request.get(path);
       expect(res.headers()['x-robots-tag']).toContain('noindex');
       await page.goto(path);
-      await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
+      await expect(page.locator('meta[name="robots"]:not([data-host])')).toHaveAttribute('content', 'noindex, nofollow');
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://motorclaimsdepartment.co.uk${path}`);
       await expect(page.locator('h1')).toHaveCount(1);
       // Independence line directly after the hero
@@ -29,7 +29,7 @@ test.describe('landing pages', () => {
       expect(sitemap).not.toContain(path);
     });
 
-    test(`${path}: fold at 390×844 shows headline, instruction, proof grid, call pill, wait row, and the online CTA touching the bottom edge`, async ({ page, isMobile }) => {
+    test(`${path}: fold at 390×844 shows H1, H2, proof grid, call pill, wait row and the online CTA, in that order, with the online CTA's bottom edge on the fold`, async ({ page, isMobile }) => {
       test.skip(!isMobile, 'mobile fold only');
       await page.setViewportSize({ width: 390, height: 844 });
       await page.goto(path);
@@ -41,17 +41,53 @@ test.describe('landing pages', () => {
         expect(box!.y + box!.height, `${sel} bottom`).toBeLessThanOrEqual(844 + 1);
         return box!;
       };
-      await inView('h1');
-      await inView('[data-hero] p');
-      await inView('[data-testid="proof-grid"]');
-      await inView('[data-testid="hero-call"]');
-      await inView('[data-testid="wait-row"]');
-      const online = await inView('[data-testid="hero-online"]');
+      // Everything above the fold, in order: each element starts below the previous one ends
+      const order = ['[data-hero] h1', '[data-hero] h2', '[data-testid="proof-grid"]', '[data-testid="hero-call"]', '[data-testid="wait-row"]', '[data-testid="hero-online"]'];
+      let prevBottom = 0;
+      let online = { y: 0, height: 0 };
+      for (const sel of order) {
+        const box = await inView(sel);
+        expect(box.y, `${sel} starts after the previous element`).toBeGreaterThanOrEqual(prevBottom - 1);
+        prevBottom = box.y + box.height;
+        online = box;
+      }
+      // The online CTA is the outlined pill whose bottom edge touches the fold
       const bottom = online.y + online.height;
-      expect(bottom, 'online CTA bottom edge').toBeGreaterThanOrEqual(844 - 12);
+      expect(bottom, 'online CTA bottom edge').toBeGreaterThanOrEqual(844 - 1);
       expect(bottom, 'online CTA bottom edge').toBeLessThanOrEqual(844);
+      const onlineCta = page.getByTestId('hero-online');
+      await expect(onlineCta).toHaveText(/Or start your no-fault claim online/);
+      await expect(onlineCta).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+      await expect(onlineCta).toHaveCSS('border-top-color', 'rgb(255, 255, 255)');
+      // V1: the hero sits on the ink shards under the marine bar; white H1, the instruction line in sky, the sub in white
+      await expect(page.locator('[data-hero]')).toHaveCSS('background-color', 'rgb(22, 50, 79)');
+      await expect(page.locator('[data-hero] h1')).toHaveCSS('color', 'rgb(255, 255, 255)');
+      await expect(page.locator('[data-hero] h1 span')).toHaveCSS('color', 'rgb(191, 214, 230)');
+      expect((await page.locator('[data-hero] h2').innerText()).replace(/\s+/g, ' ')).toBe('Choose the smarter way to claim for no-fault accidents.');
+      await expect(page.locator('[data-hero] h2')).toHaveCSS('color', 'rgb(255, 255, 255)');
+      expect((await page.locator('header svg[data-logo]').boundingBox())!.height).toBeCloseTo(28, 0);
+      // The 2×2 grid: the four cards, marine circles, coral icons
+      const cards = page.locator('[data-testid="proof-grid"] li');
+      await expect(cards).toHaveText([/Protect your\s*no claims/, /No excess\s*to pay/, /Like-for-like\s*replacement/, /Back on the road\s*within 90 mins/]);
+      const circle = cards.first().locator('span').first();
+      await expect(circle).toHaveCSS('background-color', 'rgb(22, 50, 79)');
+      await expect(circle.locator('svg')).toHaveCSS('color', 'rgb(242, 105, 75)');
+      // The coral call pill with the solid phone icon
+      const call = page.getByTestId('hero-call');
+      await expect(call).toHaveCSS('background-color', 'rgb(242, 105, 75)');
+      await expect(call.locator('svg use')).toHaveAttribute('href', '#i-phone');
     });
   }
+
+  test('the chip band with its two pills follows the reviews, and there is no handler section', async ({ page }) => {
+    await page.goto('/claim/goskippy/');
+    const band = page.getByTestId('band');
+    await expect(band.locator('mark')).toHaveText('We work for you.');
+    await expect(band.locator('mark')).toHaveCSS('background-color', 'rgb(242, 105, 75)');
+    await expect(band.locator('a')).toHaveText(['Start your claim', /Call now/]);
+    await expect(page.getByText('I’m Dani')).toHaveCount(0);
+    await expect(page.locator('main a[href="/claim-now/"]', { hasText: 'Start your non-fault claim' }).filter({ visible: true })).toHaveCount(2);
+  });
 
   test('no-fault page carries the fault checklist; goskippy does not', async ({ page }) => {
     await page.goto('/claim/no-fault-accident/');

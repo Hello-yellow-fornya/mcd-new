@@ -8,6 +8,8 @@
  *
  * A deliberate exception (the reg placeholder is uppercase by design) is marked
  * on the same line:  text-transform: uppercase; /* allow: uppercase *\/
+ * White on coral is allowed at big-print sizes only (the band chip, 28px and up):
+ * mark the block with  /* allow: big-print *\/
  *
  * Usage: node scripts/lint-css.mjs [dir-or-file...]   (default: src)
  */
@@ -44,7 +46,8 @@ export function lintCss(text, file) {
   let m;
   while ((m = block.exec(stripped))) {
     const [, selector, decls] = m;
-    if (BRIGHT_BG.test(decls) && LIGHT_TEXT.test(decls)) {
+    const raw = text.slice(m.index, m.index + m[0].length); // comments are preserved in position
+    if (BRIGHT_BG.test(decls) && LIGHT_TEXT.test(decls) && !/allow:\s*big-print/.test(raw)) {
       add(
         lineOf(stripped, m.index + selector.length),
         'ink-on-bright',

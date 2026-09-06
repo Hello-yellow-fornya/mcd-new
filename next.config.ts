@@ -1,5 +1,4 @@
 import type { NextConfig } from 'next';
-import { robotsHeaders } from './src/lib/staging';
 
 const nextConfig: NextConfig = {
   // Slug rules (brief §5): trailing slashes on, lowercase.
@@ -9,13 +8,10 @@ const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
-  // Staging (brief §2a): site-wide X-Robots-Tag on every environment that is
-  // not production, keyed off VERCEL_ENV at build time. The <meta name="robots">
-  // tag is set alongside it in src/app/layout.tsx.
+  // Staging noindex is host-based and lives in src/middleware.ts (brief §2a).
   async headers() {
     return [
-      ...robotsHeaders(process.env.VERCEL_ENV),
-      // Paid landing pages are never indexed (brief §6), whatever the environment.
+      // Paid landing pages are never indexed (brief §6), whatever the host.
       { source: '/claim/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
     ];
   },

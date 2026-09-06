@@ -4,14 +4,21 @@ import { useEffect, useId, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Icon } from '@/components/Icon/Icon';
+import { Logo } from '@/components/Logo/Logo';
 import { site } from '@/lib/site';
 import { nav, cta, type NavLink } from '@/data/copy';
 import styles from './SiteHeader.module.css';
 
 type Props = {
   links?: ReadonlyArray<NavLink>;
-  /** Homepage only: transparent over the photo hero, solid marine once it sticks. */
+  /** Homepage only: transparent over the photo hero, solid once it sticks. */
   transparent?: boolean;
+  /**
+   * The solid bar's surface. ink is the marine bar (§4). paper is the homepage
+   * bar from design/mcd-site-fullbleed.html: paper, the colour logo at 36px
+   * (28px mobile), ink links, the active link underlined in coral.
+   */
+  solidTone?: 'ink' | 'paper';
   /** Landing pages: wordmark and the coral pill only, no links or drawer (the mockups show the wordmark alone). */
   minimal?: boolean;
 };
@@ -23,11 +30,11 @@ function isActive(pathname: string, link: NavLink) {
 
 /**
  * The marine bar (CLAUDE.md §4). Sticky, ink, 72px desktop / 64px mobile.
- * Franklin wordmark, links at 88% white with the active page underlined in
+ * The mono white lockup (§4a, 28px desktop / 22px mobile), links at 88% white with the active page underlined in
  * coral, a coral phone pill (the number on desktop, "Call now" on mobile,
  * never an icon-only circle) and a burger that opens the paper drawer.
  */
-export function SiteHeader({ links = nav.links, transparent = false, minimal = false }: Props) {
+export function SiteHeader({ links = nav.links, transparent = false, minimal = false, solidTone = 'ink' }: Props) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [stuck, setStuck] = useState(!transparent);
@@ -63,12 +70,20 @@ export function SiteHeader({ links = nav.links, transparent = false, minimal = f
   }, [open]);
 
   const solid = stuck || open;
+  const paper = solidTone === 'paper';
+  const onPaper = paper && solid;
+  // Over the hero: coral disc, white type. On paper: coral disc, ink type. On the marine bar: mono white.
+  const logo = transparent && !solid ? 'colour-on-marine' : paper ? 'colour-on-paper' : 'mono-white';
 
   return (
-    <header className={[styles.bar, transparent && styles.transparent, solid && styles.solid, 'on-dark'].filter(Boolean).join(' ')} data-testid="site-header">
+    <header
+      className={[styles.bar, transparent && styles.transparent, solid && styles.solid, paper && styles.paper, minimal && styles.minimalBar, !onPaper && 'on-dark'].filter(Boolean).join(' ')}
+      data-testid="site-header"
+      data-tone={onPaper ? 'paper' : 'ink'}
+    >
       <div className={`wrap ${styles.in}`}>
-        <Link className={styles.brand} href="/">
-          {site.wordmark}
+        <Link className={styles.brand} href="/" aria-label="Motor Claims Department, home">
+          <Logo variant={logo} className={styles.logo} />
         </Link>
 
         {!minimal && (

@@ -14,7 +14,7 @@ export const siteUrl: string = normaliseOrigin(process.env.NEXT_PUBLIC_SITE_URL 
 export const site = {
   name: 'Motor Claims Department',
   legalName: 'Motor Claims Department Ltd',
-  /** Text wordmark until the logo exists (guidelines §12): body 700, lowercase. */
+  /** Former text wordmark; the header and footer now use the §4a logo. Kept for copy that spells the name out. */
   wordmark: 'motor claims department',
   strapline: 'The claims department on your side.',
   line: 'Hit by someone else? You shouldn’t pay for it.',

@@ -15,6 +15,17 @@
   margin-bottom: 8px;
 }
 
+.brand {
+  display: inline-flex;
+  margin-bottom: 4px;
+}
+
+.brand svg {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
 .muted {
   color: var(--muted);
 }

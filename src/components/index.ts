@@ -1,6 +1,8 @@
 export { Button } from './Button/Button';
 export { Icon, IconCircle } from './Icon/Icon';
 export { Sprite } from './Icon/Sprite';
+export { Logo, LogoSquare, Mark, squareSvg } from './Logo/Logo';
+export type { LogoVariant, SquareTone } from './Logo/Logo';
 export type { IconName } from './Icon/names';
 export { JsonLd } from './JsonLd/JsonLd';
 export { SiteHeader } from './SiteHeader/SiteHeader';
@@ -27,7 +29,8 @@ export type { FaqItem } from './Faq/Faq';
 export { RelatedPages } from './RelatedPages/RelatedPages';
 export type { RelatedPage } from './RelatedPages/RelatedPages';
 export { Band } from './Band/Band';
-export { HandlerBlock } from './HandlerBlock/HandlerBlock';
+export { BenefitsBand } from './BenefitsBand/BenefitsBand';
+export type { Benefit } from './BenefitsBand/BenefitsBand';
 export { LandingHeader } from './SiteHeader/SiteHeader';
 export { ReviewCarousel } from './ReviewCarousel/ReviewCarousel';
 export { ProofGrid } from './ProofGrid/ProofGrid';

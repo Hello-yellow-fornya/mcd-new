@@ -5,7 +5,7 @@
   "description": "Hit by someone else? Don’t claim on your GoSkippy policy. Call Motor Claims Department: no excess, no claims bonus untouched, a like-for-like car.",
   "h1": "Insured with GoSkippy?",
   "h1Sub": "Call us before you call your insurer.",
-  "instruction": "The smarter way to claim for\nno-fault accidents.",
+  "instruction": "Choose the smarter way to claim\nfor no-fault accidents.",
   "proof": ["no-claims", "no-excess", "like-for-like", "ninety-minutes"],
   "waitRow": ["avg-wait", "fastest-way"],
   "faultSection": false,

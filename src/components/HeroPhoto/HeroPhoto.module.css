@@ -29,11 +29,14 @@
   object-position: 72% 30%;
 }
 
-/* Marine scrim from the left, then a full-width tint rising from the bottom. Never black. */
+/* Marine scrim from the left, then a full-width tint rising from the bottom. Never black.
+   Both sit above the photo (the fill image is positioned and comes later in the DOM,
+   so without a z-index it would paint over the scrim) and below the copy. */
 .frame::before {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: var(--scrim-left);
 }
 
@@ -43,6 +46,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1;
   height: 34%;
   background: var(--scrim-bottom);
   pointer-events: none;
@@ -50,7 +54,7 @@
 
 .copy {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   left: max(24px, calc((100% - 1140px) / 2 + 24px));
   top: 9cqw;
   color: var(--white);
@@ -80,6 +84,24 @@
   width: 27cqw;
 }
 
+/* Mobile-only copy and the wait row are hidden on desktop */
+.mob,
+.wait {
+  display: none;
+}
+
+/* The coral bar under a headline word (mobile homepage) */
+.copy mark {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  text-decoration: underline;
+  text-decoration-color: var(--coral);
+  text-decoration-thickness: 0.14em;
+  text-underline-offset: 0.08em;
+  text-decoration-skip-ink: none;
+}
+
 .call {
   display: flex;
   align-items: center;
@@ -107,7 +129,7 @@
 
 .pillsDesktop {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   right: max(24px, calc((100% - 1140px) / 2 + 24px));
   bottom: 24px;
 }
@@ -143,10 +165,19 @@
 }
 
 @media (max-width: 820px) {
-  /* Tall 9:15.6 crop, bottom scrim, copy at the bottom. The signed-off mockup
-     renders the three pills as an ink strip at the top of the frame. */
+  /* Fold-locked (design/mcd-homepage-mobile-v2.html): the frame fills the viewport
+     under the 64px bar, so its bottom edge lands on the fold on any phone. Bottom
+     scrim, copy anchored to the bottom, in flow. */
+  .underNav {
+    margin-top: 0;
+  }
+
   .frame {
-    aspect-ratio: 9 / 15.6;
+    aspect-ratio: auto;
+    min-height: calc(100dvh - var(--nav-h));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
 
   .frame::before {
@@ -158,16 +189,28 @@
   }
 
   .copy {
-    left: 18px;
-    right: 18px;
+    position: relative;
+    left: auto;
+    right: auto;
     top: auto;
-    bottom: 26px;
+    bottom: auto;
+    width: 100%;
+    padding: 0 18px 26px;
+  }
+
+  .desk {
+    display: none;
+  }
+
+  .mob {
+    display: inline;
   }
 
   .copy h1 {
     font-size: 34px;
+    line-height: 1.06;
     max-width: none;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
   }
 
   .sub {
@@ -176,9 +219,64 @@
     margin-bottom: 22px;
   }
 
+  /* "Choose the smarter way to claim." in Franklin 900 at 22px */
+  .subSwitch {
+    font-family: var(--display);
+    font-weight: var(--w-display);
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    opacity: 1;
+  }
+
+  .subSwitch mark {
+    text-decoration-thickness: 0.16em;
+  }
+
   .reg {
     margin-top: 0;
     width: 100%;
+  }
+
+  /* The wait row directly under the call button: white text, mid-green dot, navy bolt */
+  .wait {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 12px 0 0;
+    padding: 0;
+  }
+
+  .wait li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--white);
+    white-space: nowrap;
+    max-width: none;
+  }
+
+  .pic {
+    flex: none;
+    width: 15px;
+    height: 15px;
+    border-radius: var(--r-circle);
+    background: var(--green-tint);
+    color: #2f6b1a; /* the mid-green dot from mcd-homepage-mobile-v2.html, a step deeper than the landing-page mark */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wait li:nth-child(2) .pic {
+    color: var(--ink);
+  }
+
+  .unsubstantiated {
+    outline: 1.5px dashed var(--coral);
+    outline-offset: 2px;
   }
 
   .call {
@@ -200,7 +298,7 @@
   .pillsMobile {
     display: block;
     position: relative;
-    z-index: 1;
+    z-index: 2;
     background: var(--ink);
     padding: 12px 18px 18px;
   }

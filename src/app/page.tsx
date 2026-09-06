@@ -1,19 +1,9 @@
 import type { Metadata } from 'next';
-import {
-  Band,
-  Faq,
-  HandlerBlock,
-  HeroPhoto,
-  IconCircle,
-  JsonLd,
-  Pattern,
-  SectionCta,
-  SiteFooter,
-  SiteHeader,
-  Steps,
-} from '@/components';
+import { Band, BenefitsBand, Faq, HeroPhoto, Highlight, IndependenceLine, JsonLd, ProofGrid, ReviewCarousel, SectionCta, SiteFooter, SiteHeader, Steps, ThemUs } from '@/components';
+import { patternClass } from '@/components/Pattern/Pattern';
 import { site, absoluteUrl } from '@/lib/site';
-import { benefits, hero, homeFaq, howItWorks, whoWeHelp } from '@/data/copy';
+import { resolveClaims } from '@/lib/landing';
+import { benefits, catchSection, hero, heroMobile, homeFaq, howItWorks, themUs } from '@/data/copy';
 import heroImage from '../../public/images/hero-placeholder.jpg';
 import heroImageMobile from '../../public/images/hero-placeholder-mobile.jpg';
 import styles from './page.module.css';
@@ -52,66 +42,114 @@ const schema = {
   ],
 };
 
-export default function HomePage() {
+/** The intro with "their" underlined in coral, as the mockup sets it. */
+function Intro({ text }: { text: string }) {
+  const key = 'their insurer instead';
+  const at = text.indexOf(key);
+  if (at < 0) return <>{text}</>;
   return (
     <>
-      <SiteHeader transparent />
-      <main id="main">
-        <HeroPhoto image={{ src: heroImage, alt: hero.photoAlt }} mobileImage={{ src: heroImageMobile }} underNav />
+      {text.slice(0, at)}
+      <Highlight tone="coral">their</Highlight>
+      {text.slice(at + 'their'.length)}
+    </>
+  );
+}
 
-        <section className={styles.benefits} aria-labelledby="benefits-h">
-          <div className="wrap">
-            <h2 id="benefits-h">{benefits.heading}</h2>
-            <ul className={styles.bgrid}>
-              {benefits.items.map((b) => (
-                <li key={b.title} className={styles.b}>
-                  <IconCircle name={b.icon} size={56} />
-                  <h3>{b.title}</h3>
-                  <p>{b.body}</p>
-                </li>
-              ))}
-            </ul>
-            <SectionCta />
-          </div>
-        </section>
+/** A headline with one marked phrase (the coral bar on the mobile hero). */
+function Marked({ before, mark, after }: { before: string; mark: string; after: string }) {
+  return (
+    <>
+      {before}
+      <mark>{mark}</mark>
+      {after}
+    </>
+  );
+}
 
-        <Pattern as="section" name="shards-ink" id="how" className={`${styles.how} on-dark`} aria-labelledby="how-h">
-          <div className="wrap">
+/** A heading that reads one way on desktop and another on mobile. */
+function Switch({ desktop, mobile }: { desktop: string; mobile: string }) {
+  return (
+    <>
+      <span className={styles.deskOnly}>{desktop}</span>
+      <span className={styles.mobOnly}>{mobile}</span>
+    </>
+  );
+}
+
+/**
+ * Homepage V1.
+ * Desktop (design/mcd-site-fullbleed.html): photo hero → the moving "Why claim"
+ * band → the chip band on ink shards → review carousel → How it works on ink
+ * shards → the catch (FAQ) → footer.
+ * Mobile (design/mcd-homepage-mobile-v2.html): the paper bar, the fold-locked
+ * photo hero → 2×2 proof grid → reviews → the chip band → their/your table with
+ * the CTA pair → independence line → FAQ → footer.
+ * One DOM, ordered for desktop; the mobile order is flex order on <main>, and
+ * the sections that belong to one breakpoint only are hidden on the other.
+ */
+export default function HomePage() {
+  const grid = resolveClaims([...heroMobile.proof]);
+  const waitRow = resolveClaims([...heroMobile.waitRow]);
+  return (
+    <div className={styles.home}>
+      <SiteHeader transparent solidTone="paper" />
+      <main id="main" className={styles.main}>
+        <HeroPhoto
+          image={{ src: heroImage, alt: hero.photoAlt }}
+          mobileImage={{ src: heroImageMobile }}
+          mobileTitle={<Marked {...heroMobile.line} />}
+          mobileSub={<Marked {...heroMobile.sub} />}
+          waitRow={waitRow}
+          mobilePills="none"
+          underNav
+          className={styles.oHero}
+        />
+
+        <BenefitsBand heading={benefits.heading} highlight="Motor Claims Department" items={benefits.items} className={styles.deskOnly} />
+
+        <Band variant="chip" pattern="shards-ink" className={styles.oBand} />
+
+        <ReviewCarousel className={styles.oReviews} />
+
+        <section id="how" className={`${styles.how} ${patternClass('shards-ink')} ${styles.deskOnly}`} aria-labelledby="how-h" data-placement="how">
+          <div className="wrap on-dark">
             <h2 id="how-h">{howItWorks.heading}</h2>
             <p className={styles.howSub}>
               <b>{howItWorks.introLead}</b>
-              Most people don’t know that. They ring their own insurer, pay the excess, and watch their no-claims take the hit for
-              somebody else’s mistake. We claim from <em>their</em> insurer instead. Here’s what that means for you.
+              <Intro text={howItWorks.intro} />
             </p>
             <Steps items={howItWorks.steps} onDark />
             <SectionCta />
           </div>
-        </Pattern>
+        </section>
 
-        <Faq id="catch" heading={homeFaq.heading} sub={homeFaq.sub} items={homeFaq.items}>
-          <SectionCta />
+        <Faq
+          id="catch"
+          heading={<Switch desktop={catchSection.heading} mobile={homeFaq.heading} />}
+          sub={<Switch desktop={catchSection.sub} mobile={homeFaq.sub} />}
+          items={homeFaq.items}
+          className={styles.oFaq}
+        >
+          <SectionCta stack />
         </Faq>
 
-        <HandlerBlock />
-
-        <Band size="lg" />
-
-        <section id="types" className={styles.types} aria-labelledby="types-h">
+        {/* Mobile only: the proof grid under the fold, then the their/your table and the independence line */}
+        {grid.length > 0 && (
+          <section className={`${styles.proofSec} ${styles.mobOnly} ${styles.oProof}`} aria-label="Why claim through Motor Claims Department" data-placement="proof">
+            <ProofGrid items={grid} size="sm" />
+          </section>
+        )}
+        <section id="ways" className={`${styles.tu} ${styles.mobOnly} ${styles.oTu}`} aria-label="Their claims department compared with your claims handler" data-placement="them-us">
           <div className="wrap">
-            <h2 id="types-h">Who we help</h2>
-            <ul className={styles.chips}>
-              {whoWeHelp.map((w) => (
-                <li key={w} className={styles.chip}>
-                  {w}
-                </li>
-              ))}
-            </ul>
-            <SectionCta className={styles.typesCta} />
+            <ThemUs head={themUs.head} rows={themUs.rows} compact />
+            <SectionCta stack />
           </div>
         </section>
+        <IndependenceLine className={`${styles.mobOnly} ${styles.oIndep}`} />
       </main>
       <SiteFooter />
       <JsonLd data={schema} />
-    </>
+    </div>
   );
 }

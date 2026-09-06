@@ -93,7 +93,6 @@ test.describe('phase 1 routes', () => {
     expect(sitemap).not.toContain('/styleguide/');
     expect(sitemap).not.toContain('/claim/');
     const robots = await (await request.get('/robots.txt')).text();
-    expect(robots).toContain('Disallow: /');
     expect(robots).toContain('Sitemap: https://motorclaimsdepartment.co.uk/sitemap.xml');
   });
 });

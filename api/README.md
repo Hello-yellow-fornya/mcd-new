@@ -6,7 +6,7 @@ The Railway service for motorclaimsdepartment.co.uk: submissions, later the DVLA
 
 1. New project → Deploy from GitHub → this repo, **Root Directory `api`**.
 2. Add a Postgres plugin. Railway injects `DATABASE_URL`.
-3. Variables: `CLAIMS_API_KEY` (a long random string, the same value goes into the Vercel project as `CLAIMS_API_KEY`), `CLAIMS_INBOX`.
+3. Variables: `CLAIMS_API_KEY` (a long random string, the same value goes into the `mcd-new-2` Vercel project as `CLAIMS_API_KEY`), `CLAIMS_INBOX`.
 4. Create a second environment, `staging`, with its own Postgres and its own `CLAIMS_INBOX`, and point the Vercel preview environment's `CLAIMS_API_URL` at it. Production points at production. Test submissions never reach the real inbox (brief §2a).
 5. Deploys run `npm run migrate` then start; `/health` reports database status.
 

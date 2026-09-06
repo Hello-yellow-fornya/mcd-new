@@ -2,12 +2,11 @@ import { Fragment } from 'react';
 import {
   Band,
   Faq,
-  HandlerBlock,
   Icon,
-  IconCircle,
   IndependenceLine,
   JsonLd,
   LandingHeader,
+  ProofGrid,
   ReviewCarousel,
   SectionCta,
   SiteFooter,
@@ -15,18 +14,12 @@ import {
   ThemUs,
 } from '@/components';
 import { Button } from '@/components/Button/Button';
+import { patternClass } from '@/components/Pattern/Pattern';
 import { absoluteUrl, site } from '@/lib/site';
 import { resolveClaims, type LandingConfig } from '@/lib/landing';
-import { cta } from '@/data/copy';
+import { cta, homeFaq, themUs } from '@/data/copy';
 import styles from './LandingPage.module.css';
 
-const themUsRows = [
-  { them: 'Works for your insurer', us: 'Works for you' },
-  { them: 'A queue, then whoever picks up', us: 'One named person, UK-based, from first call to keys back' },
-  { them: 'Your excess, paid by you', us: 'No excess — the other driver’s insurer pays' },
-  { them: 'A claim on your policy', us: 'Nothing on your policy. Your no-claims untouched' },
-  { them: 'A courtesy car, if you’re covered', us: 'A like-for-like car, on your drive' },
-];
 
 function Lines({ text }: { text: string }) {
   return (
@@ -43,9 +36,9 @@ function Lines({ text }: { text: string }) {
 
 /**
  * Paid landing page (brief §6) from design/mcd-lp-*.html: mobile-first column,
- * text hero on the stone shard pattern with the proof grid, the coral "call
- * now" pill, the wait row and the online CTA at the fold; independence line;
- * reviews; optional fault checklist; band; them/us; FAQ; handler; footer.
+ * the marine bar, text hero on the ink shards with the proof grid, the coral
+ * "call now" pill, the wait row and the online CTA at the fold; independence
+ * line; reviews; optional fault checklist; the chip band; them/us; FAQ; footer.
  * Insurer name appears only in the H1 and the independence line.
  */
 export function LandingPage({ config }: { config: LandingConfig }) {
@@ -57,28 +50,16 @@ export function LandingPage({ config }: { config: LandingConfig }) {
       <div className={styles.column}>
         <LandingHeader />
         <main id="main">
-          <section className={styles.hero} data-hero data-placement="hero">
+          <section className={`${styles.hero} ${patternClass('shards-ink')}`} data-hero data-placement="hero">
             <div className={`wrap ${styles.heroIn}`}>
               <h1>
                 {config.h1}
                 <span className={styles.hl}>{config.h1Sub}</span>
               </h1>
-              <p className={styles.instruction}>
+              <h2 className={styles.instruction}>
                 <Lines text={config.instruction} />
-              </p>
-              {grid.length > 0 && (
-                <ul className={styles.grid} aria-label="Why claim through MCD" data-testid="proof-grid">
-                  {grid.map((c) => (
-                    <li key={c.id} className={c.substantiated ? undefined : styles.unsubstantiated} title={c.substantiated ? undefined : 'Unsubstantiated claim: renders on preview only until evidence is on file'}>
-                      <IconCircle name={c.icon} tone="ink" size={40} className={styles.gic} />
-                      <b>
-                        <Lines text={c.title} />
-                      </b>
-                      {c.sub && <span className={styles.gsub}>{c.sub}</span>}
-                    </li>
-                  ))}
-                </ul>
-              )}
+              </h2>
+              {grid.length > 0 && <ProofGrid items={grid} className={styles.grid} />}
               <a className={styles.call} href={site.phone.href} data-track="hero-call" data-testid="hero-call">
                 <Icon name="phone" className={styles.callIcon} />
                 call now
@@ -95,8 +76,8 @@ export function LandingPage({ config }: { config: LandingConfig }) {
                   ))}
                 </ul>
               )}
-              <Button href="/claim-now/" variant="secondary" iconAfter="arrow" className={styles.online} data-testid="hero-online">
-                Or start your claim online
+              <Button href="/claim-now/" variant="secondary-on-dark" iconAfter="arrow" className={styles.online} data-testid="hero-online">
+                {cta.online}
               </Button>
             </div>
           </section>
@@ -158,20 +139,18 @@ export function LandingPage({ config }: { config: LandingConfig }) {
             </section>
           )}
 
-          <Band pattern="shards-ink" cta={false} breakBeforeHighlight />
+          <Band variant="chip" pattern="shards-ink" />
 
           <section className={styles.tu} id="ways" data-placement="them-us">
             <div className="wrap">
-              <ThemUs head={['Their claims department', 'Your claims handler']} rows={themUsRows} compact />
+              <ThemUs head={themUs.head} rows={themUs.rows} compact />
               <SectionCta stack />
             </div>
           </section>
 
-          <Faq id="catch" heading="How it works" sub="Answering your frequently asked questions." items={config.faq}>
+          <Faq id="how" heading={homeFaq.heading} sub={homeFaq.sub} items={config.faq}>
             <SectionCta stack />
           </Faq>
-
-          <HandlerBlock stackCta />
         </main>
         <SiteFooter />
         <StickyCallBar />

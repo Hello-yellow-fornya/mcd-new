@@ -17,10 +17,14 @@
   max-width: none;
 }
 
-/* Text hero on the stone shard pattern */
+/* Text hero on the ink shards (V1): white H1, the instruction line in sky */
 .hero {
-  background: var(--stone) url('/patterns/mcd-shards-stone-1920x1080.svg') center / cover no-repeat;
   padding: 30px 0 24px;
+  color: var(--white);
+}
+
+.hero h1 {
+  color: var(--white);
 }
 
 .heroIn {
@@ -45,61 +49,30 @@
   letter-spacing: -0.02em;
   white-space: nowrap;
   margin-top: 22px;
-  color: var(--blue);
+  color: var(--sky);
   text-decoration: underline;
-  text-decoration-color: var(--sky);
+  text-decoration-color: rgba(191, 214, 230, 0.45);
   text-decoration-thickness: 0.14em;
   text-underline-offset: 0.16em;
 }
 
+/* The H2: the instruction line, body face, not display */
 .instruction {
   text-align: center;
+  font-family: var(--body);
   font-size: 17px;
   font-weight: var(--w-bold);
   line-height: 1.35;
-  color: var(--ink);
+  letter-spacing: 0;
+  color: var(--white);
   margin: 0 auto 14px;
   max-width: none;
+  text-wrap: balance;
 }
 
-/* 2×2 proof grid */
+/* 2×2 proof grid (ProofGrid), white cards on the ink shards */
 .grid {
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
   margin: 0 0 18px;
-  text-align: center;
-}
-
-.grid li {
-  background: var(--white);
-  border-radius: 18px;
-  padding: 12px 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  line-height: 1.2;
-  max-width: none;
-}
-
-.gic {
-  margin-bottom: 2px;
-}
-
-.grid b {
-  font-family: var(--display);
-  font-weight: var(--w-display);
-  font-size: 15px;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-}
-
-.gsub {
-  font-size: 12.5px;
-  color: var(--muted);
-  line-height: 1.3;
 }
 
 /* The primary CTA: "call now" pill, Franklin 900, icon on the left */
@@ -120,7 +93,7 @@
   letter-spacing: -0.015em;
   white-space: nowrap;
   text-decoration: none;
-  box-shadow: 0 14px 26px rgba(var(--coral-rgb), 0.35);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.35);
 }
 
 .callIcon {
@@ -147,7 +120,7 @@
   align-items: center;
   gap: 9px;
   font-size: 14px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.9);
   white-space: nowrap;
   max-width: none;
 }
@@ -181,6 +154,12 @@
 .unsubstantiated {
   outline: 1.5px dashed var(--coral);
   outline-offset: -1.5px;
+}
+
+/* The independence line under the hero sits on paper with no top hairline (design/mcd-lp-*.html) */
+.column :global([data-testid='independence-line']) {
+  background: var(--paper);
+  border-top: 0;
 }
 
 /* Sourced facts */

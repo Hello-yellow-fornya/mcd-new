@@ -34,7 +34,7 @@ test.describe('claim-now', () => {
 
   test('thank-you route fires the conversion and is not indexed', async ({ page }) => {
     await page.goto('/claim-now/thank-you/?ref=MCD-TEST01');
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
+    await expect(page.locator('meta[name="robots"]:not([data-host])')).toHaveAttribute('content', /noindex/);
     const events = await page.evaluate(() => (window.dataLayer || []).filter((e) => (e as { event?: string }).event === 'claim_submitted') as { ref?: string }[]);
     expect(events).toHaveLength(1);
     expect(events[0].ref).toBe('MCD-TEST01');
