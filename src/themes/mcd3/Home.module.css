@@ -19,6 +19,12 @@
   margin: 0 0 28px;
 }
 
+/* Section headings: the line below clears the bottom of the highlighter (mockup: 12px, measured from the underlay) */
+.sec h2,
+.faq h2 {
+  margin-bottom: 14px;
+}
+
 .sec {
   padding: 72px 0;
   background: var(--white);

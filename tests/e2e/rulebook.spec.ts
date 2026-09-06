@@ -143,6 +143,26 @@ test.describe(`layout rulebook (${theme})`, () => {
     });
   }
 
+  for (const path of pages) {
+    test(`§2 ${path}: the line after a highlighted heading clears the bottom of the highlighter`, async ({ page }) => {
+      await ready(page, path);
+      const marks = page.locator('h1 mark[data-hl], h2 mark[data-hl]').filter({ visible: true });
+      const n = await marks.count();
+      for (let i = 0; i < n; i++) {
+        const gap = await marks.nth(i).evaluate((el) => {
+          const heading = el.closest('h1, h2')!;
+          let next = heading.nextElementSibling as HTMLElement | null;
+          while (next && !next.checkVisibility()) next = next.nextElementSibling as HTMLElement | null;
+          if (!next) return null;
+          const rects = Array.from(el.getClientRects());
+          const underlayBottom = Math.max(...rects.map((r) => r.bottom));
+          return next.getBoundingClientRect().top - underlayBottom;
+        });
+        if (gap !== null) expect(gap, 'clear space below the highlighter').toBeGreaterThanOrEqual(8);
+      }
+    });
+  }
+
   // ---- 3. Proof ----
   for (const path of pages) {
     test(`§3 ${path}: proof grid cards equal height, icon circle 34–36px, title 14px, sub 12–13px; wait row directly under the call button`, async ({ page, isMobile }) => {
