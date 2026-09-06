@@ -39,6 +39,19 @@ export function Sprite() {
             style={{ stroke: 'var(--icon-knockout, var(--coral))' }}
           />
         </symbol>
+        {/* A call handler with a headset: solid silhouette, the mic boom knocks out */}
+        <symbol id="i-headset" viewBox="0 0 24 24">
+          <path d="M3.5 21.5c0-4.7 3.8-8 8.5-8s8.5 3.3 8.5 8z" />
+          <circle cx="12" cy="9" r="4.4" />
+          <rect x="9.2" y="11.5" width="5.6" height="3" />
+          <path d="M6.8 9h2.6v5.4a1.3 1.3 0 0 1-2.6 0z" />
+          <path d="M14.6 9h2.6v5.4a1.3 1.3 0 0 1-2.6 0z" />
+          <path d="M5.9 9.6V9a6.1 6.1 0 0 1 12.2 0v.6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+          <rect x="4.9" y="8.4" width="1.9" height="3.5" rx=".95" />
+          <rect x="17.2" y="8.4" width="1.9" height="3.5" rx=".95" />
+          <path d="M17.3 11.4c-.2 1.6-1 2.4-2.1 2.6" fill="none" strokeWidth="1" strokeLinecap="round" style={{ stroke: 'var(--icon-knockout, var(--coral))' }} />
+          <circle cx="15" cy="14.3" r=".85" style={{ fill: 'var(--icon-knockout, var(--coral))' }} />
+        </symbol>
         <symbol id="i-person" viewBox="0 0 24 24">
           <circle cx="12" cy="7.5" r="4.5" />
           <path d="M3.5 21.5c0-4.7 3.8-8 8.5-8s8.5 3.3 8.5 8z" />
