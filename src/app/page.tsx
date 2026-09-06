@@ -6,6 +6,8 @@ import { resolveClaims } from '@/lib/landing';
 import { benefits, catchSection, hero, heroMobile, homeFaq, howItWorks, themUs } from '@/data/copy';
 import heroImage from '../../public/images/hero-placeholder.jpg';
 import heroImageMobile from '../../public/images/hero-placeholder-mobile.jpg';
+import { isMcd3 } from '@/lib/theme';
+import { HomeMcd3 } from '@/themes/mcd3/Home';
 import styles from './page.module.css';
 
 export const metadata: Metadata = {
@@ -88,7 +90,7 @@ function Switch({ desktop, mobile }: { desktop: string; mobile: string }) {
  * One DOM, ordered for desktop; the mobile order is flex order on <main>, and
  * the sections that belong to one breakpoint only are hidden on the other.
  */
-export default function HomePage() {
+function HomeMcd2() {
   const grid = resolveClaims([...heroMobile.proof]);
   const waitRow = resolveClaims([...heroMobile.waitRow]);
   return (
@@ -152,4 +154,9 @@ export default function HomePage() {
       <JsonLd data={schema} />
     </div>
   );
+}
+
+/** One route, one skin: the theme decides which homepage renders. */
+export default function HomePage() {
+  return isMcd3 ? <HomeMcd3 /> : <HomeMcd2 />;
 }

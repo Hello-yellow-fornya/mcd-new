@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
+import { isMcd3 } from './theme';
 
 test.describe('site header', () => {
+  test.skip(isMcd3, '2.0 bar and logo; the 3.0 header is covered in home-mcd3.spec');
+
   test('desktop: wordmark, links, services dropdown, number in a coral pill', async ({ page, isMobile }) => {
     test.skip(isMobile, 'desktop only');
     await page.goto('/styleguide/');
@@ -53,6 +56,7 @@ test.describe('site header', () => {
 });
 
 test('logo, favicons and manifest are the §4a set', async ({ page, request }) => {
+  test.skip(isMcd3, '2.0 logo set');
   await page.goto('/');
   await expect(page.locator('footer svg[data-logo="mono-ink"]')).toHaveCount(1);
   await expect(page.locator('link[rel="icon"][type="image/svg+xml"]')).toHaveCount(1);

@@ -53,7 +53,9 @@ html[data-theme='mcd3'] {
   --w-semibold: 600;
   --w-regular: 500;
   --ls-h1: -0.02em;
-  --ls-h2: -0.01em;
+  --ls-h2: -0.02em;
+  --lh-h1: 1.05;
+  --btn-min: 52px;
 
   /* The half-height yellow underlay on the last words of a heading */
   --hl-underlay: inset 0 -0.45em 0 var(--yellow);
@@ -78,7 +80,62 @@ html[data-theme='mcd3'] [data-icon-circle] {
   --icon-knockout: var(--yellow);
 }
 
-/* The headline highlight: ink words on the half-height yellow underlay */
-html[data-theme='mcd3'] mark {
+
+/* The headline highlight: the half-height yellow underlay on the last words of a heading */
+html[data-theme='mcd3'] mark[data-hl] {
+  background: linear-gradient(transparent 55%, var(--yellow) 55%);
+  box-shadow: none;
   color: inherit;
+  padding: 0 0.08em;
+}
+
+/* Chipped headline lines: ink on yellow, never white on yellow (the hero payoff is the inverted ink chip) */
+html[data-theme='mcd3'] mark[data-chip]:not([data-chip='invert']) {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+/* Comparison marks: ticked yellow circles and outlined crosses */
+html[data-theme='mcd3'] [data-mark='ok'] {
+  background: var(--yellow);
+  color: var(--ink);
+}
+
+html[data-theme='mcd3'] [data-mark='no'] {
+  border: 1.8px solid var(--ink);
+  color: var(--ink);
+  background: transparent;
+}
+
+/* Sentence case everywhere: the reg placeholder stays as typed */
+html[data-theme='mcd3'] body {
+  font-weight: 500;
+}
+
+html[data-theme='mcd3'] b,
+html[data-theme='mcd3'] strong {
+  font-weight: 700;
+}
+
+/* The H1 payoff: the chip inverted to ink on yellow */
+html[data-theme='mcd3'] mark[data-chip='invert'] {
+  background: var(--ink);
+  color: var(--yellow);
+}
+
+/* Body copy is the body grey; headings are ink (brand guidelines v1) */
+html[data-theme='mcd3'] body {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* Zero specificity, so any surface that sets its own heading colour (white on ink) wins */
+:where(html[data-theme='mcd3']) :where(h1, h2, h3) {
+  color: var(--ink);
+}
+
+/* The sticky call bar is white with the ink button */
+html[data-theme='mcd3'] [data-testid='sticky-call-bar'] {
+  background: var(--white);
+  box-shadow: 0 -1px 0 var(--line);
 }

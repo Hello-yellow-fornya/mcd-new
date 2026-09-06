@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { colours as c } from './theme';
 
 test.describe('styleguide components', () => {
   test.beforeEach(async ({ page }) => {
@@ -33,9 +34,7 @@ test.describe('styleguide components', () => {
   });
 
   test('every coral surface carries ink-900 text, and nothing but the reg input is uppercase', async ({ page }) => {
-    const bad = await page.evaluate(() => {
-      const coral = 'rgb(242, 105, 75)';
-      const ink900 = 'rgb(15, 36, 56)';
+    const bad = await page.evaluate(([coral, ink900]) => {
       const out: string[] = [];
       for (const el of Array.from(document.querySelectorAll('body *'))) {
         const cs = getComputedStyle(el);
@@ -44,7 +43,7 @@ test.describe('styleguide components', () => {
         if (cs.fontStyle === 'italic') out.push(`italic: ${el.tagName}.${el.className}`);
       }
       return out;
-    });
+    }, [c.bright, c.onBright]);
     expect(bad).toEqual([]);
   });
 

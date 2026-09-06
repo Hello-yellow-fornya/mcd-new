@@ -58,3 +58,10 @@ In the order they will bite.
 - 19 unit tests, 98 Playwright checks (both viewports), all passing on the production build.
 - Lighthouse mobile, production-mode build, throttled 4G: homepage 97–98 / 100 / 100 / 100 with LCP 2.4–2.6s across runs; template pages 98–100 / 100 / 100 / 100 with LCP 1.4–2.4s; landing pages 97–98 / 100 / 100 / 66, the 66 being the intended `noindex`; `/claim-now/` 98 / 100 / 100 / 100. The homepage LCP sits above the brief's 2.0s target on Lighthouse's simulation; accepted 4 September.
 - First-load JavaScript is 117–119 KB against the brief's 100 KB; the Next.js 15 framework floor is 102 KB. Accepted as a documented exception pending a reworded target.
+
+
+## MCD 3.0 (added after the V1 update)
+
+- Theme mechanism and rulebook tests: PR #9 (`feat/08-theme-mechanism`). Skin: the next PR (`feat/09-mcd3-skin`). See `docs/mcd3.md`.
+- The four 3.0 design files were not in `/design/`; the skin is built to the brief's values and needs a reconciliation pass when they land.
+- The `mcd-new-3` Vercel project is not created (no credential in the session). Until it exists, a 3.0 preview renders on `mcd-new-2` from the `mcd3/preview` branch.

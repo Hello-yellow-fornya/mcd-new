@@ -16,7 +16,7 @@ type Props = {
 
 function Mark({ ok }: { ok: boolean }) {
   return (
-    <span className={[styles.mk, ok ? styles.ok : styles.no].join(' ')} aria-hidden="true">
+    <span className={[styles.mk, ok ? styles.ok : styles.no].join(' ')} aria-hidden="true" data-mark={ok ? 'ok' : 'no'}>
       <Icon name={ok ? 'tick' : 'cross'} size={14} />
     </span>
   );

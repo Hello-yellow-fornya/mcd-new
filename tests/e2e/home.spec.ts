@@ -1,10 +1,13 @@
 import { test, expect, type Locator } from '@playwright/test';
+import { isMcd3 } from './theme';
 
 /** innerText of the visible matches only (display:none copy for the other breakpoint is skipped). */
 const visibleText = (loc: Locator) =>
   loc.evaluateAll((els) => els.filter((el) => el.checkVisibility()).map((el) => (el as HTMLElement).innerText.replace(/\s+/g, ' ').trim()));
 
 test.describe('homepage', () => {
+  test.skip(isMcd3, '2.0 homepage; the 3.0 homepage has its own spec');
+
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
   });

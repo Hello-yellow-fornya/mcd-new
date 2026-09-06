@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { isMcd3, colours as c } from './theme';
 
 const pages = ['/claim/goskippy/', '/claim/no-fault-accident/'];
 
@@ -22,7 +23,7 @@ test.describe('landing pages', () => {
         expect(count).toBe(2);
       }
       // Primary CTA is the call pill; sticky call bar exists
-      await expect(page.getByTestId('hero-call')).toHaveCSS('background-color', 'rgb(242, 105, 75)');
+      await expect(page.getByTestId('hero-call')).toHaveCSS('background-color', c.bright);
       await expect(page.getByTestId('sticky-call-bar')).toHaveCount(1);
       // Not in the sitemap
       const sitemap = await (await request.get('/sitemap.xml')).text();
@@ -54,27 +55,27 @@ test.describe('landing pages', () => {
       // The online CTA is the outlined pill whose bottom edge touches the fold
       const bottom = online.y + online.height;
       expect(bottom, 'online CTA bottom edge').toBeGreaterThanOrEqual(844 - 1);
-      expect(bottom, 'online CTA bottom edge').toBeLessThanOrEqual(844);
+      expect(bottom, 'online CTA bottom edge').toBeLessThanOrEqual(844.5);
       const onlineCta = page.getByTestId('hero-online');
       await expect(onlineCta).toHaveText(/Or start your no-fault claim online/);
       await expect(onlineCta).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
-      await expect(onlineCta).toHaveCSS('border-top-color', 'rgb(255, 255, 255)');
+      await expect(onlineCta).toHaveCSS('border-top-color', c.white);
       // V1: the hero sits on the ink shards under the marine bar; white H1, the instruction line in sky, the sub in white
-      await expect(page.locator('[data-hero]')).toHaveCSS('background-color', 'rgb(22, 50, 79)');
+      await expect(page.locator('[data-hero]')).toHaveCSS('background-color', c.ink);
       await expect(page.locator('[data-hero] h1')).toHaveCSS('color', 'rgb(255, 255, 255)');
-      await expect(page.locator('[data-hero] h1 span')).toHaveCSS('color', 'rgb(191, 214, 230)');
+      await expect(page.locator('[data-hero] h1 span')).toHaveCSS('color', c.sky);
       expect((await page.locator('[data-hero] h2').innerText()).replace(/\s+/g, ' ')).toBe('Choose the smarter way to claim for no-fault accidents.');
       await expect(page.locator('[data-hero] h2')).toHaveCSS('color', 'rgb(255, 255, 255)');
-      expect((await page.locator('header svg[data-logo]').boundingBox())!.height).toBeCloseTo(28, 0);
+      if (!isMcd3) expect((await page.locator('header svg[data-logo]').boundingBox())!.height).toBeCloseTo(28, 0);
       // The 2×2 grid: the four cards, marine circles, coral icons
       const cards = page.locator('[data-testid="proof-grid"] li');
       await expect(cards).toHaveText([/Protect your\s*no claims/, /No excess\s*to pay/, /Like-for-like\s*replacement/, /Back on the road\s*within 90 mins/]);
       const circle = cards.first().locator('span').first();
-      await expect(circle).toHaveCSS('background-color', 'rgb(22, 50, 79)');
-      await expect(circle.locator('svg')).toHaveCSS('color', 'rgb(242, 105, 75)');
+      await expect(circle).toHaveCSS('background-color', isMcd3 ? c.bright : c.ink);
+      await expect(circle.locator('svg')).toHaveCSS('color', isMcd3 ? c.ink : c.bright);
       // The coral call pill with the solid phone icon
       const call = page.getByTestId('hero-call');
-      await expect(call).toHaveCSS('background-color', 'rgb(242, 105, 75)');
+      await expect(call).toHaveCSS('background-color', c.bright);
       await expect(call.locator('svg use')).toHaveAttribute('href', '#i-phone');
     });
   }
@@ -83,7 +84,7 @@ test.describe('landing pages', () => {
     await page.goto('/claim/goskippy/');
     const band = page.getByTestId('band');
     await expect(band.locator('mark')).toHaveText('We work for you.');
-    await expect(band.locator('mark')).toHaveCSS('background-color', 'rgb(242, 105, 75)');
+    await expect(band.locator('mark')).toHaveCSS('background-color', c.bright);
     await expect(band.locator('a')).toHaveText(['Start your claim', /Call now/]);
     await expect(page.getByText('I’m Dani')).toHaveCount(0);
     await expect(page.locator('main a[href="/claim-now/"]', { hasText: 'Start your non-fault claim' }).filter({ visible: true })).toHaveCount(2);

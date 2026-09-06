@@ -4,6 +4,8 @@ import { isProduction } from '@/lib/staging';
 import { footer } from '@/data/copy';
 import { CookieSettingsButton } from '@/components/Consent/ConsentBanner';
 import { Logo } from '@/components/Logo/Logo';
+import { isMcd3 } from '@/lib/theme';
+import { FooterMcd3 } from '@/themes/mcd3/FooterMcd3';
 import styles from './SiteFooter.module.css';
 
 /**
@@ -21,6 +23,7 @@ export function fcaLine(): string {
 }
 
 export function SiteFooter() {
+  if (isMcd3) return <FooterMcd3 />;
   const year = new Date().getFullYear();
   return (
     <footer className={styles.foot}>

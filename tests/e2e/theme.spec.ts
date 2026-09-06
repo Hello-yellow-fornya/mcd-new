@@ -11,7 +11,23 @@ test(`the build is the ${theme} theme`, async ({ page, request }) => {
     await expect(page.locator('link[rel="preload"][as="font"][href*="quicksand"]')).toHaveCount(1);
     expect((await request.get('/fonts/quicksand-latin-wght.woff2')).status()).toBe(200);
     await expect(page.locator('body')).toHaveCSS('font-family', /Quicksand/);
-    await expect(page.locator('body')).toHaveCSS('background-color', 'rgb(247, 245, 239)');
+    // Layout rules §7: never coral, never marine on the yellow brand; icons never yellow
+    const offBrand = await page.evaluate(() => {
+      const bad = new Set(['rgb(242, 105, 75)', 'rgb(22, 50, 79)', 'rgb(191, 214, 230)', 'rgb(61, 109, 156)']);
+      const out: string[] = [];
+      for (const el of Array.from(document.querySelectorAll<HTMLElement>('body *'))) {
+        const cs = getComputedStyle(el);
+        if (bad.has(cs.backgroundColor) || bad.has(cs.color) || bad.has(cs.borderTopColor)) out.push(`${el.tagName}.${el.className}`);
+        if (el.matches('[data-icon-circle] svg') && cs.color === 'rgb(255, 212, 0)') out.push(`yellow icon: ${el.parentElement?.className}`);
+      }
+      return out.slice(0, 10);
+    });
+    expect(offBrand).toEqual([]);
+    // The 3.0 favicon set: "mcd" on the Safety Yellow tile
+    const icon = await (await request.get('/icon.svg')).text();
+    expect(icon).toContain('#ffd400');
+    expect(icon).not.toContain('#16324f');
+    for (const path of ['/apple-icon.png', '/favicon.ico', '/icons/icon-512.png']) expect((await request.get(path)).status(), path).toBe(200);
   } else {
     expect(await html.getAttribute('data-theme')).toBeNull();
     await expect(page.locator('link[rel="preload"][as="font"][href*="quicksand"]')).toHaveCount(0);
@@ -20,6 +36,9 @@ test(`the build is the ${theme} theme`, async ({ page, request }) => {
     // No Quicksand face is ever requested on a 2.0 build
     const fonts = await page.evaluate(() => performance.getEntriesByType('resource').map((e) => e.name).filter((n) => /\.woff2/.test(n)));
     expect(fonts.some((n) => n.includes('quicksand'))).toBe(false);
+    // The 2.0 favicon set: the §4a mark on marine
+    const icon = await (await request.get('/icon.svg')).text();
+    expect(icon).toContain('#16324f');
   }
 });
 

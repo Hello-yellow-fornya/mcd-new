@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isProduction } from '../../src/lib/staging.ts';
 import { isLiveHost } from '../../src/lib/host.ts';
-import { resolveTheme } from '../../src/lib/theme.ts';
+import { resolveTheme, themeForBuild } from '../../src/lib/theme.ts';
 
 test('only VERCEL_ENV=production is production', () => {
   assert.equal(isProduction('production'), true);
@@ -35,4 +35,13 @@ test('the theme defaults to mcd2 unless NEXT_PUBLIC_THEME is exactly mcd3', () =
   assert.equal(resolveTheme('mcd3'), 'mcd3');
   assert.equal(resolveTheme('MCD3'), 'mcd2');
   assert.equal(resolveTheme('mcd4'), 'mcd2');
+});
+
+test('a preview build on an mcd3/ branch is the 3.0 theme; production and other branches are not', () => {
+  assert.equal(themeForBuild({ VERCEL_ENV: 'preview', VERCEL_GIT_COMMIT_REF: 'mcd3/preview' }), 'mcd3');
+  assert.equal(themeForBuild({ VERCEL_ENV: 'production', VERCEL_GIT_COMMIT_REF: 'mcd3/preview' }), 'mcd2');
+  assert.equal(themeForBuild({ VERCEL_ENV: 'preview', VERCEL_GIT_COMMIT_REF: 'feat/09-mcd3-skin' }), 'mcd2');
+  assert.equal(themeForBuild({ VERCEL_ENV: 'preview', VERCEL_GIT_COMMIT_REF: 'mcd3/preview', NEXT_PUBLIC_THEME: 'mcd2' }), 'mcd2');
+  assert.equal(themeForBuild({ NEXT_PUBLIC_THEME: 'mcd3' }), 'mcd3');
+  assert.equal(themeForBuild({}), 'mcd2');
 });

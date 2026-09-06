@@ -6,5 +6,9 @@ import styles from './Highlight.module.css';
  * headline, on the last two to five words. `coral` is the band underline.
  */
 export function Highlight({ children, tone = 'sky' }: { children: ReactNode; tone?: 'sky' | 'coral' }) {
-  return <mark className={tone === 'coral' ? styles.coral : styles.sky}>{children}</mark>;
+  return (
+    <mark className={tone === 'coral' ? styles.coral : styles.sky} data-hl={tone}>
+      {children}
+    </mark>
+  );
 }

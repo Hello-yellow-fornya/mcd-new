@@ -33,7 +33,7 @@ One codebase, two visual skins, chosen at build time by `NEXT_PUBLIC_THEME`:
 | Vercel project | `mcd-new-2` | `mcd-new-3` (see below) |
 | Claims API | shared; `source` from the page | shared; `source: "mcd3"` |
 
-Pages do not branch on the theme. `src/lib/theme.ts` resolves the value; anything other than exactly `mcd3` is `mcd2`, so an unset variable builds 2.0 byte for byte (`pnpm snapshot:html` snapshots every route for a before/after diff).
+Pages do not branch on the theme. `src/lib/theme.ts` resolves the value; anything other than exactly `mcd3` is `mcd2`, so an unset variable builds 2.0 byte for byte (`pnpm snapshot:html` snapshots every route for a before/after diff). One convenience: a **preview** build on a branch named `mcd3/…` renders 3.0 without the variable, so `mcd-new-2` can show a 3.0 preview (push the skin to `mcd3/preview`) until `mcd-new-3` exists. Production builds never take that path.
 
 Tests run for both: `pnpm test:e2e` (2.0, port 3100) and `pnpm test:e2e:mcd3` (3.0, port 3101). `tests/e2e/rulebook.spec.ts` is `design/MCD-layout-rules.md` as assertions and runs unchanged against either build; `pnpm test:rulebook` runs it for both.
 
