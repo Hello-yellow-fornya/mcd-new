@@ -39,6 +39,12 @@ test.describe('homepage', () => {
 
   test('the Why claim band moves: five stone cards at a fixed size, duplicated once, paused on hover and touch, static under reduced motion', async ({ page, isMobile }) => {
     test.skip(isMobile, 'desktop only: the mobile homepage has the proof grid instead');
+    const heading = page.locator('#benefits-h');
+    await expect(heading).toHaveCSS('text-align', 'center');
+    const hl = heading.locator('span');
+    await expect(hl).toHaveText('Motor Claims Department');
+    await expect(hl).toHaveCSS('text-decoration-color', 'rgb(191, 214, 230)');
+    expect(parseFloat(await hl.evaluate((el) => getComputedStyle(el).textDecorationThickness))).toBeLessThan(6);
     const track = page.getByTestId('benefits-track');
     const sets = track.locator('ul');
     await expect(sets).toHaveCount(2);

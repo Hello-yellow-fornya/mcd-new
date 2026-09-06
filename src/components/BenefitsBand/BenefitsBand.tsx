@@ -7,6 +7,8 @@ export type Benefit = { icon: IconName; title: string; body: string };
 
 type Props = {
   heading: string;
+  /** The words at the end of the heading that take the thin sky underline (e.g. the brand name). */
+  highlight?: string;
   items: ReadonlyArray<Benefit>;
   className?: string;
 };
@@ -19,7 +21,17 @@ type Props = {
  * assistive tech. Paused on hover and keyboard focus (CSS) and while touched
  * (Track); a static, scrollable row under reduced motion.
  */
-export function BenefitsBand({ heading, items, className }: Props) {
+export function BenefitsBand({ heading, highlight, items, className }: Props) {
+  const at = highlight ? heading.lastIndexOf(highlight) : -1;
+  const title =
+    at >= 0 ? (
+      <>
+        {heading.slice(0, at)}
+        <span className={styles.hl}>{heading.slice(at)}</span>
+      </>
+    ) : (
+      heading
+    );
   const set = (hidden: boolean) => (
     <ul className={styles.set} aria-hidden={hidden || undefined}>
       {items.map((b) => (
@@ -34,7 +46,7 @@ export function BenefitsBand({ heading, items, className }: Props) {
   return (
     <section className={[styles.band, className].filter(Boolean).join(' ')} aria-labelledby="benefits-h" data-placement="benefits" data-testid="benefits-band">
       <div className="wrap">
-        <h2 id="benefits-h">{heading}</h2>
+        <h2 id="benefits-h">{title}</h2>
       </div>
       <div className={styles.viewport}>
         <Track>

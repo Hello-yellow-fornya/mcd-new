@@ -9,6 +9,16 @@
   white-space: nowrap;
   font-size: clamp(26px, 3.3vw, 38px);
   margin-bottom: 26px;
+  text-align: center;
+}
+
+/* Thin sky underline under the brand name: the headline highlight at a lighter weight */
+.hl {
+  text-decoration: underline;
+  text-decoration-color: var(--sky);
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.14em;
+  text-decoration-skip-ink: none;
 }
 
 /* The left inset lives on the viewport, not the track, so a -50% translate is exactly one set. */

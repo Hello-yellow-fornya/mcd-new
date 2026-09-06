@@ -106,7 +106,7 @@ export default function HomePage() {
           className={styles.oHero}
         />
 
-        <BenefitsBand heading={benefits.heading} items={benefits.items} className={styles.deskOnly} />
+        <BenefitsBand heading={benefits.heading} highlight="Motor Claims Department" items={benefits.items} className={styles.deskOnly} />
 
         <Band variant="chip" pattern="shards-ink" className={styles.oBand} />
 
