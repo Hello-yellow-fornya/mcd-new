@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { isMcd3 } from '@/lib/theme';
 import { compactReg, isPlausibleReg } from '@/lib/reg';
 
 /**
@@ -40,7 +41,8 @@ export async function POST(req: Request) {
   const reg = compactReg(String(body.reg ?? ''));
   if (!isPlausibleReg(reg)) return NextResponse.json({ ok: false, error: 'Check the registration and try again.' }, { status: 422 });
 
-  const payload = { reg, source: String(body.source ?? 'web'), path: String(body.path ?? ''), startedAt: new Date().toISOString() };
+  // The 3.0 comparison build shares the claims API and identifies itself by source.
+  const payload = { reg, source: isMcd3 ? 'mcd3' : String(body.source ?? 'web'), path: String(body.path ?? ''), startedAt: new Date().toISOString() };
 
   const api = process.env.CLAIMS_API_URL;
   if (api) {

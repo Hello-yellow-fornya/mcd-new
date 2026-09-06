@@ -58,14 +58,15 @@ export function HeroPhoto({ image, mobileImage, title = heroCopy.line, sub = her
       {/* getImageProps does not preload; these links are hoisted into <head> and only the matching one loads. */}
       {mobile && <link rel="preload" as="image" media={MOBILE} imageSrcSet={mobile.srcSet} imageSizes={mobile.sizes} fetchPriority="high" />}
       <link rel="preload" as="image" media={mobile ? DESKTOP : undefined} imageSrcSet={desktop.srcSet} imageSizes={desktop.sizes} fetchPriority="high" />
-      <div className={`${styles.frame} on-dark`} data-testid="hero-frame">
+      <div className={`${styles.frame} on-dark`} data-testid="hero-frame" data-fold-locked={mobilePills === 'none' ? '' : undefined}>
         {mobilePills === 'above' && mobileStrip}
-        <picture>
+        {/* On mobile the photo fills the flexible space above the bottom-anchored copy: the hero's one flexible gap */}
+        <picture data-flex-gap="photo">
           {mobile && <source media={MOBILE} srcSet={mobile.srcSet} sizes={mobile.sizes} />}
           {/* eslint-disable-next-line jsx-a11y/alt-text -- alt comes from getImageProps */}
           <img {...desktop} />
         </picture>
-        <div className={styles.copy}>
+        <div className={styles.copy} data-fold-copy>
           <h1>
             {mobileTitle ? (
               <>

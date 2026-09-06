@@ -112,7 +112,7 @@ export default function HomePage() {
 
         <ReviewCarousel className={styles.oReviews} />
 
-        <section id="how" className={`${styles.how} ${patternClass('shards-ink')} ${styles.deskOnly}`} aria-labelledby="how-h" data-placement="how">
+        <section id="how" className={`${styles.how} ${patternClass('shards-ink')} ${styles.deskOnly}`} aria-labelledby="how-h" data-placement="how" data-content-section>
           <div className="wrap on-dark">
             <h2 id="how-h">{howItWorks.heading}</h2>
             <p className={styles.howSub}>
@@ -140,7 +140,7 @@ export default function HomePage() {
             <ProofGrid items={grid} size="sm" />
           </section>
         )}
-        <section id="ways" className={`${styles.tu} ${styles.mobOnly} ${styles.oTu}`} aria-label="Their claims department compared with your claims handler" data-placement="them-us">
+        <section id="ways" className={`${styles.tu} ${styles.mobOnly} ${styles.oTu}`} aria-label="Their claims department compared with your claims handler" data-placement="them-us" data-content-section>
           <div className="wrap">
             <ThemUs head={themUs.head} rows={themUs.rows} compact />
             <SectionCta stack />

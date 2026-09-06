@@ -33,7 +33,7 @@ export function BenefitsBand({ heading, highlight, items, className }: Props) {
       heading
     );
   const set = (hidden: boolean) => (
-    <ul className={styles.set} aria-hidden={hidden || undefined}>
+    <ul className={styles.set} aria-hidden={hidden || undefined} data-card-row>
       {items.map((b) => (
         <li key={b.title} className={styles.card}>
           <IconCircle name={b.icon} size={48} className={styles.ic} />

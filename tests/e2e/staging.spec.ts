@@ -45,12 +45,19 @@ test('fonts are self-hosted and loaded', async ({ page }) => {
   const loaded = await page.evaluate(() =>
     Array.from(document.fonts).filter((f) => f.status === 'loaded').map((f) => `${f.weight} ${f.family}`),
   );
-  expect(loaded.some((f) => f.startsWith('900'))).toBe(true);
-  expect(loaded.some((f) => f.startsWith('400'))).toBe(true);
   expect(fontRequests.length).toBeGreaterThan(0);
   for (const url of fontRequests) expect(url).not.toMatch(/fonts\.(googleapis|gstatic)\.com/);
-  // Only Franklin 900 and Public Sans 400/700 are preloaded; 600 loads normally.
-  await expect(page.locator('link[rel="preload"][as="font"]')).toHaveCount(3);
+  if (process.env.NEXT_PUBLIC_THEME === 'mcd3') {
+    // 3.0: Quicksand, one variable face, self-hosted from /fonts
+    expect(loaded.some((f) => /Quicksand/.test(f))).toBe(true);
+    expect(fontRequests.some((u) => u.includes('/fonts/quicksand-latin-wght.woff2'))).toBe(true);
+    await expect(page.locator('link[rel="preload"][as="font"][href*="quicksand"]')).toHaveCount(1);
+  } else {
+    expect(loaded.some((f) => f.startsWith('900'))).toBe(true);
+    expect(loaded.some((f) => f.startsWith('400'))).toBe(true);
+    // Only Franklin 900 and Public Sans 400/700 are preloaded; 600 loads normally.
+    await expect(page.locator('link[rel="preload"][as="font"]')).toHaveCount(3);
+  }
 });
 
 test('skip link is the first focusable element and targets main', async ({ page }) => {

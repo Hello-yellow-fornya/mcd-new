@@ -57,7 +57,7 @@ export function Faq({ items, heading, sub, children, schema = true, firstOpen = 
     );
   }
   return (
-    <section id={id} className={[styles.section, className].filter(Boolean).join(' ')}>
+    <section id={id} className={[styles.section, className].filter(Boolean).join(' ')} data-content-section={children ? '' : undefined}>
       <div className={`wrap ${styles.sectionIn}`}>
         <div>
           <h2>{heading}</h2>

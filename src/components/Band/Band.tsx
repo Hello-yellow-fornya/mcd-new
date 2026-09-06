@@ -32,7 +32,9 @@ export function Band({ size = 'md', variant = 'underline', cta = true, pattern, 
           <p className={styles.line}>{band.line1}</p>
           <p className={styles.line}>{band.line2}</p>
           <p className={styles.chipLine}>
-            <mark className={styles.chip}>{band.highlight}</mark>
+            <mark className={styles.chip} data-chip>
+              {band.highlight}
+            </mark>
           </p>
           <div className={styles.pills}>
             <a className={styles.pill} href={nav.claimHref}>

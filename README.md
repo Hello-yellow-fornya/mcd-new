@@ -22,6 +22,32 @@ pnpm test           # unit tests (node --test)
 pnpm test:e2e       # Playwright, against a production build (run `pnpm exec playwright install` once)
 ```
 
+## Themes (MCD 2.0 and 3.0)
+
+One codebase, two visual skins, chosen at build time by `NEXT_PUBLIC_THEME`:
+
+| | `mcd2` (default, or unset) | `mcd3` |
+|---|---|---|
+| Skin | The 2.0 build, unchanged | MCD 3.0: Safety Yellow, ink, cream, Quicksand |
+| Where it lives | `src/styles/tokens.css`, the components | `src/themes/mcd3/` (tokens, fonts, the 3.0 homepage, wordmark, line icons) and `theme` checks in shared components |
+| Vercel project | `mcd-new-2` | `mcd-new-3` (see below) |
+| Claims API | shared; `source` from the page | shared; `source: "mcd3"` |
+
+Pages do not branch on the theme. `src/lib/theme.ts` resolves the value; anything other than exactly `mcd3` is `mcd2`, so an unset variable builds 2.0 byte for byte (`pnpm snapshot:html` snapshots every route for a before/after diff).
+
+Tests run for both: `pnpm test:e2e` (2.0, port 3100) and `pnpm test:e2e:mcd3` (3.0, port 3101). `tests/e2e/rulebook.spec.ts` is `design/MCD-layout-rules.md` as assertions and runs unchanged against either build; `pnpm test:rulebook` runs it for both.
+
+### Hosting the 3.0 comparison build
+
+The 3.0 build is a second Vercel project from this same repo, so the client sees 2.0 and 3.0 side by side. To create it (Vercel dashboard, or `vercel project add mcd-new-3` with a token):
+
+1. New project `mcd-new-3` from `Hello-yellow-fornya/mcd-new`, framework Next.js, production branch `main`.
+2. Environment variables, all environments: `NEXT_PUBLIC_THEME=mcd3`, `NEXT_PUBLIC_SITE_URL=https://mcd-new-3.vercel.app`, plus the same `NEXT_PUBLIC_GTM_ID`, `CLAIMS_API_URL`, `CLAIMS_API_KEY` and `FCA_STATUS_LINE` as `mcd-new-2`.
+3. Deployment Protection on for every deployment, as on `mcd-new-2`.
+4. Nothing else: a site URL on `.vercel.app` is never a live host, so the build stays noindexed and `robots.txt` disallows everything regardless of the domain.
+
+No new Railway service: 3.0 posts to the shared claims API with `source: "mcd3"`.
+
 ## Environments and staging
 
 Nothing is served from `motorclaimsdepartment.co.uk` until told. Vercel's auto-assigned URLs are staging.

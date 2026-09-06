@@ -12,7 +12,7 @@ type Props = {
 /** Every content section ends with this pair, both coral: Start your claim + Call 0800 048 0048. */
 export function SectionCta({ stack, className }: Props) {
   return (
-    <div className={[styles.secCta, stack && styles.stack, className].filter(Boolean).join(' ')}>
+    <div className={[styles.secCta, stack && styles.stack, className].filter(Boolean).join(' ')} data-cta-pair>
       <Button href={nav.claimHref}>{cta.start}</Button>
       <Button href={site.phone.href} icon="phone">
         {cta.call}

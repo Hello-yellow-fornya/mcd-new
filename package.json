@@ -18,6 +18,9 @@
     "typecheck": "tsc --noEmit",
     "test": "node --test \"tests/unit/**/*.test.{mjs,ts}\"",
     "test:e2e": "playwright test",
+    "test:e2e:mcd3": "NEXT_PUBLIC_THEME=mcd3 playwright test",
+    "test:rulebook": "playwright test tests/e2e/rulebook.spec.ts && NEXT_PUBLIC_THEME=mcd3 playwright test tests/e2e/rulebook.spec.ts",
+    "snapshot:html": "node scripts/snapshot-html.mjs",
     "check": "pnpm typecheck && pnpm lint && pnpm lint:content && pnpm lint:css && pnpm test",
     "new-page": "node scripts/new-page.mjs",
     "stubs": "node scripts/stubs-from-sitemap.mjs"

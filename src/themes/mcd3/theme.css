@@ -1,0 +1,84 @@
+/*
+ * MCD 3.0 theme (brief: MCD 3.0). Scoped to html[data-theme="mcd3"], so a 2.0
+ * build is untouched. Tokens first, then the handful of shared-component
+ * overrides the 3.0 rules need (no shard patterns, ink icons in yellow chips).
+ *
+ * Colour: Safety Yellow #FFD400, ink #19180F, cream #F7F5EF, white, body grey
+ * #54524A, ochre #B08900, pale #FFF6C9, hairline #E6E2D6. Ink on yellow. Yellow
+ * only in the hero, chips and icon circles; cream and white alternate; ink for
+ * the final CTA and the footer.
+ * Type: Quicksand 500 / 600 / 700, self-hosted (public/fonts). Sentence case.
+ */
+
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/fonts/quicksand-latin-wght.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+html[data-theme='mcd3'] {
+  /* The 3.0 palette, mapped onto the shared token names so every 2.0 page re-skins */
+  --yellow: #ffd400;
+  --ochre: #b08900;
+  --pale: #fff6c9;
+  --cream: #f7f5ef;
+  --ink: #19180f;
+  --ink-900: #19180f;
+  --ink-rgb: 25, 24, 15;
+  --paper: var(--cream);
+  --stone: #ffffff;
+  --white: #ffffff;
+  --muted: #54524a;
+  --line: #e6e2d6;
+  --blue: var(--ochre);
+  --sky: var(--pale);
+  --coral: var(--yellow);
+  --coral-rgb: 255, 212, 0;
+  --on-coral: var(--ink);
+  --on-sky: var(--ink);
+  --on-ink: var(--white);
+  --marine-lift: #2a2916;
+  --green-tint: var(--pale);
+  --green-deep: var(--ochre);
+
+  /* Type: one family, three weights */
+  --display: 'Quicksand', system-ui, sans-serif;
+  --body: 'Quicksand', system-ui, sans-serif;
+  --body-semibold: 'Quicksand', system-ui, sans-serif;
+  --w-display: 700;
+  --w-bold: 700;
+  --w-semibold: 600;
+  --w-regular: 500;
+  --ls-h1: -0.02em;
+  --ls-h2: -0.01em;
+
+  /* The half-height yellow underlay on the last words of a heading */
+  --hl-underlay: inset 0 -0.45em 0 var(--yellow);
+  --hl-coral: inset 0 -0.45em 0 var(--yellow);
+
+  /* Photo treatment stays ink, never black */
+  --scrim-left: linear-gradient(90deg, rgba(var(--ink-rgb), 0.8) 0%, rgba(var(--ink-rgb), 0.52) 30%, rgba(var(--ink-rgb), 0.12) 55%, rgba(var(--ink-rgb), 0) 70%);
+  --scrim-bottom: linear-gradient(0deg, rgba(var(--ink-rgb), 0.72) 0%, rgba(var(--ink-rgb), 0.45) 45%, rgba(var(--ink-rgb), 0) 100%);
+  --scrim-mobile: linear-gradient(0deg, rgba(var(--ink-rgb), 0.97) 0%, rgba(var(--ink-rgb), 0.9) 36%, rgba(var(--ink-rgb), 0.4) 62%, rgba(var(--ink-rgb), 0) 82%);
+}
+
+/* No shard or sweep patterns in 3.0: the dark surfaces are flat ink */
+html[data-theme='mcd3'] [class*='shards'],
+html[data-theme='mcd3'] [class*='sweep'] {
+  background-image: none;
+}
+
+/* Icon circles: ink line icons inside yellow chips, whatever tone the 2.0 markup asked for */
+html[data-theme='mcd3'] [data-icon-circle] {
+  background: var(--yellow);
+  color: var(--ink);
+  --icon-knockout: var(--yellow);
+}
+
+/* The headline highlight: ink words on the half-height yellow underlay */
+html[data-theme='mcd3'] mark {
+  color: inherit;
+}

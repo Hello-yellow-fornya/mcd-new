@@ -22,6 +22,7 @@ export function Icon({ name, size = '1em', label, className }: IconProps) {
       aria-label={label}
       aria-hidden={label ? undefined : true}
       focusable="false"
+      data-icon={name}
     >
       <use href={`#i-${name}`} />
     </svg>
@@ -49,6 +50,8 @@ export function IconCircle({ name, tone = 'coral', size = 56, label, className }
       role={label ? 'img' : undefined}
       aria-label={label}
       aria-hidden={label ? undefined : true}
+      data-icon-circle={tone}
+      data-size={size}
     >
       <Icon name={name} size={iconSize} />
     </span>
