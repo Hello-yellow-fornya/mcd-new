@@ -18,7 +18,7 @@ type Props = {
 export function Steps({ items, onDark, className }: Props) {
   const withIcons = items.some((s) => s.icon);
   return (
-    <ol className={[styles.steps, withIcons ? styles.icons : styles.compact, onDark && styles.onDark, className].filter(Boolean).join(' ')}>
+    <ol className={[styles.steps, withIcons ? styles.icons : styles.compact, onDark && styles.onDark, className].filter(Boolean).join(' ')} data-card-row>
       {items.map((s, i) => (
         <li key={s.id ?? i} id={s.id} className={styles.step}>
           {s.icon && <IconCircle name={s.icon} size={56} className={styles.ic} />}

@@ -10,10 +10,15 @@ export function siteHost(): string {
   return new URL(process.env.NEXT_PUBLIC_SITE_URL || PRODUCTION_SITE_URL).host.toLowerCase();
 }
 
-/** True when the request host is the real site (with or without www). */
+/**
+ * True when the request host is the real site (with or without www). A site
+ * URL on vercel.app (the 3.0 comparison project sets NEXT_PUBLIC_SITE_URL to
+ * its own .vercel.app address) is never live, so those builds stay noindexed.
+ */
 export function isLiveHost(host: string | null | undefined, site = siteHost()): boolean {
   if (!host) return false;
-  const h = host.toLowerCase().split(':')[0];
   const s = site.split(':')[0];
+  if (s.endsWith('.vercel.app')) return false;
+  const h = host.toLowerCase().split(':')[0];
   return h === s || h === `www.${s}` || `www.${h}` === s;
 }

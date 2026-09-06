@@ -21,7 +21,7 @@ type Props = {
  */
 export function ProofGrid({ items, label = 'Why claim through MCD', size = 'md', className }: Props) {
   return (
-    <ul className={[styles.grid, size === 'sm' && styles.sm, className].filter(Boolean).join(' ')} aria-label={label} data-testid="proof-grid">
+    <ul className={[styles.grid, size === 'sm' && styles.sm, className].filter(Boolean).join(' ')} aria-label={label} data-testid="proof-grid" data-card-row>
       {items.map((p) => {
         const unsubstantiated = p.substantiated === false;
         return (

@@ -141,7 +141,7 @@ export function LandingPage({ config }: { config: LandingConfig }) {
 
           <Band variant="chip" pattern="shards-ink" />
 
-          <section className={styles.tu} id="ways" data-placement="them-us">
+          <section className={styles.tu} id="ways" data-placement="them-us" data-content-section>
             <div className="wrap">
               <ThemUs head={themUs.head} rows={themUs.rows} compact />
               <SectionCta stack />

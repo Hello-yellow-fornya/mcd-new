@@ -1,6 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const port = 3100;
+// One build serves one theme; the port follows the theme so a 2.0 server is never reused for a 3.0 run.
+const theme = process.env.NEXT_PUBLIC_THEME === 'mcd3' ? 'mcd3' : 'mcd2';
+const port = theme === 'mcd3' ? 3101 : 3100;
 
 export default defineConfig({
   testDir: './tests/e2e',
@@ -26,6 +28,6 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     timeout: 240_000,
     // A test container id so the consent path can be exercised; the loader request itself is blocked in tests.
-    env: { NEXT_PUBLIC_GTM_ID: process.env.NEXT_PUBLIC_GTM_ID || 'GTM-TEST0000' },
+    env: { NEXT_PUBLIC_GTM_ID: process.env.NEXT_PUBLIC_GTM_ID || 'GTM-TEST0000', ...(theme === 'mcd3' ? { NEXT_PUBLIC_THEME: 'mcd3' } : {}) },
   },
 });
